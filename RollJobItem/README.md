@@ -7,3 +7,7 @@ This extension can be used at companies that often cut roll stock down before pr
 - A table extension (80100) on the PVS Job Sheet table to add Roll Item No.
 - A page extension (80100) on the PVS Job Items ListPart for the user to enter the Roll Item No.
 - A custom calculation formula codeunit (80100) that will calculate the weight/length of the roll paper and add the roll item no. to the calculation detail line.
+
+## What you will need to do for this extension to work
+
+- Create a custom calculation formula with # 80100 that points to Codeunit 80100. Assign this formula on a material line on your cutting machine calculation unit.
