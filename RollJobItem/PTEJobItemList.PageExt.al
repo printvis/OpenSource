@@ -7,6 +7,7 @@ pageextension 80100 "PTE Job Items ListPart Extend" extends "PVS Job Items ListP
             field("Roll Item No"; SheetRec."Roll Item No")
             {
                 ApplicationArea = All;
+                Caption = 'Pre-cut Roll Item No.';
                 DrillDown = false;
                 Editable = true;
                 Lookup = true;
@@ -42,6 +43,7 @@ pageextension 80100 "PTE Job Items ListPart Extend" extends "PVS Job Items ListP
         PageMgt: Codeunit "PVS Page Management";
         RollNo: Code[20];
     begin
+
         if not PageMgt.LookUp_JobItem_Paper_Item(Rec, RollNo) then
             exit;
 
