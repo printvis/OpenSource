@@ -1,12 +1,9 @@
-# AL-Go Per Tenant Extension Template
-This template repository can be used for managing AppSource Apps for Business Central.
+# PrintVis Open Source Repository
 
-[![Use this template](https://github.com/microsoft/AL-Go/assets/10775043/ca1ecc85-2fd3-4ab5-a866-bd2e7e80259d)](https://github.com/new?template_name=AL-Go-PTE&template_owner=microsoft)
+This repository will be dedicated to custom developed code that PrintVis will share with partners/customers **as-is**.
 
-Please go to https://aka.ms/AL-Go to learn more.
+These are ideas or requests that we feel have some merit for certain customers but may not be appropriate for the base product at this time. By offering them as open source, we expedite their development, as they won't undergo translation into all languages and won't be documented within our system.
 
-## Contributing
+To make it easier for customers to try this open source development, we will always use the **80100-89999** custom object range and ensure none of our objects in this repository collide with each other.
 
-Please read [this](https://github.com/microsoft/AL-Go/blob/main/Scenarios/Contribute.md) description on how to contribute to AL-Go for GitHub.
-
-We do not accept Pull Requests on the template repository directly.
+As mentioned this open source code is provided **as-is** and any issues, additions, or upgrades will be the responsibility of the partner/customer using them.

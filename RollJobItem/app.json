@@ -1,0 +1,38 @@
+{
+  "id": "43c458c0-31c6-4f59-8d13-f5c89d4b8d53",
+  "name": "RollJobItem",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "This extension can be used to add a roll item number to the PVS Job Item table, job items page, and a new formula for pulling in that roll item number with the quantity.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "NovaVision Software A/S",
+      "version": "24.0.0.0"
+    }],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80100,
+      "to": 89999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
