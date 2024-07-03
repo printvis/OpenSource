@@ -1,0 +1,51 @@
+{
+  "id": "0ee253d5-f0be-4487-ae65-f4adab7c671e",
+  "name": "PTE Sales Order Integration Move Data",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "891ae755-a9bc-4f53-b79b-ad9d2a07105b",
+      "name": "PTE SalesOrder Integration",
+      "publisher": "NovaVision Software A/S",
+      "version": "24.0.0.0"
+    } ,
+    {
+      "id": "2a20c679-302a-4d8f-93de-ba9f4bcafd35",
+      "name": "PTE Sales Order Integration Temporary DataTransfer",
+      "publisher": "NovaVision Software A/S",
+      "version": "1.0.0.0"
+    },
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "publisher": "NovaVision Software A/S",
+       "name": "PrintVis",
+       "version": "24.0.0.0"
+    } 
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80101,
+      "to": 80133
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "11.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

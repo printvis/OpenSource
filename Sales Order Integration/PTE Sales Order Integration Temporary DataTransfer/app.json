@@ -1,0 +1,39 @@
+{
+  "id": "2a20c679-302a-4d8f-93de-ba9f4bcafd35",
+  "name": "PTE Sales Order Integration Temporary DataTransfer",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "brief": "Tool to move Data from PVS/PTE Sales Order Integration into temporary Tables",
+  "description": "Tool to move Data from PTE Sales Order Integration or Sales Order Integration, if it is the OnPrem version before of the Sales Order Integration, it must be done before the move to cloud.",
+  "privacyStatement":  "",
+  "EULA":  "",
+  "help":  "",
+  "url":  "",
+  "logo":  "",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "publisher": "NovaVision Software A/S",
+       "name": "PrintVis",
+       "version": "24.0.0.0"
+    } 
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80101,
+      "to": 80133
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

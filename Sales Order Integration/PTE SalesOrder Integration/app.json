@@ -1,0 +1,42 @@
+{
+  "id": "891ae755-a9bc-4f53-b79b-ad9d2a07105b",
+  "name": "PTE SalesOrder Integration",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "The Sales Order integration between BC Sales Order/Invoice and PrintVis Orders",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "NovaVision Software A/S",
+      "version": "24.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80101,
+      "to": 80133
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://www.printvis.com",
+  "resourceExposurePolicy": 
+  {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "target": "Cloud",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
