@@ -1,0 +1,16 @@
+pageextension 80109 "PTE SOI Planner RC" extends "PVS Planner Role Center"
+{
+    actions
+    {
+        addlast(PrintVis)
+        {
+            action("PTE SOI_PurchaseReceiptList")
+            {
+                ApplicationArea = All;
+                Caption = 'Purchase Receipt List';
+                RunObject = Page "PTE SOI Wareh. P. Rcpt L";
+                ToolTip = 'Purchase Receipt List';
+            }
+        }
+    }
+}
