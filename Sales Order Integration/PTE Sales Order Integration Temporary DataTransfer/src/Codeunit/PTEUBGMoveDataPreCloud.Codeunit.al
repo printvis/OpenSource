@@ -26,12 +26,12 @@ codeunit 80108 "PTE UBG Move Data Pre Cloud"
     var
         ModuleInfo: ModuleInfo;
     begin
-        if not NavApp.GetModuleInfo('40B0253D-910D-43DB-92CE-03682508A75E', ModuleInfo) then
-            exit(IsPVSSalesOrderIntegrationInstalled);
-        if ModuleInfo.Name <> 'PrintVis SalesOrder Integration' then
-            exit(IsPVSSalesOrderIntegrationInstalled);
-        if ModuleInfo.Publisher <> 'NovaVision Software A/S' then
-            exit(IsPVSSalesOrderIntegrationInstalled);
+        if not NavApp.GetModuleInfo(PVSSalesOrderIntegrationID, ModuleInfo) then
+            exit(false);
+        if ModuleInfo.Name <> SalesOrderIntegrationName then
+            exit(false);
+        if ModuleInfo.Publisher <> SalesOrderIntegrationPublisher then
+            exit(false);
 
         IsPVSSalesOrderIntegrationInstalled := true;
         exit(IsPVSSalesOrderIntegrationInstalled);
@@ -41,12 +41,12 @@ codeunit 80108 "PTE UBG Move Data Pre Cloud"
     var
         ModuleInfo: ModuleInfo;
     begin
-        if not NavApp.GetModuleInfo('073c8eda-9ed2-48c9-8cee-9d3d96af20f7', ModuleInfo) then
-            exit(IsPTEPVSSalesOrderIntegrationinstalled);
-        if ModuleInfo.Name <> 'PrintVis SalesOrder Integration' then
-            exit(IsPTEPVSSalesOrderIntegrationinstalled);
-        if ModuleInfo.Publisher <> 'NovaVision Software A/S' then
-            exit(IsPTEPVSSalesOrderIntegrationinstalled);
+        if not NavApp.GetModuleInfo(PTESalesOrderIntegrationID, ModuleInfo) then
+            exit(false);
+        if ModuleInfo.Name <> SalesOrderIntegrationName then
+            exit(false);
+        if ModuleInfo.Publisher <> SalesOrderIntegrationPublisher then
+            exit(false);
 
         IsPTEPVSSalesOrderIntegrationinstalled := true;
         exit(IsPTEPVSSalesOrderIntegrationinstalled);
@@ -54,7 +54,14 @@ codeunit 80108 "PTE UBG Move Data Pre Cloud"
 
     var
         IsPVSSalesOrderIntegrationInstalled: Boolean;
+        PVSSalesOrderIntegrationID: Label '40B0253D-910D-43DB-92CE-03682508A75E', Locked = true;
+
         IsPTEPVSSalesOrderIntegrationinstalled: Boolean;
+        PTESalesOrderIntegrationID: Label '073c8eda-9ed2-48c9-8cee-9d3d96af20f7', Locked = true;
+
+
+        SalesOrderIntegrationName: Label 'PrintVis SalesOrder Integration', Locked = true;
+        SalesOrderIntegrationPublisher: Label 'NovaVision Software A/S', Locked = true;
 
     local procedure MoveTableDataSalesLineArchive()
     var
