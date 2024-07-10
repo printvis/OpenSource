@@ -43,7 +43,7 @@ codeunit 80108 "PTE UBG Move Data Pre Cloud"
     begin
         if not NavApp.GetModuleInfo('073c8eda-9ed2-48c9-8cee-9d3d96af20f7', ModuleInfo) then
             exit(IsPTEPVSSalesOrderIntegrationinstalled);
-        if ModuleInfo.Name <> 'PTE SalesOrder Integration' then
+        if ModuleInfo.Name <> 'PrintVis SalesOrder Integration' then
             exit(IsPTEPVSSalesOrderIntegrationinstalled);
         if ModuleInfo.Publisher <> 'NovaVision Software A/S' then
             exit(IsPTEPVSSalesOrderIntegrationinstalled);
