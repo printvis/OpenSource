@@ -1,6 +1,6 @@
 {
   "id": "2a20c679-302a-4d8f-93de-ba9f4bcafd35",
-  "name": "PTE Sales Order Integration Temporary DataTransfer",
+  "name": "PTE SOI Temporary DataTransfer",
   "publisher": "PrintVis",
   "version": "1.1.0.0",
   "brief": "Tool to move Data from PVS/PTE Sales Order Integration into temporary Tables",
