@@ -55,7 +55,13 @@ TableExtension 80104 "PTE SOI Purchase Line Arc" extends "Purchase Line Archive"
             Caption = 'Unchanged Reissue';
             Description = 'PRINTVIS';
         }
-        field(80109; "PTE SOI Price Production Order"; Decimal)
+        field(80109; "PTE SOI Expected Receipt Time"; Time)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Expected Receipt Time';
+            Description = 'PRINTVIS';
+        }
+        field(80110; "PTE SOI Price Production Order"; Decimal)
         {
             CalcFormula = lookup("PVS Job"."Quoted Price" where(ID = field("PVS ID 1"),
                                                                  "Production Calculation" = const(true)));
@@ -63,12 +69,6 @@ TableExtension 80104 "PTE SOI Purchase Line Arc" extends "Purchase Line Archive"
             Description = 'PRINTVIS';
             Editable = false;
             FieldClass = FlowField;
-        }
-        field(80110; "PTE SOI Expected Receipt Time"; Time)
-        {
-            DataClassification = CustomerContent;
-            Caption = 'Expected Receipt Time';
-            Description = 'PRINTVIS';
         }
     }
 }

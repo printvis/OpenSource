@@ -626,13 +626,13 @@ Codeunit 80104 "PTE SOI S.O. Mgt"
         if in_Rec."PVS ID" = 0 then
             exit(0);
 
-        in_Rec.CalcFields("H.",
+        in_Rec.CalcFields("PTE SOI Job Cost. Dir. C. H.",
           "PTE SOI Job Cost. Dir. C. Mat.",
           "PTE SOI Job Cost. Dir. C. P.",
           "PTE SOI Job Cost. Mat. C. P.",
           "PTE SOI Job Cost. External P.");
 
-        exit(in_Rec."H." +
+        exit(in_Rec."PTE SOI Job Cost. Dir. C. H." +
           in_Rec."PTE SOI Job Cost. Dir. C. Mat." +
           in_Rec."PTE SOI Job Cost. Mat. C. P." +
           in_Rec."PTE SOI Job Cost. External P.");

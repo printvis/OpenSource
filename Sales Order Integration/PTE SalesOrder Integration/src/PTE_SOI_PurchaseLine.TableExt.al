@@ -74,7 +74,7 @@ TableExtension 80109 "PTE SOI Purchase Line" extends "Purchase Line" //"PVS tabl
             Caption = 'Unchanged Reissue';
             Description = 'PRINTVIS';
         }
-        field(80109; "PTE SOI Price Production Order"; Decimal)
+        field(80110; "PTE SOI Price Production Order"; Decimal)
         {
             CalcFormula = lookup("PVS Job"."Quoted Price" where(ID = field("PVS ID 1"),
                                                                          "Production Calculation" = const(true)));
@@ -84,14 +84,6 @@ TableExtension 80109 "PTE SOI Purchase Line" extends "Purchase Line" //"PVS tabl
             FieldClass = FlowField;
         }
 
-        field(80110; "PTE SOI Customer Name"; Text[100])
-        {
-            CalcFormula = lookup("PVS Case"."Sell-To Name" where(ID = field("PVS ID 1")));
-            Caption = 'Sell-to Name';
-            Description = 'PRINTVIS';
-            Editable = false;
-            FieldClass = FlowField;
-        }
         field(80111; "PTE SOI Job Description"; Text[250])
         {
             CalcFormula = lookup("PVS Case"."Job Name" where(ID = field("PVS ID 1")));
@@ -106,6 +98,14 @@ TableExtension 80109 "PTE SOI Purchase Line" extends "Purchase Line" //"PVS tabl
             CalcFormula = lookup("Purchase Header"."PTE SOI Status Code" where("Document Type" = field("Document Type"),
                                                                                     "No." = field("Document No.")));
             Caption = 'PO Status Code';
+            Description = 'PRINTVIS';
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(80113; "PTE SOI Customer Name"; Text[100])
+        {
+            CalcFormula = lookup("PVS Case"."Sell-To Name" where(ID = field("PVS ID 1")));
+            Caption = 'Sell-to Name';
             Description = 'PRINTVIS';
             Editable = false;
             FieldClass = FlowField;

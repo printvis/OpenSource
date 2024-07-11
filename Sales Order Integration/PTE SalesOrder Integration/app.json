@@ -2,7 +2,7 @@
   "id": "891ae755-a9bc-4f53-b79b-ad9d2a07105b",
   "name": "PTE SalesOrder Integration",
   "publisher": "PrintVis",
-  "version": "1.0.0.0",
+  "version": "1.1.0.0",
   "brief": "",
   "description": "The Sales Order integration between BC Sales Order/Invoice and PrintVis Orders",
   "privacyStatement": "",

@@ -155,7 +155,15 @@ TableExtension 80107 "PTE SOI Sales Line" extends "Sales Line" //"PVS tableexten
                 PVSalesorderManagement.SalesLine_Validate_Unchanged(Rec, xRec)
             end;
         }
-        field(80112; "PTE SOI Price Production Order"; Decimal)
+
+        field(80112; "PTE SOI Production Qty."; Integer)
+        {
+            DataClassification = CustomerContent;
+            BlankZero = true;
+            Caption = 'Quantity';
+            Description = 'PRINTVIS';
+        }
+        field(80113; "PTE SOI Price Production Order"; Decimal)
         {
             BlankZero = true;
             CalcFormula = lookup("PVS Job"."Quoted Price" where(ID = field("PVS ID"),
@@ -166,14 +174,7 @@ TableExtension 80107 "PTE SOI Sales Line" extends "Sales Line" //"PVS tableexten
             Editable = false;
             FieldClass = FlowField;
         }
-        field(80113; "PTE SOI Production Qty."; Integer)
-        {
-            DataClassification = CustomerContent;
-            BlankZero = true;
-            Caption = 'Quantity';
-            Description = 'PRINTVIS';
-        }
-        field(80114; "H."; Decimal)
+        field(80114; "PTE SOI Job Cost. Dir. C. H."; Decimal)
         {
             BlankZero = true;
             CalcFormula = sum("PVS Job Costing Entry"."Direct Cost Total" where("Table ID" = const(6010325),
