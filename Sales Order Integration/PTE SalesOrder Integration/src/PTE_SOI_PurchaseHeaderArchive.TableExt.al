@@ -42,14 +42,11 @@ TableExtension 80103 "PTE SOI Purchase Header Arc" extends "Purchase Header Arch
             Description = 'PRINTVIS';
             TableRelation = "PVS Status Code".Code where(User = const(''));
         }
-        field(80106; "PTE SOI Status Text"; Text[250])
+        field(80106; "PTE SOI Expected Receipt Time"; Time)
         {
-            CalcFormula = lookup("PVS Status Code".Text where(Code = field("PTE SOI Status Code"),
-                                                               User = const('')));
-            Caption = 'Status Description';
+            DataClassification = CustomerContent;
+            Caption = 'Expected Receipt Time';
             Description = 'PRINTVIS';
-            Editable = false;
-            FieldClass = FlowField;
         }
         field(80107; "PTE SOI Deadline"; Date)
         {
@@ -65,21 +62,14 @@ TableExtension 80103 "PTE SOI Purchase Header Arc" extends "Purchase Header Arch
             NotBlank = true;
             TableRelation = "PVS Capacity Resource" where(Type = const(Person));
         }
-        field(80109; "PTE SOI Person Respon. Name"; Text[50])
-        {
-            CalcFormula = lookup("PVS Capacity Resource".Name where("No." = field("PTE SOI Person Responsible")));
-            Caption = 'Responsible Name';
-            Description = 'PRINTVIS';
-            Editable = false;
-            FieldClass = FlowField;
-        }
-        field(80110; "PTE SOI Manual Responsible"; Boolean)
+
+        field(80109; "PTE SOI Manual Responsible"; Boolean)
         {
             DataClassification = CustomerContent;
             Caption = 'Manual Responsible';
             Description = 'PRINTVIS';
         }
-        field(80111; "PTE SOI Coordinator"; Code[50])
+        field(80110; "PTE SOI Coordinator"; Code[50])
         {
             DataClassification = CustomerContent;
             Caption = 'Coordinator';
@@ -87,7 +77,24 @@ TableExtension 80103 "PTE SOI Purchase Header Arc" extends "Purchase Header Arch
             TableRelation = "PVS Capacity Resource" where(Type = const(Person),
                                                            Coordinator = const(true));
         }
-        field(80112; "PTE SOI Coordinator Name"; Text[50])
+        field(80111; "PTE SOI Status Text"; Text[250])
+        {
+            CalcFormula = lookup("PVS Status Code".Text where(Code = field("PTE SOI Status Code"),
+                                                               User = const('')));
+            Caption = 'Status Description';
+            Description = 'PRINTVIS';
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(80112; "PTE SOI Person Respon. Name"; Text[50])
+        {
+            CalcFormula = lookup("PVS Capacity Resource".Name where("No." = field("PTE SOI Person Responsible")));
+            Caption = 'Responsible Name';
+            Description = 'PRINTVIS';
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(80113; "PTE SOI Coordinator Name"; Text[50])
         {
             CalcFormula = lookup("PVS Capacity Resource".Name where("No." = field("PTE SOI Coordinator")));
             Caption = 'Coordinator Name';
@@ -95,12 +102,5 @@ TableExtension 80103 "PTE SOI Purchase Header Arc" extends "Purchase Header Arch
             Editable = false;
             FieldClass = FlowField;
         }
-        field(80113; "PTE SOI Expected Receipt Time"; Time)
-        {
-            DataClassification = CustomerContent;
-            Caption = 'Expected Receipt Time';
-            Description = 'PRINTVIS';
-        }
     }
-
 }

@@ -76,7 +76,13 @@ TableExtension 80106 "PTE SOI Sales Line Archive" extends "Sales Line Archive" /
             Caption = 'Unchanged Reissue';
             Description = 'PRINTVIS';
         }
-        field(80112; "PTE SOI Price Production Order"; Decimal)
+        field(80112; "PTE SOI Production Qty."; Integer)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Quantity';
+            Description = 'PRINTVIS';
+        }
+        field(80113; "PTE SOI Price Production Order"; Decimal)
         {
             CalcFormula = lookup("PVS Job"."Quoted Price" where(ID = field("PVS ID 1"),
                                                                  "Production Calculation" = const(true)));
@@ -85,12 +91,7 @@ TableExtension 80106 "PTE SOI Sales Line Archive" extends "Sales Line Archive" /
             Editable = false;
             FieldClass = FlowField;
         }
-        field(80113; "PTE SOI Production Qty."; Integer)
-        {
-            DataClassification = CustomerContent;
-            Caption = 'Quantity';
-            Description = 'PRINTVIS';
-        }
+
         field(80114; "PTE SOI Job Cost. Dir. C. H."; Decimal)
         {
             CalcFormula = sum("PVS Job Costing Entry"."Direct Cost Total" where("Table ID" = const(6010325),
