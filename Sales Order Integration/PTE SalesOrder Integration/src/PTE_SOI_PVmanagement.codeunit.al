@@ -293,6 +293,7 @@ Codeunit 80103 "PTE SOI SOint Prod Order Mgt"
 
             Global_SubjectRec.Modify();
 
+            Global_JobRec.get(Global_JobRec.ID, Global_JobRec.Job, Global_JobRec.Version);
             in_SL_Rec."PVS Product Group Code" := Global_JobRec."Product Group";
             in_SL_Rec."PTE SOI Paper" := Global_JobRec.Paper;
             in_SL_Rec."PTE SOI Unchanged Reprint" := Global_JobRec."Unchanged Rerun";
@@ -303,7 +304,7 @@ Codeunit 80103 "PTE SOI SOint Prod Order Mgt"
                 Global_SubjectRec.Validate(Quantity, Combined_Quantity);
             Global_SubjectRec."Manual Qty." := true;
             Global_SubjectRec.Modify(true);
-
+            Global_JobRec.get(Global_JobRec.ID, Global_JobRec.Job, Global_JobRec.Version);
             Update_JobItems(Global_JobRec);
 
         end;
