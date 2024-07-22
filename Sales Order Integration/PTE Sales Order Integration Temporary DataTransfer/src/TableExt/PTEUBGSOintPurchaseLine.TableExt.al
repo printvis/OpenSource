@@ -2,13 +2,13 @@ Tableextension 80112 "PTE UBG SOint Purchase Line" extends "Purchase Line" //"PV
 {
     fields
     {
-        field(80113; "PTE UBG  Production Order"; Boolean)
+        field(80114; "PTE UBG  Production Order"; Boolean)
         {
             DataClassification = CustomerContent;
             Caption = 'Production Order';
             Description = 'PRINTVIS';
         }
-        field(80114; "PTE UBG  Page Unit"; Option)
+        field(80115; "PTE UBG  Page Unit"; Option)
         {
             DataClassification = CustomerContent;
             Caption = 'Page Unit';
@@ -16,13 +16,13 @@ Tableextension 80112 "PTE UBG SOint Purchase Line" extends "Purchase Line" //"PV
             OptionCaption = 'Pages w. Print,Sheets,Total Pages';
             OptionMembers = "Pages w. Print",Sheets,"Total Pages";
         }
-        field(80115; "PTE UBG  Pages"; Integer)
+        field(80116; "PTE UBG  Pages"; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Pages';
             Description = 'PRINTVIS';
         }
-        field(80116; "PTE UBG  Format Code"; Code[20])
+        field(80117; "PTE UBG  Format Code"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Format Code';
@@ -30,26 +30,26 @@ Tableextension 80112 "PTE UBG SOint Purchase Line" extends "Purchase Line" //"PV
             TableRelation = "PVS Format Code" where(Type = filter(Miscellaneous | "Final format"));
             ValidateTableRelation = false;
         }
-        field(80117; "PTE UBG  Colors Front"; Integer)
+        field(80118; "PTE UBG  Colors Front"; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Color Front';
             Description = 'PRINTVIS';
         }
-        field(80118; "PTE UBG  Colors Back"; Integer)
+        field(80119; "PTE UBG  Colors Back"; Integer)
         {
             DataClassification = CustomerContent;
             Caption = 'Color Back';
             Description = 'PRINTVIS';
         }
-        field(80119; "PTE UBG  Paper"; Code[20])
+        field(80120; "PTE UBG  Paper"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Paper';
             Description = 'PRINTVIS';
             TableRelation = Item where("PVS Item Type" = const(Paper));
         }
-        field(80120; "PTE UBG  Unchanged Reprint"; Boolean)
+        field(80121; "PTE UBG  Unchanged Reprint"; Boolean)
         {
             DataClassification = CustomerContent;
             Caption = 'Unchanged Reissue';
