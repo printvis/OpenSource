@@ -2,7 +2,7 @@ Tableextension 80115 "PTE UBG SOint Sales Header" extends "Sales Header" //"PVS 
 {
     fields
     {
-        field(80117; "PTE UBG  Calc. Status"; Option)
+        field(80121; "PTE UBG  Calc. Status"; Option)
         {
             DataClassification = CustomerContent;
             Caption = 'Calculation not completed';
@@ -10,7 +10,7 @@ Tableextension 80115 "PTE UBG SOint Sales Header" extends "Sales Header" //"PVS 
             OptionCaption = 'Calculate,Wait';
             OptionMembers = Calculate,Wait;
         }
-        field(80118; "PTE UBG  Price Method"; Option)
+        field(80122; "PTE UBG  Price Method"; Option)
         {
             DataClassification = CustomerContent;
             Caption = 'Price Method';
@@ -18,14 +18,14 @@ Tableextension 80115 "PTE UBG SOint Sales Header" extends "Sales Header" //"PVS 
             OptionCaption = 'As per Quote,In accordance with consumption,Manual Price';
             OptionMembers = "As per Quote","In accordance with consumption","Manual Price";
         }
-        field(80119; "PTE UBG  Order Type Code"; Code[20])
+        field(80123; "PTE UBG  Order Type Code"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Order Type';
             Description = 'PRINTVIS';
             TableRelation = "PVS Order Type";
         }
-        field(80120; "PTE UBG  Status Code"; Code[20])
+        field(80124; "PTE UBG  Status Code"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Status Code';
@@ -37,13 +37,13 @@ Tableextension 80115 "PTE UBG SOint Sales Header" extends "Sales Header" //"PVS 
 
         }
 
-        field(80121; "PTE UBG  Deadline"; Date)
+        field(80125; "PTE UBG  Deadline"; Date)
         {
             DataClassification = CustomerContent;
             Caption = 'Deadline';
             Description = 'PRINTVIS';
         }
-        field(80122; "PTE UBG  Person Responsible"; Code[50])
+        field(80126; "PTE UBG  Person Responsible"; Code[50])
         {
             DataClassification = CustomerContent;
             Caption = 'Responsible';
@@ -53,7 +53,7 @@ Tableextension 80115 "PTE UBG SOint Sales Header" extends "Sales Header" //"PVS 
 
         }
 
-        field(80123; "PTE UBG  Manual Responsible"; Boolean)
+        field(80127; "PTE UBG  Manual Responsible"; Boolean)
         {
             DataClassification = CustomerContent;
             Caption = 'Manual Responsible';
@@ -61,7 +61,7 @@ Tableextension 80115 "PTE UBG SOint Sales Header" extends "Sales Header" //"PVS 
 
         }
 
-        field(80124; "PTE UBG  Coordinator"; Code[50])
+        field(80128; "PTE UBG  Coordinator"; Code[50])
         {
             DataClassification = CustomerContent;
             Caption = 'Coordinator';
