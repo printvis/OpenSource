@@ -1,0 +1,14 @@
+{
+  "country": "us",
+  "appFolders": [],
+  "testFolders": [],
+  "bcptTestFolders": [], 
+  "ConditionalSettings": [
+    {       
+        "settings": {
+            "doNotPublishApps": true,
+            "doNotSignApps": true
+        }
+    }
+]
+}
