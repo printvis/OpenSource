@@ -1,0 +1,39 @@
+{
+  "id": "4d4b0587-3384-4c1b-91a5-3706a97796d2",
+  "name": "Job Item And Sheet Custom Sort",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id":  "5452f323-059e-499a-9753-5d2c07eef904",
+      "name":  "PrintVis",
+      "publisher":  "NovaVision Software A/S",
+      "version":  "24.5.1.2"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80177,
+      "to": 80179
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
