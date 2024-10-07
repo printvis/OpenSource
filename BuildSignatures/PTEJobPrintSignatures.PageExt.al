@@ -7,6 +7,8 @@ pageextension 80200 "PTE Job Print Signatures" extends "PVS Job Print Signatures
             action(Rebuild)
             {
                 Caption = 'Rebuild signatures';
+                ToolTip = 'Rebuild signatures';
+                Image = Create;
                 trigger OnAction()
                 var
                     PVSJob: Record "PVS Job";
@@ -21,11 +23,11 @@ pageextension 80200 "PTE Job Print Signatures" extends "PVS Job Print Signatures
                     PVSJobSheet.SetRange(ID, Rec.ID);
                     PVSJobSheet.SetRange(Job, Rec.Job);
                     PVSJobSheet.SetRange(Version, Rec.Version);
-                    if PVSJobSheet.findset then
+                    if PVSJobSheet.findset() then
                         repeat
                             PVSJobSignatures.Setrange("Sheet ID", PVSJobSheet."Sheet ID");
                             PVSJobSignatures.DeleteAll();
-                        until PVSJobSheet.next = 0;
+                        until PVSJobSheet.next() = 0;
                     if Rec.IsTemporary then
                         Rec.DeleteAll();
                     PVSJobSignatures.Build_Entries_From_Job(PVSJob.ID, PVSJob.Job, PVSJob.Version, Rec);
