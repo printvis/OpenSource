@@ -1,0 +1,31 @@
+{
+  "id": "64f7cf19-03c1-4887-b7b4-ad3d8c657639",
+  "name": "BuildSignatures",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "runtime": "10.0",
+  "showMyCode": true,
+  "target": "Cloud",
+  "platform": "17.0.16974.0",
+  "contextSensitiveHelpUrl": "https://Debug.com/help/",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "version": "23.0.0.0",
+      "publisher": "NovaVision Software A/S"
+    },
+    {
+      "id": "c1335042-3002-4257-bf8a-75c898ccb1b8",
+      "name": "Application",
+      "version": "17.0.0.0",
+      "publisher": "Microsoft"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 80100,
+      "to": 89999
+    }
+  ]
+}
