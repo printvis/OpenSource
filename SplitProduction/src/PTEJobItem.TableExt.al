@@ -1,4 +1,4 @@
-tableextension 80180 "PTE PVS Job Item" extends "PVS Job Item"
+tableextension 80180 "PTE Job Item" extends "PVS Job Item"
 {
     fields
     {

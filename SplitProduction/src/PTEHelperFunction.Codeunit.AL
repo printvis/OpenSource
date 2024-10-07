@@ -49,11 +49,11 @@ Codeunit 80181 "PTE Helperfunction"
 
     procedure Check_Paper(Rec: Record "PTE Job Shift Split" temporary; in_ItemNo: code[20]; in_Machine: Code[20]; SkipMessageChecks: Boolean; var ThrowError: Boolean): Boolean
     var
-        NVTR: Codeunit "PVS ML Text Resource";
-        UnitFactor: Codeunit "PVS Unit Conversion";
         ConfigurationRec: Record "PVS Cost Center Configuration";
         ItemRec: Record Item;
         UnitSetupRec: Record "PVS Calculation Unit Setup";
+        NVTR: Codeunit "PVS ML Text Resource";
+        UnitFactor: Codeunit "PVS Unit Conversion";
         PaperWeight: Decimal;
     begin
         //<001> new parameter on this function </001>
@@ -147,7 +147,6 @@ Codeunit 80181 "PTE Helperfunction"
 
     procedure Get_MinMaxFormat(in_Machine: Code[20]; out_Min: Decimal; out_Max: Decimal)
     var
-        NVTR: Codeunit "PVS ML Text Resource";
         ConfigurationRec: Record "PVS Cost Center Configuration";
         UnitSetupRec: Record "PVS Calculation Unit Setup";
     begin
@@ -170,7 +169,7 @@ Codeunit 80181 "PTE Helperfunction"
         PVSJobItemVariant: Record "PVS Job Item Variant";
         PVSJobItem: Record "PVS Job Item";
         PVSJobTextDesciption: Record "PVS Job Text Description";
-        ConfirmLabel: label 'You have splitted lines. Do you really want to add Variants to all Product Parts?';
+        ConfirmLbl: label 'You have splitted lines. Do you really want to add Variants to all Product Parts?';
     begin
         PVSJobTextDesciption.CopyFilters(Rec);
         PVSJobItem.SetRange(ID, Rec.ID);
@@ -180,28 +179,25 @@ Codeunit 80181 "PTE Helperfunction"
         PVSJobItemVariant.SetRange(Job, Rec.Job);
         PVSJobItemVariant.SetRange(Version, Rec.Version);
         if (PVSJobTextDesciption.Count * PVSJobItem.Count) <> PVSJobItemVariant.Count then
-            if not Dialog.Confirm(ConfirmLabel, false) then error('');
+            if not Dialog.Confirm(ConfirmLbl, false) then error('');
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"PVS Job Product / Variant Map.", 'OnAfterDeleteEvent', '', false, false)]
     local procedure TablePVSJobProductVariantMapOnAfterDeleteEvent(var Rec: Record "PVS Job Product / Variant Map.")
     var
         PVSJobProductionVariantMap: Record "PVS Job Product / Variant Map.";
-        PVSJobItem: Record "PVS Job Item";
-        PVSSheetMgt: Codeunit "PVS Sheet Management";
     begin
         PVSJobProductionVariantMap.SetRange(ID, Rec.ID);
         PVSJobProductionVariantMap.SetRange(Job, Rec.Job);
         PVSJobProductionVariantMap.SetRange(Version, Rec.Version);
         PVSJobProductionVariantMap.SetRange("Job Item No.", Rec."Job Item No.");
-        if PVSJobProductionVariantMap.IsEmpty then begin
-            // PVSJobItem.SetRange(ID, Rec.ID);
-            // PVSJobItem.SetRange(Job, Rec.Job);
-            // PVSJobItem.SetRange(Version, Rec.Version);
-            // PVSJobItem.SetRange("Job Item No.", Rec."Job Item No.");
-            // if PVSJobItem.FindFirst() then
-            //     PVSSheetMgt.Event_Delete_Sheet(PVSJobItem, true);
-        end;
+        if PVSJobProductionVariantMap.IsEmpty then;
+        // PVSJobItem.SetRange(ID, Rec.ID);
+        // PVSJobItem.SetRange(Job, Rec.Job);
+        // PVSJobItem.SetRange(Version, Rec.Version);
+        // PVSJobItem.SetRange("Job Item No.", Rec."Job Item No.");
+        // if PVSJobItem.FindFirst() then
+        //     PVSSheetMgt.Event_Delete_Sheet(PVSJobItem, true);
     end;
 
     [EventSubscriber(ObjectType::table, DATABASE::"PVS Job Sheet", 'OnBeforeDeleteEvent', '', false, false)]
@@ -209,9 +205,9 @@ Codeunit 80181 "PTE Helperfunction"
     var
         PVSJobItem: Record "PVS Job Item";
         PVSJob: Record "PVS Job";
-        ErrorLabelTxt001: Label 'Please merge the line back on the Original job item. %1';
-        ErrorLabelTxt002: Label 'Please merge the other lines back on this job item.';
         SplitMgt: Codeunit "PTE Split Mgt";
+        ErrorLabelTxt001Lbl: Label 'Please merge the line back on the Original job item. %1', Comment = '%1 is the original Job Item where it should be merged back into.';
+        ErrorLabelTxt002Lbl: Label 'Please merge the other lines back on this job item.';
     begin
         if Rec.IsTemporary() then
             exit;
@@ -230,11 +226,11 @@ Codeunit 80181 "PTE Helperfunction"
         PVSJobItem.SetRange("Sheet ID", rec."Sheet ID");
         if PVSJobItem.FindFirst() then
             if PVSJobItem."Expanded From Job Item No." <> 0 then
-                error(StrSubstNo(ErrorLabelTxt001, PVSJobItem."Expanded From Job Item No."));
+                error(ErrorLabelTxt001Lbl, PVSJobItem."Expanded From Job Item No.");
         PVSJobItem.SetFilter("Sheet ID", '<>%1', rec."Sheet ID");
         PVSJobItem.SetRange("Expanded From Job Item No.", PVSJobItem."Job Item No.");
         if PVSJobItem.Count <> 0 then
-            error(ErrorLabelTxt002);
+            error(ErrorLabelTxt002Lbl);
         /*
 It should not be allowed to delete if it has been split in any way: 
 
@@ -247,34 +243,26 @@ if the Expanded from Job Item No. field 73 is filled on other lines, then give a
     [EventSubscriber(ObjectType::Codeunit, COdeunit::"PVS Table Filters", 'OnAfterSelectImpositionFromJobItem', '', false, false)]
     local procedure PVSTableFiltersOnAfterSelectImpositionFromJobItemSingleUsage(var PVSImpositionCode: Record "PVS Imposition Code")
     var
-        PVSJobItemTmp: Record "PVS Job Item" temporary;
-        PVSJobSheetTmp: Record "PVS Job Sheet" temporary;
-        Filtertxt: Text;
-        i: Integer;
-        Max_folding_pages: Integer;
-        Pages: Integer;
-        Pages_in_sheet: Integer;
-        Step: Integer;
+        TempPVSJobItem: Record "PVS Job Item" temporary;
+        TempPVSJobSheet: Record "PVS Job Sheet" temporary;
     begin
         if not CanSingleUse then
             exit;
-        GetFilterBeforeImpositionSearch(PVSJobItemTmp, PVSJobSheetTmp);
+        GetFilterBeforeImpositionSearch(TempPVSJobItem, TempPVSJobSheet);
 
         //Update Sheet Filters
-        PVSImpositionCode.SetFilter(Machine, '%1|%2', '', PVSJobSheetTmp."Controlling Unit");
-        PVSImpositionCode.SetFilter(Finishing, '%1|%2', '', PVSJobSheetTmp.Finishing);
-        PVSImpositionCode.SetFilter("Sheet Length", '%1|%2', 0, PVSJobSheetTmp.Length);
-        PVSImpositionCode.SetFilter("Sheet Width", '%1|%2', 0, PVSJobSheetTmp.Width);
-        PVSImpositionCode.SetFilter("Paper Weight", '%1|%2..', 0, PVSJobSheetTmp.Weight);
-        PVSImpositionCode.SetFilter("Paper Quality", '%1|%2', '', PVSJobSheetTmp."Paper Quality");
+        PVSImpositionCode.SetFilter(Machine, '%1|%2', '', TempPVSJobSheet."Controlling Unit");
+        PVSImpositionCode.SetFilter(Finishing, '%1|%2', '', TempPVSJobSheet.Finishing);
+        PVSImpositionCode.SetFilter("Sheet Length", '%1|%2', 0, TempPVSJobSheet.Length);
+        PVSImpositionCode.SetFilter("Sheet Width", '%1|%2', 0, TempPVSJobSheet.Width);
+        PVSImpositionCode.SetFilter("Paper Weight", '%1|%2..', 0, TempPVSJobSheet.Weight);
+        PVSImpositionCode.SetFilter("Paper Quality", '%1|%2', '', TempPVSJobSheet."Paper Quality");
     end;
 
     local procedure CalcImposition(var in_JobItemTmp: Record "PVS Job Item" temporary; var in_SheetTmp: Record "PVS Job Sheet" temporary; var in_ConfigRec: Record "PVS Cost Center Configuration"): Boolean
     var
         AppMgt: Codeunit "PVS Application Management";
         UnitFactor: Codeunit "PVS Unit Conversion";
-        i: Integer;
-        ManualMethod: Boolean;
     begin
         // Calc imposition
         if in_ConfigRec."Default Format Code" <> '' then begin
@@ -313,17 +301,16 @@ if the Expanded from Job Item No. field 73 is filled on other lines, then give a
 
     procedure Get_Min_Format_Txt(PvsJobItem: Record "PVS Job Item" temporary; PVSJobSheet: Record "PVS Job Sheet" temporary; var out_Width: Decimal; var out_Depth: Decimal) Result: Text[250]
     var
-        Text001: Label '%1 x %2';
+        Text001Lbl: Label '%1 x %2', Comment = '%1 and %2 represents Width and Depth';
     begin
         if not Get_Min_Format(PvsJobItem, PVSJobSheet, out_Width, out_Depth) then
             exit;
 
-        Result := StrSubstNo(Text001, out_Width, out_Depth);
+        Result := StrSubstNo(Text001Lbl, out_Width, out_Depth);
     end;
 
     procedure Get_Min_Format(PvsJobItem: Record "PVS Job Item" temporary; PVSJobSheet: Record "PVS Job Sheet" temporary; var out_Width: Decimal; var out_Depth: Decimal) is_Found: Boolean
     var
-        JobItemRec: Record "PVS Job Item";
         IsHandled: Boolean;
     begin
         OnBefore_Get_Min_Format(PvsJobItem, PVSJobSheet, out_Width, out_Depth, IsHandled);
@@ -370,8 +357,8 @@ if the Expanded from Job Item No. field 73 is filled on other lines, then give a
 
 
     var
-        SinglePVSJobItemTmp: Record "PVS Job Item" temporary;
-        SingleUsePVSJobSheetTmp: Record "PVS Job Sheet" temporary;
+        TempSinglePVSJobItem: Record "PVS Job Item" temporary;
+        TempSingleUsePVSJobSheet: Record "PVS Job Sheet" temporary;
         CanSingleUse: Boolean;
 
 
@@ -389,18 +376,18 @@ if the Expanded from Job Item No. field 73 is filled on other lines, then give a
 
     procedure SetFilterBeforeImpositionSearch(in_PVSJobItemTmp: Record "PVS Job Item" temporary; in_PVSJobSheetTmp: Record "PVS Job Sheet" temporary)
     begin
-        SinglePVSJobItemTmp := in_PVSJobItemTmp;
-        SingleUsePVSJobSheetTmp := in_PVSJobSheetTmp;
+        TempSinglePVSJobItem := in_PVSJobItemTmp;
+        TempSingleUsePVSJobSheet := in_PVSJobSheetTmp;
         CanSingleUse := true;
     end;
 
     procedure GetFilterBeforeImpositionSearch(out_PVSJobItemTmp: Record "PVS Job Item" temporary; out_PVSJobSheetTmp: Record "PVS Job Sheet" temporary)
     begin
-        out_PVSJobItemTmp := SinglePVSJobItemTmp;
-        out_PVSJobSheetTmp := SingleUsePVSJobSheetTmp;
+        out_PVSJobItemTmp := TempSinglePVSJobItem;
+        out_PVSJobSheetTmp := TempSingleUsePVSJobSheet;
         CanSingleUse := false;
-        clear(SinglePVSJobItemTmp);
-        clear(SingleUsePVSJobSheetTmp);
+        clear(TempSinglePVSJobItem);
+        clear(TempSingleUsePVSJobSheet);
     end;
 
     // procedure CheckPaperOK(PaperSizeCheck: Boolean; Rec: Record "PTE Job Shift Split" temporary; var GlobalPVSJobItemTmp: Record "PVS Job Item" temporary;
