@@ -8,6 +8,7 @@ pageextension 80200 "PTE Job Print Signatures" extends "PVS Job Print Signatures
             {
                 Caption = 'Rebuild signatures';
                 ToolTip = 'Rebuild signatures';
+                ApplicationArea = All;
                 Image = Create;
                 trigger OnAction()
                 var
