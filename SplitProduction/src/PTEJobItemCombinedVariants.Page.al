@@ -1046,7 +1046,6 @@ Page 80180 "PTE Job Item Combined Variants"
     var
         Global_JobItemRec: Record "PVS Job Item";
         PVS: Codeunit "PVS Global";
-        Main: Codeunit "PVS Main";
         CalcMgt: Codeunit "PVS Calculation Management";
         SheetMgt: Codeunit "PVS Sheet Management";
         Style01: Text[50];
@@ -1084,8 +1083,8 @@ Page 80180 "PTE Job Item Combined Variants"
         VariantTxt: Text;
         Global_MaxUp: Integer;
         Number_of_Forms: Integer;
-        Text003: label '%1 Up';
-        Text004: label 'Variants: %1';
+        Text003Lbl: label '%1 Up', Comment = '%1 Refers to the Up value';
+        Text004Lbl: label 'Variants: %1', Comment = '%1 Refers to the Variant';
 
     procedure SET_RECORD(in_JobItemRec: Record "PVS Job Item")
     begin
@@ -1101,16 +1100,16 @@ Page 80180 "PTE Job Item Combined Variants"
     procedure Get_Col_Caption(in_Col: Integer) Result: Text
     begin
         if in_Col <= Get_Max_Up() then
-            Result := StrSubstNo(Text003, in_Col);
+            Result := StrSubstNo(Text003Lbl, in_Col);
     end;
 
     procedure Display()
     begin
         if Global_JobItemRec.Description <> '' then
-            VariantTxt := StrSubstNo(Text004, Global_JobItemRec.Description)
+            VariantTxt := StrSubstNo(Text004Lbl, Global_JobItemRec.Description)
         else begin
             Global_JobItemRec.CalcFields(Global_JobItemRec."Component Type Description");
-            VariantTxt := StrSubstNo(Text004, Global_JobItemRec."Component Type Description");
+            VariantTxt := StrSubstNo(Text004Lbl, Global_JobItemRec."Component Type Description");
         end;
 
         VariantTxt := VariantTxt + StrSubstNo(' (%1)', Global_JobItemRec.Quantity);
@@ -1180,7 +1179,7 @@ Page 80180 "PTE Job Item Combined Variants"
         Style32 := Get_StyleExpression(32);
     end;
 
-    procedure Get_StyleExpression(in_Up: Integer) Result: Text[250]
+    procedure Get_StyleExpression(in_Up: Integer) Result: Text[50]
     var
         i: Integer;
     begin

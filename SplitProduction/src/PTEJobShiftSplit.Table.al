@@ -353,7 +353,7 @@ Table 80180 "PTE Job Shift Split"
             Editable = true;
             trigger OnValidate()
             var
-                TmpEntries: Record "PTE Job Shift Split" temporary;
+                TempEntries: Record "PTE Job Shift Split" temporary;
             begin
                 if Rec."Split Job Item No." <= 0 then begin
                     Rec."Split Job Item No." := 0;
@@ -362,20 +362,20 @@ Table 80180 "PTE Job Shift Split"
                 if CurrFieldNo = FieldNo("Split Job Item No.") then begin
 
                     Check_Manuel_SplitNo();
-                    TmpEntries.Copy(rec, true);
-                    TmpEntries.Reset();
-                    TmpEntries.SetRange("Original Job Item No.", rec."Original Job Item No.");
-                    TmpEntries.SetRange("Split Job Item No.", Rec."Split Job Item No.");
-                    if TmpEntries.IsEmpty() then begin
-                        TmpEntries.SetRange("Split Job Item No.");
-                        TmpEntries.SetRange("Job Item No.", Rec."Split Job Item No.");
+                    TempEntries.Copy(rec, true);
+                    TempEntries.Reset();
+                    TempEntries.SetRange("Original Job Item No.", rec."Original Job Item No.");
+                    TempEntries.SetRange("Split Job Item No.", Rec."Split Job Item No.");
+                    if TempEntries.IsEmpty() then begin
+                        TempEntries.SetRange("Split Job Item No.");
+                        TempEntries.SetRange("Job Item No.", Rec."Split Job Item No.");
                     end;
                     if "Split Job Item No." <> 0 then
-                        if TmpEntries.FindFirst() then begin
-                            Rec.Validate("Controlling Sheet Unit", TmpEntries."Controlling Sheet Unit");
-                            Rec.Validate("Paper Item No.", TmpEntries."Paper Item No.");
-                            Rec.Validate(Finishing, TmpEntries.Finishing);
-                            Rec.Validate("Imposition Type", TmpEntries."Imposition Type");
+                        if TempEntries.FindFirst() then begin
+                            Rec.Validate("Controlling Sheet Unit", TempEntries."Controlling Sheet Unit");
+                            Rec.Validate("Paper Item No.", TempEntries."Paper Item No.");
+                            Rec.Validate(Finishing, TempEntries.Finishing);
+                            Rec.Validate("Imposition Type", TempEntries."Imposition Type");
                             Rec.Modify(false);
                         end
                 end
@@ -399,12 +399,6 @@ Table 80180 "PTE Job Shift Split"
     }
     trigger OnModify()
     var
-        ch: Record "PVS Job Item Plate Changes";
-        HelperFunction: Codeunit "PTE Helperfunction";
-        GlobalPVSJobItemTmp: Record "PVS Job Item" temporary;
-        GlobalPVSJobSheetTmp: Record "PVS Job Sheet" temporary;
-        GlobalCostCenterConfiguration: Record "PVS Cost Center Configuration";
-        GlobalItem: Record Item;
     begin
         //HelperFunction.CheckPaperOK(true, Rec, GlobalPVSJobItemTmp, GlobalPVSJobSheetTmp, GlobalCostCenterConfiguration, GlobalItem);
         // Set Changed values
@@ -425,7 +419,6 @@ Table 80180 "PTE Job Shift Split"
     var
         JobItemRec: Record "PVS Job Item";
         SheetRec: Record "PVS Job Sheet";
-        DifferentFromPreviousChanges: Boolean;
     begin
         if not JobItemRec.get(ID, Job, Version, "Job Item No.", 1) then
             exit;
@@ -435,115 +428,112 @@ Table 80180 "PTE Job Shift Split"
             "Changed Controlling Sheet Unit" := (SheetRec."Controlling Unit" <> "Controlling Sheet Unit");
             "Changed Finishing" := (SheetRec.Finishing <> Finishing);
             Changed := "Changed Controlling Sheet Unit" or "Changed Finishing" or "Changed Paper Item No." or "Changed Imposition Type";
-            DifferentFromPreviousChanges := (Rec."Changed Finishing" <> xRec."Changed Finishing") or (rec."Paper Item No." <> xRec."Paper Item No.");
         end;
     end;
 
     local procedure Update_VariantEntries();
     var
-        tmp: Record "PTE Job Shift Split" temporary;
+        temp: Record "PTE Job Shift Split" temporary;
     begin
         if "Variant Entry No." = 0 then
             exit;
-        tmp.Copy(rec, true);
-        tmp.reset;
-        tmp.SetRange("Job Item No.", "Job Item No.");
+        temp.Copy(rec, true);
+        temp.reset();
+        temp.SetRange("Job Item No.", "Job Item No.");
         if Rec.Changed then
             if rec."Split Job Item No." <> 0 then
-                tmp.SetRange("Split Job Item No.", rec."Split Job Item No.")
+                temp.SetRange("Split Job Item No.", rec."Split Job Item No.")
             else
-                tmp.SetFilter("Change No.", '<>%1', "Change No.");
-        if tmp.findset(true) then
+                temp.SetFilter("Change No.", '<>%1', "Change No.");
+        if temp.findset(true) then
             repeat
-                tmp."Changed Imposition Type" := "Changed Imposition Type";
-                tmp."Changed Paper Item No." := "Changed Paper Item No.";
-                tmp."Changed Controlling Sheet Unit" := "Changed Controlling Sheet Unit";
-                tmp."Changed Finishing" := "Changed Finishing";
-                tmp.Changed := Changed;
+                temp."Changed Imposition Type" := "Changed Imposition Type";
+                temp."Changed Paper Item No." := "Changed Paper Item No.";
+                temp."Changed Controlling Sheet Unit" := "Changed Controlling Sheet Unit";
+                temp."Changed Finishing" := "Changed Finishing";
+                temp.Changed := Changed;
 
-                tmp."Imposition Type" := "Imposition Type";
-                tmp."Paper Item No." := "Paper Item No.";
-                tmp."Controlling Sheet Unit" := "Controlling Sheet Unit";
-                tmp.Finishing := Finishing;
-                tmp.validate("Split Job Item No.", "Split Job Item No.");
-                tmp.Modify();
-            until tmp.next = 0;
+                temp."Imposition Type" := "Imposition Type";
+                temp."Paper Item No." := "Paper Item No.";
+                temp."Controlling Sheet Unit" := "Controlling Sheet Unit";
+                temp.Finishing := Finishing;
+                temp.validate("Split Job Item No.", "Split Job Item No.");
+                temp.Modify();
+            until temp.next() = 0;
     end;
 
     local procedure NewJobItemNo(): integer;
     var
-        tmp: Record "PTE Job Shift Split" temporary;
+        temp: Record "PTE Job Shift Split" temporary;
         HighestNewNo: Integer;
         ReuseOK: Boolean;
     begin
-
-        tmp.Copy(Rec, true);
+        HighestNewNo := 0;
+        temp.Copy(Rec, true);
 
         // If only one platechange on jobitem, new no is 0
         if CurrFieldNo = FieldNo("Controlling Sheet Unit") then begin
-            tmp.Reset();
+            temp.Reset();
             //does a Entry exists with a split job item no.
             //so a new entry that is in process of being made
-            tmp.SetRange("Original Job Item No.", Rec."Original Job Item No.");
-            tmp.SetRange("Controlling Sheet Unit", Rec."Controlling Sheet Unit");
-            tmp.SetFilter("Split Job Item No.", '<>%1', 0);
-            if tmp.FindFirst() then begin
-                exit(tmp."Split Job Item No.");
-            end
+            temp.SetRange("Original Job Item No.", Rec."Original Job Item No.");
+            temp.SetRange("Controlling Sheet Unit", Rec."Controlling Sheet Unit");
+            temp.SetFilter("Split Job Item No.", '<>%1', 0);
+            if temp.FindFirst() then
+                exit(temp."Split Job Item No.")
             else begin
-                tmp.Setrange("Split Job Item No.", 0);
-                tmp.SetFilter("Job Item No.", '<>%1', rec."Job Item No.");
-                if tmp.FindFirst() then begin
-                    exit(tmp."Job Item No.");
-                end
+                temp.Setrange("Split Job Item No.", 0);
+                temp.SetFilter("Job Item No.", '<>%1', rec."Job Item No.");
+                if temp.FindFirst() then
+                    exit(temp."Job Item No.");
             end
         end;
 
 
-        tmp.reset;
-        tmp.SetRange("Job Item No.", rec."Job Item No.");
-        tmp.SetFilter("Change No.", '<>%1', Rec."Change No.");
-        tmp.SetRange("Split Job Item No.", 0);
-        if tmp.IsEmpty then
+        temp.reset();
+        temp.SetRange("Job Item No.", rec."Job Item No.");
+        temp.SetFilter("Change No.", '<>%1', Rec."Change No.");
+        temp.SetRange("Split Job Item No.", 0);
+        if temp.IsEmpty then
             exit(0);
 
         if "Split Job Item No." <> 0 then begin
             // can existing split no be reused
             ReuseOK := true;
             // is reusing another new no they must have equal attributes
-            tmp.reset;
-            tmp.SetRange("Split Job Item No.", "Split Job Item No.");
-            // tmp.reset;
+            temp.reset();
+            temp.SetRange("Split Job Item No.", "Split Job Item No.");
+            // tmp.reset();
             // tmp.SetRange("Job Item No.", "Split Job Item No.");
-            if tmp.findset then
+            if temp.findset() then
                 repeat
-                    if (tmp."Job Item No." <> Rec."Job Item No.") or (tmp."Change No." <> rec."Change No.") then
-                        if not Equal_Attributes(tmp, rec) then
+                    if (temp."Job Item No." <> Rec."Job Item No.") or (temp."Change No." <> rec."Change No.") then
+                        if not Equal_Attributes(temp, rec) then
                             ReuseOK := false;
-                until (tmp.next = 0) or (not ReuseOK);
+                until (temp.next() = 0) or (not ReuseOK);
             if ReuseOK then
                 exit("Split Job Item No.");
-            tmp.Reset();
+            temp.Reset();
         end;
 
-        tmp.reset;
-        tmp.SetFilter("Split Job Item No.", '<>0');
-        if tmp.IsEmpty then begin
+        temp.reset();
+        temp.SetFilter("Split Job Item No.", '<>0');
+        if temp.IsEmpty then begin
             // find next job item no
-            tmp.SetRange("Split Job Item No.");
-            tmp.SetCurrentKey(ID, Job, Version, "Job Item No. 2");
-            tmp.FindLast();
-            exit(tmp."Job Item No. 2" + 1);
+            temp.SetRange("Split Job Item No.");
+            temp.SetCurrentKey(ID, Job, Version, "Job Item No. 2");
+            temp.FindLast();
+            exit(temp."Job Item No. 2" + 1);
         end;
-        tmp.findset();
+        temp.findset();
         repeat
-            if (tmp."Job Item No." <> Rec."Job Item No.") or (tmp."Change No." <> rec."Change No.") then begin
-                if Equal_Attributes(tmp, Rec) then
-                    exit(tmp."Split Job Item No.");
-                if tmp."Split Job Item No." > HighestNewNo then
-                    HighestNewNo := tmp."Split Job Item No.";
+            if (temp."Job Item No." <> Rec."Job Item No.") or (temp."Change No." <> rec."Change No.") then begin
+                if Equal_Attributes(temp, Rec) then
+                    exit(temp."Split Job Item No.");
+                if temp."Split Job Item No." > HighestNewNo then
+                    HighestNewNo := temp."Split Job Item No.";
             end;
-        until tmp.next = 0;
+        until temp.next() = 0;
         exit(HighestNewNo + 1);
     end;
 
@@ -562,18 +552,17 @@ Table 80180 "PTE Job Shift Split"
 
     procedure Check_Manuel_SplitNo(): Boolean
     var
-        tmp: Record "PTE Job Shift Split" temporary;
-        HighestNewNo: Integer;
+        temp: Record "PTE Job Shift Split" temporary;
     begin
         if ("Split Job Item No." = 0) and (not Changed) then
             exit;
         if "Split Job Item No." = "Job Item No." then
             exit(RollBack(3, false));
 
-        tmp.Copy(Rec, true);
+        temp.Copy(Rec, true);
 
         // If only one platechange on jobitem, new no is 0
-        tmp.reset;
+        temp.reset();
         // blank is not allowed
         if "Split Job Item No." = 0 then
             if Rec."Original Job Item No." <> Rec."Job Item No." then
@@ -582,11 +571,11 @@ Table 80180 "PTE Job Shift Split"
 
         // Is it renumber to a another number (merge/move)
         // where it is from same origin
-        tmp.Reset();
-        tmp.SetRange("Original Job Item No.", "Original Job Item No.");
-        tmp.SetRange("Job Item No.", "Split Job Item No.");
-        if tmp.findfirst then
-            if not ImpositionMergeCheck(rec."Imposition Type", tmp."Imposition Type") then
+        temp.Reset();
+        temp.SetRange("Original Job Item No.", "Original Job Item No.");
+        temp.SetRange("Job Item No.", "Split Job Item No.");
+        if temp.findfirst() then
+            if not ImpositionMergeCheck(rec."Imposition Type", temp."Imposition Type") then
                 exit(RollBack(4, false))
             else
                 exit;
@@ -594,34 +583,23 @@ Table 80180 "PTE Job Shift Split"
         // Is it trying to be moved to another origin?
         // That is not allowed
 
-        tmp.SetFilter("Original Job Item No.", '<>%1', rec."Original Job Item No.");
-        tmp.SetRange("Job Item No.", rec."Split Job Item No.");
-        tmp.SetRange("Split Job Item No.", 0);
-        if not tmp.IsEmpty() then
+        temp.SetFilter("Original Job Item No.", '<>%1', rec."Original Job Item No.");
+        temp.SetRange("Job Item No.", rec."Split Job Item No.");
+        temp.SetRange("Split Job Item No.", 0);
+        if not temp.IsEmpty() then
             exit(RollBack(2, false));
 
         // must be a new no
-        tmp.Reset();
-        tmp.SetRange("Job Item No. 2", "Split Job Item No.");
-        if tmp.findset then
+        temp.Reset();
+        temp.SetRange("Job Item No. 2", "Split Job Item No.");
+        if temp.findset() then
             repeat
-                if (tmp."Job Item No." = "Job Item No.") and (tmp."Change No." = "Change No.") then
+                if (temp."Job Item No." = "Job Item No.") and (temp."Change No." = "Change No.") then
                     exit(RollBack(0, false));
-            until tmp.next = 0;
-
-        // is reusing another new no they must have equal attributes
-        // tmp.Reset();
-        // tmp.SetRange("Job Item No. 2");
-        // tmp.SetRange("Split Job Item No.", "Split Job Item No.");
-        // if tmp.findset then
-        //     repeat
-        //         if not Equal_Attributes(tmp, rec) then
-        //             exit(RollBack(0, false));
-        //     until tmp.next = 0;
-
+            until temp.next() = 0;
     end;
 
-    local procedure ImpositionMergeCheck(From_ImpositionCode: Code[20]; To_ImpositionCode: Code[20]) OK: Boolean
+    local procedure ImpositionMergeCheck(From_ImpositionCode: Code[20]; To_ImpositionCode: Code[20]): Boolean
     var
         FromImpositionCode, ToImpositionCode : Record "PVS Imposition Code";
     begin
@@ -635,24 +613,24 @@ Table 80180 "PTE Job Shift Split"
 
     local procedure RollBack(ErrorNo: integer; GiveError: Boolean): Boolean
     var
-        Error000: Label 'Not a valid No.';
-        Error001: Label 'This will empty Job Item %1, that at least 1 job item is splitted from';
-        Error002: Label 'It is not allowed to merge plate changes from different components';
-        Error003: Label 'This is the same Number';
-        Error004: Label 'Must have same folding pages';
+        Error000Lbl: Label 'Not a valid No.';
+        Error001Lbl: Label 'This will empty Job Item %1, that at least 1 job item is splitted from', Comment = '%1 refers to the jobitem that has splitted entries from';
+        Error002Lbl: Label 'It is not allowed to merge plate changes from different components';
+        Error003Lbl: Label 'This is the same Number';
+        Error004Lbl: Label 'Must have same folding pages';
         ErrorTxt: Text;
     begin
         case ErrorNo of
             0:
-                ErrorTxt := Error000;
+                ErrorTxt := Error000Lbl;
             1:
-                ErrorTxt := StrSubstNo(error001, rec."Job Item No.");
+                ErrorTxt := StrSubstNo(Error001Lbl, rec."Job Item No.");
             2:
-                ErrorTxt := Error002;
+                ErrorTxt := Error002Lbl;
             3:
-                ErrorTxt := Error003;
+                ErrorTxt := Error003Lbl;
             4:
-                ErrorTxt := Error004;
+                ErrorTxt := Error004Lbl;
         end;
         if GiveError then
             error(ErrorTxt);
@@ -662,29 +640,29 @@ Table 80180 "PTE Job Shift Split"
 
     procedure SelectMachineManually(IsLookUpMachine: Boolean)
     var
-        TmpEntries: Record "PTE Job Shift Split" temporary;
+        TempEntries: Record "PTE Job Shift Split" temporary;
     begin
         if (CurrFieldNo = FieldNo("Controlling Sheet Unit")) or (IsLookUpMachine) then begin
-            TmpEntries.Copy(rec, true);
-            TmpEntries.Reset();
+            TempEntries.Copy(rec, true);
+            TempEntries.Reset();
             //does a Entry exists with a split job item no.
             //so a new entry that is in process of being made
-            TmpEntries.SetRange("Original Job Item No.", Rec."Original Job Item No.");
-            TmpEntries.SetRange("Controlling Sheet Unit", Rec."Controlling Sheet Unit");
-            TmpEntries.SetFilter("Split Job Item No.", '<>%1', 0);
-            if TmpEntries.FindFirst() then begin
-                Rec.Validate("Paper Item No.", TmpEntries."Paper Item No.");
-                Rec.Validate(Finishing, TmpEntries.Finishing);
-                Rec.Validate("Imposition Type", TmpEntries."Imposition Type");
+            TempEntries.SetRange("Original Job Item No.", Rec."Original Job Item No.");
+            TempEntries.SetRange("Controlling Sheet Unit", Rec."Controlling Sheet Unit");
+            TempEntries.SetFilter("Split Job Item No.", '<>%1', 0);
+            if TempEntries.FindFirst() then begin
+                Rec.Validate("Paper Item No.", TempEntries."Paper Item No.");
+                Rec.Validate(Finishing, TempEntries.Finishing);
+                Rec.Validate("Imposition Type", TempEntries."Imposition Type");
                 Rec.Modify(true);
             end
             else begin
-                TmpEntries.Setrange("Split Job Item No.", 0);
-                TmpEntries.SetFilter("Job Item No.", '<>%1', rec."Job Item No.");
-                if TmpEntries.FindFirst() then begin
-                    Rec.Validate("Paper Item No.", TmpEntries."Paper Item No.");
-                    Rec.Validate(Finishing, TmpEntries.Finishing);
-                    Rec.Validate("Imposition Type", TmpEntries."Imposition Type");
+                TempEntries.Setrange("Split Job Item No.", 0);
+                TempEntries.SetFilter("Job Item No.", '<>%1', rec."Job Item No.");
+                if TempEntries.FindFirst() then begin
+                    Rec.Validate("Paper Item No.", TempEntries."Paper Item No.");
+                    Rec.Validate(Finishing, TempEntries.Finishing);
+                    Rec.Validate("Imposition Type", TempEntries."Imposition Type");
                     Rec.Modify(true);
                 end
             end

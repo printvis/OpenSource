@@ -1,4 +1,4 @@
-pageextension 80180 "PTE Job" extends "PVS Job Card"
+pageextension 80180 "PTE Job Card" extends "PVS Job Card"
 {
     actions
     {
@@ -9,6 +9,7 @@ pageextension 80180 "PTE Job" extends "PVS Job Card"
                 Caption = 'Split Production';
                 Image = Split;
                 ApplicationArea = All;
+                ToolTip = 'Will open the Split Production Page';
 
                 trigger OnAction()
                 var
@@ -24,6 +25,7 @@ pageextension 80180 "PTE Job" extends "PVS Job Card"
                 Caption = 'Prepare Job for Split Production';
                 Image = AdjustEntries;
                 ApplicationArea = All;
+                ToolTip = 'Will prepare the job for Split Production';
 
                 trigger OnAction()
                 var

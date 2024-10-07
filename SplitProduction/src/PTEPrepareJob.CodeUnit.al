@@ -4,9 +4,9 @@ codeunit 80182 "PTE Prepare Job"
     var
         CaseRec: Record "PVS Case";
         CaseModificationAllowed: Codeunit "PVS Case Modification Allowed";
-        RecRef: RecordRef;
         CalcMgt: Codeunit "PVS Calculation Management";
         PlanMgt: Codeunit "PVS Planning Management";
+        RecRef: RecordRef;
     begin
         if not CheckJobStatus(in_JobRec) then
             exit(false);
@@ -25,13 +25,13 @@ codeunit 80182 "PTE Prepare Job"
             exit(false);
 
         in_JobRec."Skip Calc." := true;
-        in_JobRec.modify;
+        in_JobRec.modify();
 
         PrepareJobItems(in_JobRec);
 
         in_JobRec.get(in_JobRec.ID, in_JobRec.Job, in_JobRec.Version);
         in_JobRec."Skip Calc." := false;
-        in_JobRec.modify;
+        in_JobRec.modify();
 
         CalcMgt.Main_Calculate_Job(in_JobRec.ID, in_JobRec.Job, in_JobRec.Version);
         PlanMgt.Adjust_Limits(0, in_JobRec.ID, in_JobRec.Job);
@@ -46,7 +46,6 @@ codeunit 80182 "PTE Prepare Job"
     var
         VariantRec: Record "PVS Job Item Variant";
         PlateChange: Record "PVS Job Item Plate Changes";
-        p: page "PVS Job Item Combined Variants";
     begin
         if not AllVariantsCreated(in_JobRec) then
             exit(false);
@@ -59,7 +58,7 @@ codeunit 80182 "PTE Prepare Job"
             exit(false);
 
         // Check for unassigned variants
-        VariantRec.reset;
+        VariantRec.reset();
         VariantRec.SetRange(ID, in_JobRec.id);
         VariantRec.SetRange(Job, in_JobRec.Job);
         VariantRec.SetRange(Version, in_JobRec.Version);
@@ -74,7 +73,7 @@ codeunit 80182 "PTE Prepare Job"
                 VariantRec.SetRange("Sheet ID", PlateChange."Change No.");
                 if VariantRec.IsEmpty then
                     exit(false);
-            until PlateChange.next = 0;
+            until PlateChange.next() = 0;
 
         exit(true);
     end;
@@ -94,7 +93,7 @@ codeunit 80182 "PTE Prepare Job"
         if not CreateNew then
             exit(false);
 
-        ProdPart.init;
+        ProdPart.init();
         ProdPart.ID := in_JobRec.ID;
         ProdPart.Job := in_JobRec.Job;
         ProdPart.Version := in_JobRec.Version;
@@ -139,10 +138,9 @@ codeunit 80182 "PTE Prepare Job"
 
     local procedure CheckJobStatus(var in_JobRec: Record "PVS Job"): Boolean
     var
+        OrderRec: Record "PVS Case";
         CopyMgt: Codeunit "PVS Copy Management";
         NewVersion: Integer;
-        OrderRec: Record "PVS Case";
-        ProdJobRec: Record "PVS Job";
     begin
         // Check prod job - make version
         if in_JobRec.ID = 0 then
@@ -192,7 +190,7 @@ codeunit 80182 "PTE Prepare Job"
                 AssignPlateChanges(JobItemRec);
                 if SheetRec.Get(JobItemRec."Sheet ID") then
                     SheetMgt.Update_Sheet_From_JobItems(SheetRec);
-            until JobItemRec.next = 0;
+            until JobItemRec.next() = 0;
 
         exit(true);
     end;
@@ -201,7 +199,7 @@ codeunit 80182 "PTE Prepare Job"
     var
         VariantRec: Record "PVS Job Item Variant";
     begin
-        VariantRec.init;
+        VariantRec.init();
         VariantRec.ID := in_JobItemRec.id;
         VariantRec.Job := in_JobItemRec.Job;
         VariantRec.Version := in_JobItemRec.Version;
@@ -219,7 +217,7 @@ codeunit 80182 "PTE Prepare Job"
         if MaxUp = 0 then
             exit;
         // Assign Platechanges
-        VariantRec.reset;
+        VariantRec.reset();
         VariantRec.SetRange(ID, in_JobItemRec.id);
         VariantRec.SetRange(Job, in_JobItemRec.Job);
         VariantRec.SetRange(Version, in_JobItemRec.Version);
@@ -250,12 +248,12 @@ codeunit 80182 "PTE Prepare Job"
                     // assign variant to platechange
                     VariantRec."Sheet ID" := PlateChangeRec."Change No.";
                     VariantRec."No. of Ups" := MaxUp;
-                    VariantRec.modify;
+                    VariantRec.modify();
                 end;
-            until VariantRec.next = 0;
+            until VariantRec.next() = 0;
 
             RemoveUnusedPlateChanges(in_JobItemRec);
-            if VariantRec.findfirst then
+            if VariantRec.findfirst() then
                 VariantRec.Calculate_PlateChange_Qty();
             in_JobItemRec.get(in_JobItemRec.ID, in_JobItemRec.Job, in_JobItemRec.Version, in_JobItemRec."Job Item No.", 1);
         end;
@@ -265,11 +263,11 @@ codeunit 80182 "PTE Prepare Job"
     var
         VariantRec: Record "PVS Job Item Variant";
         PlateChangeRec: Record "PVS Job Item Plate Changes";
-        PlateChangeTMP: Record "PVS Job Item Plate Changes" temporary;
+        TempPlateChange: Record "PVS Job Item Plate Changes" temporary;
         FirstUnusedNo, NextNo : Integer;
     begin
 
-        VariantRec.reset;
+        VariantRec.reset();
         VariantRec.SetRange(ID, in_JobItemRec.id);
         VariantRec.SetRange(Job, in_JobItemRec.Job);
         VariantRec.SetRange(Version, in_JobItemRec.Version);
@@ -288,10 +286,10 @@ codeunit 80182 "PTE Prepare Job"
                         FirstUnusedNo := PlateChangeRec."Change No.";
                 end else
                     if FirstUnusedNo <> -1 then begin
-                        PlateChangeTMP := PlateChangeRec;
-                        PlateChangeTMP.insert;
+                        TempPlateChange := PlateChangeRec;
+                        TempPlateChange.insert();
                     end;
-            until PlateChangeRec.next = 0;
+            until PlateChangeRec.next() = 0;
 
         if FirstUnusedNo = -1 then
             exit;
@@ -300,21 +298,21 @@ codeunit 80182 "PTE Prepare Job"
         PlateChangeRec.DeleteAll();
 
         NextNo := FirstUnusedNo;
-        PlateChangeTMP.reset;
-        if PlateChangeTMP.findfirst then
+        TempPlateChange.reset();
+        if TempPlateChange.findset() then
             repeat
-                PlateChangeRec := PlateChangeTMP;
+                PlateChangeRec := TempPlateChange;
                 PlateChangeRec."Change No." := NextNo;
-                PlateChangeRec.insert;
+                PlateChangeRec.insert();
                 // Reassign variants to new platechange
-                VariantRec.SetRange("Sheet ID", PlateChangeTMP."Change No.");
+                VariantRec.SetRange("Sheet ID", TempPlateChange."Change No.");
                 if VariantRec.findset(true) then
                     repeat
                         VariantRec."Sheet ID" := PlateChangeRec."Change No.";
-                        VariantRec.modify;
-                    until VariantRec.next = 0;
+                        VariantRec.modify();
+                    until VariantRec.next() = 0;
                 NextNo += 1;
-            until PlateChangeTMP.next = 0;
+            until TempPlateChange.next() = 0;
     end;
 
     local procedure Get_Max_Up(var in_JobItemRec: Record "PVS Job Item") MaxUp: Integer
@@ -432,7 +430,7 @@ codeunit 80182 "PTE Prepare Job"
                                 MappingRec."Product Version No." := ProductPartRec."Entry No.";
                                 MappingRec.Insert(true);
                             end;
-                        until JobItemRec.next = 0;
+                        until JobItemRec.next() = 0;
                 end;
             until ProductPartRec.Next() = 0;
 
@@ -443,13 +441,13 @@ codeunit 80182 "PTE Prepare Job"
     local procedure AutoVariantStartPosition(var in_JobRec: Record "PVS Job"): Integer
     var
         ProdPart: Record "PVS Job Text Description";
-        TxtTMP: Record "PVS Job Text Description" temporary;
+        TempTxt: Record "PVS Job Text Description" temporary;
         FirstTxt: Text;
         RemoveTxt: Text;
         cutpos: Integer;
-        i: Integer;
         pos: Integer;
     begin
+        cutPos := 0;
         ProdPart.SetRange(ID, in_JobRec.ID);
         ProdPart.SetRange(Job, in_JobRec.Job);
         ProdPart.SetRange(Version, in_JobRec.Version);
@@ -459,28 +457,27 @@ codeunit 80182 "PTE Prepare Job"
 
         FirstTxt := ProdPart.Text;
         repeat
-            TxtTMP := ProdPart;
-            TxtTMP.Insert();
+            TempTxt := ProdPart;
+            TempTxt.Insert();
         until ProdPart.Next() = 0;
 
         pos := StrPos(FirstTxt, ' ');
 
-        if TxtTMP.Count > 1 then begin
+        if TempTxt.Count > 1 then
             while pos > 1 do begin
                 RemoveTxt := CopyStr(FirstTxt, cutPos + 1, pos);
 
-                TxtTMP.FindFirst();
+                TempTxt.FindSet();
                 repeat
-                    if CopyStr(TxtTMP.Text, cutPos + 1, pos) <> RemoveTxt then
+                    if CopyStr(TempTxt.Text, cutPos + 1, pos) <> RemoveTxt then
                         pos := 0;
-                until (TxtTMP.Next() = 0) or (pos = 0);
+                until (TempTxt.Next() = 0) or (pos = 0);
 
                 if pos > 0 then begin
                     cutPos += pos;
                     pos := StrPos(CopyStr(FirstTxt, cutPos + 1), ' ');
                 end;
             end;
-        end;
         exit(cutPos + 1);
     end;
 

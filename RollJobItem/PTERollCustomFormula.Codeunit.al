@@ -3,8 +3,8 @@ Codeunit 80100 "PTE Roll Custom Formula"
     trigger OnRun()
     begin
         SingleInstance.Get_Current_CalcUnitDetailRec(JobCalculationDetail); // Get the Current Calc. Detail record
-        SingleInstance.Get_SheetRecTmp(JobSheetTemp);
-        SingleInstance.Get_ProcessRecTmp(JobProcessTemp);
+        SingleInstance.Get_SheetRecTmp(TempJobSheet);
+        SingleInstance.Get_ProcessRecTmp(TempJobProcess);
 
         // Clear the fields to be calculated
         JobCalculationDetail."Qty. Calculated" := 0;
@@ -21,9 +21,9 @@ Codeunit 80100 "PTE Roll Custom Formula"
     end;
 
     var
-        JobSheetTemp: Record "PVS Job Sheet" temporary;
+        TempJobSheet: Record "PVS Job Sheet" temporary;
         JobCalculationDetail: Record "PVS Job Calculation Detail";
-        JobProcessTemp: Record "PVS Job Process" temporary;
+        TempJobProcess: Record "PVS Job Process" temporary;
         SingleInstance: Codeunit "PVS SingleInstance";
 
     local procedure Formula_80100()
@@ -41,20 +41,20 @@ Codeunit 80100 "PTE Roll Custom Formula"
         // depending on the price unit on the paper, the quantity will be calculated in either pcs, weight etc.
         // The example also shows how the value of a standard formula to be retrieved
 
-        if not JobSheetTemp.Get(JobCalculationDetail."Sheet ID") then
+        if not TempJobSheet.Get(JobCalculationDetail."Sheet ID") then
             exit;
 
-        if not PaperItem.Get(JobSheetTemp."Roll Item No") then
+        if not PaperItem.Get(TempJobSheet."Roll Item No") then
             exit;
 
-        if not JobProcessTemp.Get(JobSheetTemp."First Process ID") then
+        if not TempJobProcess.Get(TempJobSheet."First Process ID") then
             exit;
 
         // This will change the item no. on the calc. line
         JobCalculationDetail."Item No." := PaperItem."No.";
 
         // This will get the result of formula 16 (amount of paper - same as formula 14 but without changing the item no.)
-        if not CalcMgt.Standard_Formula_Rutine(16, JobCalculationDetail, Dummy_PriceUnit, Local_Job, JobSheetTemp, JobProcessTemp, false) then
+        if not CalcMgt.Standard_Formula_Rutine(16, JobCalculationDetail, Dummy_PriceUnit, Local_Job, TempJobSheet, TempJobProcess, false) then
             exit;
 
         Quantity_Result := JobCalculationDetail."Qty. Calculated";
@@ -66,11 +66,11 @@ Codeunit 80100 "PTE Roll Custom Formula"
                 begin
                     // Weight of paper with scrap
                     // Calculate Area
-                    Quantity_Result := JobSheetTemp."Full Sheet Format 1" * JobSheetTemp."Full Sheet Format 2" * Quantity_Result;
+                    Quantity_Result := TempJobSheet."Full Sheet Format 1" * TempJobSheet."Full Sheet Format 2" * Quantity_Result;
 
                     // Transform from area to weight
                     Factor :=
-                      UnitConversion.Weight2SqFormat(JobSheetTemp.Weight, JobSheetTemp."Weight Unit", JobSheetTemp."Full Sheet Format 1", JobSheetTemp."Full Sheet Format 2");
+                      UnitConversion.Weight2SqFormat(TempJobSheet.Weight, TempJobSheet."Weight Unit", TempJobSheet."Full Sheet Format 1", TempJobSheet."Full Sheet Format 2");
                     if Factor = 0 then
                         Quantity_Result := 0
                     else
@@ -80,10 +80,10 @@ Codeunit 80100 "PTE Roll Custom Formula"
             3:
                 // Area of paper with scrap
                 // Calculate Area
-                Quantity_Result := JobSheetTemp."Full Sheet Format 1" * JobSheetTemp."Full Sheet Format 2" * Quantity_Result;
+                Quantity_Result := TempJobSheet."Full Sheet Format 1" * TempJobSheet."Full Sheet Format 2" * Quantity_Result;
             4:
                 // Lenght of paper with scrap
-                Quantity_Result := JobSheetTemp."Print Sheet" * JobSheetTemp.Length / UnitConversion.Lenght2Format() * Quantity_Result;
+                Quantity_Result := TempJobSheet."Print Sheet" * TempJobSheet.Length / UnitConversion.Lenght2Format() * Quantity_Result;
         end;
 
         JobCalculationDetail."Qty. Calculated" := Quantity_Result;

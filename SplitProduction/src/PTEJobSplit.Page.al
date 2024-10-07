@@ -85,7 +85,7 @@ Page 80181 "PTE Job Split"
                         TOOL4: Code[20];
                         UNIT: Code[20];
                     begin
-                        if AutoMgt.Show_ListOfUnits(GlobalPVSJobItemtmp, UNIT, PAPER, TOOL1, TOOL2, TOOL3, TOOL4) then
+                        if AutoMgt.Show_ListOfUnits(TempGlobalPVSJobItem, UNIT, PAPER, TOOL1, TOOL2, TOOL3, TOOL4) then
                             if UNIT <> '' then begin
                                 Rec."Lookup Controlling Sheet Unit" := true;
                                 Rec.validate("Controlling Sheet Unit", Unit);
@@ -115,10 +115,10 @@ Page 80181 "PTE Job Split"
                     var
                         HelperFunction: Codeunit "PTE Helperfunction";
                     begin
-                        HelperFunction.SetFilterBeforeImpositionSearch(GlobalPVSJobItemTmp, GlobalPVSJobSheetTmp);
+                        HelperFunction.SetFilterBeforeImpositionSearch(TempGlobalPVSJobItem, TempGlobalPVSJobSheet);
                         // 002
-                        if Page.RunModal(Page::"PVS Imposition Search", GlobalPVSJobItemTmp) = Action::LookupOK then begin
-                            rec.validate("Imposition Type", GlobalPVSJobItemTmp."Imposition Type");
+                        if Page.RunModal(Page::"PVS Imposition Search", TempGlobalPVSJobItem) = Action::LookupOK then begin
+                            rec.validate("Imposition Type", TempGlobalPVSJobItem."Imposition Type");
                             if CheckPaperOK(true) then;
                             Rec.Modify(true);
                             CurrPage.Update(false);
@@ -128,14 +128,14 @@ Page 80181 "PTE Job Split"
 
                     trigger OnLookup(var Text: Text): Boolean
                     var
-                        JobItemTmp: Record "PVS Job Item" temporary;
+                        TempJobItem: Record "PVS Job Item" temporary;
                     begin
-                        JobItemTmp := GlobalPVSJobItem;
-                        JobItemTmp.validate("Paper Item No.", JobItemTmp."Paper Item No.");
-                        JobItemTmp.Insert(false);
+                        TempJobItem := GlobalPVSJobItem;
+                        TempJobItem.validate("Paper Item No.", TempJobItem."Paper Item No.");
+                        TempJobItem.Insert(false);
                         // 002
-                        if Page.RunModal(Page::"PVS Imposition Search", JobItemTmp) = Action::LookupOK then begin
-                            rec.validate("Imposition Type", JobItemTmp."Imposition Type");
+                        if Page.RunModal(Page::"PVS Imposition Search", TempJobItem) = Action::LookupOK then begin
+                            rec.validate("Imposition Type", TempJobItem."Imposition Type");
                             if CheckPaperOK(true) then;
                             Rec.Modify(true);
                             CurrPage.Update(false);
@@ -156,10 +156,10 @@ Page 80181 "PTE Job Split"
 
                     trigger OnLookup(var Text: Text): Boolean
                     var
-                        PageMgt: Codeunit "PVS Page Management";
                         ItemRec: Record Item;
+                        PageMgt: Codeunit "PVS Page Management";
                     begin
-                        PageMgt.Set_Item_Sheet_Filters(ItemRec, GlobalPVSJobSheetTmp);
+                        PageMgt.Set_Item_Sheet_Filters(ItemRec, TempGlobalPVSJobSheet);
                         Commit();
                         if Page.RunModal(Page::"PVS Item Lookup", ItemRec) = Action::LookupOK then begin
                             Rec.validate("Paper Item No.", ItemRec."No.");
@@ -305,19 +305,18 @@ Page 80181 "PTE Job Split"
 
                 trigger OnAction()
                 var
+                    TempRec2: Record "PTE Job Shift Split" temporary;
                     ProcessSplit: Codeunit "PTE Split Process";
-                    VariantTMP: Record "PVS Job Item Variant" temporary;
                     HelperFunction: Codeunit "PTE Helperfunction";
                     ThrowError: Boolean;
-                    Rec2: Record "PTE Job Shift Split" temporary;
                 begin
-                    Rec2.Copy(rec, true);
-                    if Rec2.FindSet(false) then
+                    TempRec2.Copy(rec, true);
+                    if TempRec2.FindSet(false) then
                         repeat
                             if HelperFunction.Check_Paper(rec, Rec."Paper Item No.", Rec."Controlling Sheet Unit", true, ThrowError) then;
                             if ThrowError then
                                 Error('Please correct the Lines, format issues detected between Machines and Paper of 1 or more lines.');
-                        until Rec2.Next() = 0;
+                        until TempRec2.Next() = 0;
                     ProcessSplit.Update_SplitJobItem(Rec);
                     InitSplit();
                     CurrPage.Update(false);
@@ -356,7 +355,7 @@ Page 80181 "PTE Job Split"
                 begin
                     IsCopySettings := true;
                     IsNotCopySettings := not IsCopySettings;
-                    TmpEntryToCopySettingsFrom := Rec;
+                    TempEntryToCopySettingsFrom := Rec;
                     Rec.Delete(false);
                     Rec.SetRange("Original Job Item No.", Rec."Original Job Item No.");
                     CurrPage.update(true);
@@ -377,9 +376,9 @@ Page 80181 "PTE Job Split"
                     Rec.SetRange("Original Job Item No.");
                     IsCopySettings := false;
                     IsNotCopySettings := not IsCopySettings;
-                    Rec := TmpEntryToCopySettingsFrom;
+                    Rec := TempEntryToCopySettingsFrom;
                     Rec.Insert(false);
-                    TmpEntryToCopySettingsFrom := TmpEntry;
+                    TempEntryToCopySettingsFrom := TempEntry;
                     CurrPage.update(false);
                 end;
             }
@@ -401,16 +400,16 @@ Page 80181 "PTE Job Split"
                     if Rec.FindSet() then
                         repeat
                             TempRec := Rec;
-                            TempRec.Insert;
+                            TempRec.insert();
                         until Rec.Next() = 0
                     else begin
                         TempRec := Rec;
-                        TempRec.Insert;
+                        TempRec.insert();
                     end;
                     if TempRec.findset(false) then
                         repeat
                             // New values Set
-                            Rec := TmpEntryToCopySettingsFrom;
+                            Rec := TempEntryToCopySettingsFrom;
                             // Restore Old Data that should not be changed
                             Rec.ID := TempRec.ID;
                             Rec.Job := TempRec.Job;
@@ -422,10 +421,10 @@ Page 80181 "PTE Job Split"
                             Rec.Description := TempRec.Description;
                             Rec.Quantity := TempRec.Quantity;
 
-                            if TmpEntryToCopySettingsFrom."Job Item No." <> TempRec."Job Item No." then
-                                Rec."Split Job Item No." := TmpEntryToCopySettingsFrom."Job Item No.";
-                            if TmpEntryToCopySettingsFrom."Split Job Item No." <> 0 then
-                                Rec."Split Job Item No." := TmpEntryToCopySettingsFrom."Split Job Item No.";
+                            if TempEntryToCopySettingsFrom."Job Item No." <> TempRec."Job Item No." then
+                                Rec."Split Job Item No." := TempEntryToCopySettingsFrom."Job Item No.";
+                            if TempEntryToCopySettingsFrom."Split Job Item No." <> 0 then
+                                Rec."Split Job Item No." := TempEntryToCopySettingsFrom."Split Job Item No.";
                             Rec.SetChangedFields();
                             Rec.Modify(false);
                             Rec.Validate("Split Job Item No.");
@@ -437,10 +436,10 @@ Page 80181 "PTE Job Split"
                     Rec.Reset();
                     IsCopySettings := false;
                     IsNotCopySettings := not IsCopySettings;
-                    Rec := TmpEntryToCopySettingsFrom;
+                    Rec := TempEntryToCopySettingsFrom;
                     Rec.Insert(false);
                     // Rec.Modify(false);
-                    TmpEntryToCopySettingsFrom := TmpEntry;
+                    TempEntryToCopySettingsFrom := TempEntry;
                     CurrPage.update(false);
                 end;
             }
@@ -474,33 +473,33 @@ Page 80181 "PTE Job Split"
         if PaperSizeCheck then
             if not HelperFunction.Check_Paper(rec, Rec."Paper Item No.", Rec."Controlling Sheet Unit", false, ThrowError) then
                 exit;
-        GlobalPVSJobSheetTmp."Paper Item No." := Rec."Paper Item No.";
-        GlobalPVSJobSheetTmp.Modify(false);
-        HelperFunction.Change_Paper(GlobalPVSJobItemTmp, GlobalPVSJobSheetTmp, GlobalCostCenterConfiguration);
-        GlobalPVSJobSheetTmp.Check_ECO_Label();
+        TempGlobalPVSJobSheet."Paper Item No." := Rec."Paper Item No.";
+        TempGlobalPVSJobSheet.Modify(false);
+        HelperFunction.Change_Paper(TempGlobalPVSJobItem, TempGlobalPVSJobSheet, GlobalCostCenterConfiguration);
+        TempGlobalPVSJobSheet.Check_ECO_Label();
         MinFormatText := Get_Min_Format_Txt();
         Set_StyleExpression();
         exit(true);
     end;
 
     var
-        SplitMgt: Codeunit "PTE Split Mgt";
         Global_Job: Record "PVS Job";
+        TempGlobalPVSJobItem: Record "PVS Job Item" temporary;
+        TempGlobalPVSJobSheet: Record "PVS Job Sheet" temporary;
+        Global_PVSJobSheet: Record "PVS Job Sheet";
+        GlobalPVSJobItem: Record "PVS Job Item";
+        GlobalItem: Record Item;
+        TempEntryToCopySettingsFrom: Record "PTE Job Shift Split" temporary;
+        TempEntry: Record "PTE Job Shift Split" temporary;
+        GlobalCostCenterConfiguration: Record "PVS Cost Center Configuration";
+        SplitMgt: Codeunit "PTE Split Mgt";
         Style01: Text[50];
         Style_Imposition, Style_Paper, Style_ControlUnit, Style_Finishing, Style_Format1, Style_Format2 : Text[50];
 
-        GlobalPVSJobItemTmp: Record "PVS Job Item" temporary;
-        GlobalPVSJobSheetTmp: Record "PVS Job Sheet" temporary;
-        Global_PVSJobSheet: Record "PVS Job Sheet";
-        GlobalPVSJobItem: Record "PVS Job Item";
-        GlobalCostCenterConfiguration: Record "PVS Cost Center Configuration";
         f1: Decimal;
         f2: Decimal;
-        GlobalItem: Record Item;
         MinFormatText: Text;
         IsNotCopySettings, IsCopySettings : Boolean;
-        TmpEntryToCopySettingsFrom: Record "PTE Job Shift Split" temporary;
-        TmpEntry: Record "PTE Job Shift Split" temporary;
 
     procedure Set_StyleExpression()
     begin
@@ -532,7 +531,7 @@ Page 80181 "PTE Job Split"
             Style_Format2 := Style01;
     end;
 
-    procedure Get_StyleExpression() Result: Text[250]
+    procedure Get_StyleExpression() Result: Text[50]
     var
         UseJobItemNo: Integer;
         i: Integer;
@@ -569,7 +568,7 @@ Page 80181 "PTE Job Split"
     var
         HelperFunction: Codeunit "PTE Helperfunction";
     begin
-        exit(HelperFunction.Get_Min_Format_Txt(GlobalPVSJobItemTmp, GlobalPVSJobSheetTmp, f1, f2));
+        exit(HelperFunction.Get_Min_Format_Txt(TempGlobalPVSJobItem, TempGlobalPVSJobSheet, f1, f2));
     end;
 
     procedure SetJob(in_Job: Record "PVS Job")
@@ -579,36 +578,35 @@ Page 80181 "PTE Job Split"
 
     procedure InitSplit()
     var
-        VariantTMP: Record "PVS Job Item Variant" temporary;
+        TempVariant: Record "PVS Job Item Variant" temporary;
     begin
         rec.Reset();
         rec.DeleteAll();
         if not SplitMgt.ReadTMPSplit(Global_Job) then
             CurrPage.Close();
         SplitMgt.GetTMPSplit(Rec);
-        SplitMgt.GetTMPVariant(VariantTMP);
-        CurrPage.Variants.Page.SetTmp(VariantTMP);
+        SplitMgt.GetTMPVariant(TempVariant);
+        CurrPage.Variants.Page.SetTmp(TempVariant);
     end;
 
     procedure UpdateTempRecs()
     var
         UnitSetupRec: Record "PVS Calculation Unit Setup";
-        PaperWeight: Decimal;
     begin
         if not UnitSetupRec.Get(UnitSetupRec.Type::"Price Unit", Rec."Controlling Sheet Unit") then
             exit;
         if not GlobalCostCenterConfiguration.Get(UnitSetupRec."Cost Center Code", UnitSetupRec.Configuration) then
             exit;
-        GlobalPVSJobItemTmp := GlobalPVSJobItem;
-        GlobalPVSJobSheetTmp := Global_PVSJobSheet;
-        GlobalPVSJobSheetTmp."Paper Item No." := Rec."Paper Item No.";
+        TempGlobalPVSJobItem := GlobalPVSJobItem;
+        TempGlobalPVSJobSheet := Global_PVSJobSheet;
+        TempGlobalPVSJobSheet."Paper Item No." := Rec."Paper Item No.";
         GlobalPVSJobItem."Imposition Type" := Rec."Imposition Type";
-        GlobalPVSJobSheetTmp."Controlling Unit" := Rec."Controlling Sheet Unit";
-        GlobalPVSJobSheetTmp.Finishing := Rec.Finishing;
-        if not GlobalPVSJobItemTmp.Insert(false) then
-            if GlobalPVSJobItemTmp.Modify(false) then;
-        if not GlobalPVSJobSheetTmp.Insert(false) then
-            if GlobalPVSJobSheetTmp.Modify(false) then;
+        TempGlobalPVSJobSheet."Controlling Unit" := Rec."Controlling Sheet Unit";
+        TempGlobalPVSJobSheet.Finishing := Rec.Finishing;
+        if not TempGlobalPVSJobItem.Insert(false) then
+            if TempGlobalPVSJobItem.Modify(false) then;
+        if not TempGlobalPVSJobSheet.Insert(false) then
+            if TempGlobalPVSJobSheet.Modify(false) then;
     end;
 
     //Point 1 + 2

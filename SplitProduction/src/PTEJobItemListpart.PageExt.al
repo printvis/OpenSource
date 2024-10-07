@@ -8,6 +8,7 @@ pageextension 80181 "PTE Job Item Listpart" extends "PVS Job Items ListPart"
             field("PTE Controlling Sheet Text"; Rec."PTE Controlling Sheet Text")
             {
                 ApplicationArea = all;
+                ToolTip = 'Refers to the selected "List Of Units" Text/Description';
             }
         }
     }
