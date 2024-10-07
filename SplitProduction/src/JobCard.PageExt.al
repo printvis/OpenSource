@@ -8,6 +8,7 @@ pageextension 80180 "PTE Job" extends "PVS Job Card"
             {
                 Caption = 'Split Production';
                 Image = Split;
+                ApplicationArea = All;
 
                 trigger OnAction()
                 var
@@ -22,6 +23,7 @@ pageextension 80180 "PTE Job" extends "PVS Job Card"
             {
                 Caption = 'Prepare Job for Split Production';
                 Image = AdjustEntries;
+                ApplicationArea = All;
 
                 trigger OnAction()
                 var
