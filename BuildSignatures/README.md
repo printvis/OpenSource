@@ -1,4 +1,4 @@
-# Automated Job Signatrures
+# Automated Job Signatures
 
 PrintVis is writing the AssemblySection into the Assembly Node of the JDF, which describes how the sections for the PrintVis Job Items are bound together. The Assembly setting must be made manually in the **PrintVis Job Signatures** by the user.
  
