@@ -54,11 +54,4 @@ pageextension 80180 "PTE Job Card" extends "PVS Job Card"
             */
         }
     }
-
-    trigger OnOpenPage()
-    begin
-        //    Rec.SetRange(ID, 290);
-        //    message('KT Test');
-    end;
-
 }
