@@ -13,5 +13,5 @@
             "projects":  "*",
             "AuthTokenSecret":  "LibraryAppRepoToken"
         }
-  ],
+  ]
 }
