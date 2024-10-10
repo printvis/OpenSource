@@ -5,13 +5,13 @@
   "installApps": [
     "https://printvis.blob.core.windows.net/releases/CloudApps/NovaVision%20Software%20AS_PrintVis_24.4.1.0.app?sv=2023-01-03&st=2024-09-11T08%3A53%3A22Z&se=2026-07-12T08%3A53%3A00Z&sr=b&sp=r&sig=4bLYDcdOlC1Ymx8q%2Fa2hM5ci%2B%2By2TePO5eEQ%2F4q5KjI%3D"
   ],
-    "appDependencyProbingPaths":[
-            {
-            "repo":  "https://github.com/printvis/PrintVis-System-Library",
-            "release_status":  "release",
-            "version":  "latest",
-            "projects":  "*",
-            "AuthTokenSecret":  "LibraryAppRepoToken"
-        }
+  "appDependencyProbingPaths": [
+    {
+      "repo": "https://github.com/printvis/PrintVis-System-Library",
+      "release_status": "release",
+      "version": "latest",
+      "projects": "*",
+      "AuthTokenSecret": "LibraryAppRepoToken"
+    }
   ]
 }
