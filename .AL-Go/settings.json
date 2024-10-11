@@ -10,7 +10,18 @@
             "doNotSignApps": true
         }
     }
-] ,"installApps": [
-   "https://printvis.blob.core.windows.net/releases/CloudApps/Library/NovaVision%20Software%20AS_PrintVis%20System%20Library_24.4.1.0.app?sv=2023-01-03&st=2024-09-11T08%3A52%3A08Z&se=2025-10-12T08%3A52%3A00Z&sr=b&sp=r&sig=dF2a6gVbc3P9K2MulcgLec1MiHKh6WfSw1fvdHlFu3s%3D",
-   "https://printvis.blob.core.windows.net/releases/CloudApps/NovaVision%20Software%20AS_PrintVis_24.6.1.1.app?sv=2023-01-03&st=2024-10-11T11%3A07%3A35Z&se=2025-01-12T12%3A07%3A00Z&sr=b&sp=r&sig=u%2FFKX8PPQIvT%2BrYBDSdYVJyhjgxuJ4ZPRJZI%2BGS86LU%3D"  ]
+] ,
+  "installApps": [
+   "https://printvis.blob.core.windows.net/releases/CloudApps/NovaVision%20Software%20AS_PrintVis_24.6.1.1.app?sv=2023-01-03&st=2024-10-11T11%3A07%3A35Z&se=2025-01-12T12%3A07%3A00Z&sr=b&sp=r&sig=u%2FFKX8PPQIvT%2BrYBDSdYVJyhjgxuJ4ZPRJZI%2BGS86LU%3D"
+  ],   
+"appDependencyProbingPaths":
+  [
+    {
+      "repo":  "https://github.com/printvis/PrintVis-System-Library",
+      "release_status":  "release",
+      "version":  "latest",
+      "projects":  "*",
+      "AuthTokenSecret":  "LibraryAppRepoToken"
+    }
+  ]
 }
