@@ -161,9 +161,8 @@ Codeunit 80103 "PTE SOI SOint Prod Order Mgt"
                 repeat
                     if (SL_Tmp."PVS ID" = in_SL_Rec."PVS ID") and (SL_Tmp."PVS Job" = in_SL_Rec."PVS Job") and SL_Tmp."PTE SOI Production Order" then
                         if SL_Tmp."PVS Job Item No." = in_SL_Rec."PVS Job Item No." then begin
-                            if SL.Get(SL_Tmp."Document Type", SL_Tmp."Document No.", SL_Tmp."Line No.") then begin
+                            if SL.Get(SL_Tmp."Document Type", SL_Tmp."Document No.", SL_Tmp."Line No.") then
                                 Combined_Quantity := Combined_Quantity + SL_Tmp."Quantity (Base)";
-                            end;
                         end else
                             AddSubjects := true;
                 until SL_Tmp.Next() = 0;
