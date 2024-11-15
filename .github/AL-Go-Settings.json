@@ -1,7 +1,7 @@
 {
   "type": "PTE",
   "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
-  "templateSha": "aa12d5ac4df1db8e8849ac68aa1000260fa3b7f4",
+  "templateSha": "36999e29e31ad83a6a856ee6ef59cd1602c84df5",
   "installApps": [
     "https://printvis.blob.core.windows.net/releases/CloudApps/NovaVision%20Software%20AS_PrintVis_24.4.1.0.app?sv=2023-01-03&st=2024-09-11T08%3A53%3A22Z&se=2026-07-12T08%3A53%3A00Z&sr=b&sp=r&sig=4bLYDcdOlC1Ymx8q%2Fa2hM5ci%2B%2By2TePO5eEQ%2F4q5KjI%3D"
   ],
