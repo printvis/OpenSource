@@ -1,0 +1,37 @@
+{
+  "id": "7b3f2088-9bb2-4cf9-81cf-20b115dd1fc2",
+  "name": "PrintVis Sync",
+  "publisher": "NovaVision Software A/S",
+  "version": "25.0.1.0",
+  "brief": "PrintVis ERP/MIS built specifically for the print industry.",
+  "description": "PrintVis ERP/MIS built specifically for the print industry.",
+  "privacyStatement": "http://www.printvis.com",
+  "EULA": "http://www.printvis.com",
+  "help": "https://support.printvis.com/",
+  "url": "http://www.printvis.com",
+  "logo": "./Logo/PV_logo_240x240px.png",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "NovaVision Software A/S",
+      "version": "21.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "20.0.0.0",
+  "application": "20.0.0.0",
+  "idRanges": [
+    {
+      "from":  80200,
+      "to":  80206
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://www.printvis.com",
+  "resourceExposurePolicy": {"allowDebugging": true,"allowDownloadingSource": false,"includeSourceInSymbolFile": true},
+  "runtime": "9.0",
+  "target": "Cloud",
+  "features": ["TranslationFile"],
+  "supportedLocales": ["en-US", "da-DK", "de-DE"]
+  
+}
