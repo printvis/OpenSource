@@ -158,7 +158,7 @@ Codeunit 80203 "PVS Sync Json Exchange."
         Field.SetRange(TableNo, RecRef.Number());
         Field.SetFilter(ObsoleteState, '<>%1', Field.Obsoletestate::Removed);
         Field.SetRange(Class, Field.Class::Normal);
-        if Field.FindSet(false, false) then
+        if Field.FindSet(false) then
             repeat
                 WriteFieldToJSON(JObject, GetSafename(Field.FieldName), Field."No.", RecRef, DoCalcField);
             until Field.Next() = 0;
@@ -191,7 +191,7 @@ Codeunit 80203 "PVS Sync Json Exchange."
         Field.SetRange("No.", 0, 2000000000 - 1);
         Field.SetRange(Class, Field.Class::Normal);
         Field.SetFilter(Type, '<>%1&<>%2', Field.Type::Media, Field.Type::MediaSet);
-        if Field.FindSet(false, false) then
+        if Field.FindSet(false) then
             repeat
                 FldRef := RecRef.Field(Field."No.");
                 if JsonObject.GetStringPropertyValueByName(GetSafename(Field.FieldName), JsonPropertyText) then begin

@@ -110,7 +110,6 @@ Page 80200 "PVS Sync Table Setup"
 
     var
         SyncChangeManagement: Codeunit "PVS Sync Change Management";
-        [InDataSet]
         StyleExpression: Text;
 
     local procedure OpenFieldPage()

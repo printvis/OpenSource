@@ -95,7 +95,7 @@ Codeunit 80205 "PVS Sync Change Management"
                 exit;
         end;
 
-        if BusinessGroupTemp.FindSet(false, false) then
+        if BusinessGroupTemp.FindSet(false) then
             repeat
                 AddRecordForBusinessGroup(RecRef, xRecRef, BusinessGroupTemp.Code, LogType);
             until BusinessGroupTemp.Next() = 0;
@@ -114,7 +114,7 @@ Codeunit 80205 "PVS Sync Change Management"
         Field.SetFilter(ObsoleteState, '<>%1', Field.Obsoletestate::Removed);
         Field.SetRange(Class, Field.Class::Normal);
         Field.SetFilter(Type, '%1|%2', Field.Type::Media, Field.Type::MediaSet);
-        if Field.FindSet(false, false) then
+        if Field.FindSet(false) then
             repeat
                 case Field.Type of
                     Field.Type::Media:
@@ -146,7 +146,7 @@ Codeunit 80205 "PVS Sync Change Management"
 
         if SourceGuidValue <> TargetGuidValue then begin
             TenantMedia.Get(TargetGuidValue);
-            if BusinessGroupTemp.FindSet(false, false) then
+            if BusinessGroupTemp.FindSet(false) then
                 repeat
                     AddMediaRecordForBusinessGroup(TenantMedia, TargetRecordRef, TargetFieldNo, BusinessGroupTemp.Code);
                 until BusinessGroupTemp.Next() = 0;
@@ -178,9 +178,9 @@ Codeunit 80205 "PVS Sync Change Management"
             if TenantMediaSet.IsEmpty() then
                 exit;
 
-            if BusinessGroupTemp.FindSet(false, false) then
+            if BusinessGroupTemp.FindSet(false) then
                 repeat
-                    if TenantMediaSet.FindSet(false, false) then begin
+                    if TenantMediaSet.FindSet(false) then begin
                         repeat
                             Evaluate(MediaGuid, Format(TenantMediaSet."Media ID"));
                             TenantMedia.Get(MediaGuid);
@@ -268,7 +268,7 @@ Codeunit 80205 "PVS Sync Change Management"
         BusinessGroupTemp.Reset();
         BusinessGroupTemp.DeleteAll();
 
-        if BusinessGroup.FindSet(false, false) then
+        if BusinessGroup.FindSet(false) then
             repeat
                 BusinessGroupTemp := BusinessGroup;
                 BusinessGroupTemp.Insert();

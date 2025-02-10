@@ -72,7 +72,7 @@ Codeunit 80200 "PVS Sync Processing Management"
         SyncLogEntry.SetCurrentKey("Entry No.");
         SyncLogEntry.Ascending(false);
         SyncLogEntry.SetRange(Status, SyncLogEntry.Status::New);
-        if SyncLogEntry.FindSet(false, false) then
+        if SyncLogEntry.FindSet(false) then
             Repeat
                 if not TempSkipTables.Get(SyncLogEntry."Table No.") then begin //-- OGPTI Performance & Locking improvements
                     TempSyncLogEntry.SetRange("Record ID", SyncLogEntry."Record ID");
@@ -235,7 +235,7 @@ Codeunit 80200 "PVS Sync Processing Management"
         PVSBusinessGroup2.FindFirst;
         PVSBusinessGroup.SetRange("Company in Same Database", true);
         PVSBusinessGroup.SetFilter(Code, '<>%1', PVSBusinessGroup2.Code);
-        if PVSBusinessGroup.FindSet(false, false) then
+        if PVSBusinessGroup.FindSet(false) then
             repeat
                 QrySyncLogEntries.SetRange(Status, PVSSyncLogEntry.Status::New);
                 QrySyncLogEntries.SetRange(DestinationBusinessGroup, PVSBusinessGroup.Code);
@@ -439,7 +439,7 @@ Codeunit 80200 "PVS Sync Processing Management"
         Field.SetRange("No.", 0, 2000000000 - 1);
         Field.SetFilter(ObsoleteState, '<>%1', Field.Obsoletestate::Removed);
         Field.SetRange(Class, Field.Class::Normal);
-        if Field.FindSet(false, false) then
+        if Field.FindSet(false) then
             repeat
                 FldRef := RecRef.Field(Field."No.");
                 if NewRec then

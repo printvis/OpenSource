@@ -266,7 +266,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     CostCenterCode := GetKeyValue(CostCenter.FieldName(Code), NameValueBuffer);
                     CostCenter.SetRange("Business Group Cost Center", CostCenterCode);
-                    if CostCenter.FindSet(true, false) then
+                    if CostCenter.FindSet(true) then
                         repeat
                             RecRef.GetTable(CostCenter);
                             SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);
@@ -318,12 +318,12 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     if (OperationCode <> OldOperationCode) or (OldDate <> NewDate) then begin
                         CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                         CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                        if CostCenterConfiguration.FindSet(false, false) then
+                        if CostCenterConfiguration.FindSet(false) then
                             repeat
                                 CostCenterRates.SetRange("Cost Center Code", CostCenterConfiguration."Cost Center Code");
                                 CostCenterRates.SetRange(Configuration, CostCenterConfiguration.Configuration);
                                 CostCenterRates.SetRange(Operation, OldOperationCode);
-                                if CostCenterRates.FindSet(false, false) then
+                                if CostCenterRates.FindSet(false) then
                                     repeat
                                         if CostCenterRates2.Get(CostCenterRates."Cost Center Code", CostCenterRates.Configuration, OldOperationCode,
                                                                  CostCenterRates."Product Group", CostCenterRates."Price Group", CostCenterRates."Customer Group",
@@ -342,7 +342,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                     CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                    if CostCenterConfiguration.FindSet(false, false) then
+                    if CostCenterConfiguration.FindSet(false) then
                         repeat
                             OperationCode := GetKeyValue(CostCenterRates.FieldName(Operation), NameValueBuffer);
                             if Evaluate(OldDate, GetKeyValue(CostCenterRates.FieldName(Date), NameValueBuffer)) then;
@@ -367,7 +367,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     ConfigurationCode := GetKeyValue(CostCenterRates.FieldName(Configuration), NameValueBuffer);
                     CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                     CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                    if CostCenterConfiguration.FindSet(true, false) then
+                    if CostCenterConfiguration.FindSet(true) then
                         repeat
                             OperationCode := GetKeyValue(CostCenterRates.FieldName(Operation), NameValueBuffer);
                             if Evaluate(OldDate, GetKeyValue(CostCenterRates.FieldName(Date), NameValueBuffer)) then;
@@ -455,7 +455,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     ConfigurationCode := GetKeyValue(CostCenterConfiguration.FieldName(Configuration), NameValueBuffer);
                     CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                     CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                    if CostCenterConfiguration.FindSet(true, false) then
+                    if CostCenterConfiguration.FindSet(true) then
                         repeat
                             RecRef.GetTable(CostCenterConfiguration);
                             SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);
@@ -502,12 +502,12 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     if OperationCode <> OldOperationCode then begin
                         CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                         CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                        if CostCenterConfiguration.FindSet(false, false) then
+                        if CostCenterConfiguration.FindSet(false) then
                             repeat
                                 CostCenterOperation.SetRange("Cost Center Code", CostCenterConfiguration."Cost Center Code");
                                 CostCenterOperation.SetRange(Configuration, CostCenterConfiguration.Configuration);
                                 CostCenterOperation.SetRange(Operation, OldOperationCode);
-                                if CostCenterOperation.FindSet(false, false) then
+                                if CostCenterOperation.FindSet(false) then
                                     repeat
                                         if CostCenterOperation2.Get(CostCenterOperation."Cost Center Code", CostCenterOperation.Configuration, OldOperationCode,
                                                                  CostCenterOperation."Sell-To No.", CostCenterOperation."Product Group") then
@@ -524,7 +524,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                     CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                    if CostCenterConfiguration.FindSet(false, false) then
+                    if CostCenterConfiguration.FindSet(false) then
                         repeat
                             OperationCode := GetKeyValue(CostCenterOperation.FieldName(Operation), NameValueBuffer);
 
@@ -545,7 +545,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     ConfigurationCode := GetKeyValue(CostCenterOperation.FieldName(Configuration), NameValueBuffer);
                     CostCenterConfiguration.SetRange("Business Group Cost Center", CostCenterCode);
                     CostCenterConfiguration.SetRange("Business Group Configuration", ConfigurationCode);
-                    if CostCenterConfiguration.FindSet(true, false) then
+                    if CostCenterConfiguration.FindSet(true) then
                         repeat
                             OperationCode := GetKeyValue(CostCenterOperation.FieldName(Operation), NameValueBuffer);
 
@@ -611,7 +611,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     SpeedTableCode := GetKeyValue(SpeedTable.FieldName(Code), NameValueBuffer);
                     SpeedTable.SetRange("Business Group Speed Table", SpeedTableCode);
-                    if SpeedTable.FindSet(true, false) then
+                    if SpeedTable.FindSet(true) then
                         repeat
                             RecRef.GetTable(SpeedTable);
                             SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);
@@ -667,7 +667,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     if Evaluate(xDecimalArray[4], GetKeyValue(PrefixxRec + SpeedTableLine.FieldName("From Qty."), NameValueBuffer)) then;
 
                     SpeedTable.SetRange("Business Group Speed Table", xCodeArray[1]);
-                    if SpeedTable.FindSet(false, false) then
+                    if SpeedTable.FindSet(false) then
                         repeat
                             if SpeedTableLine.Get(SpeedTable.Code, xCodeArray[2], xCodeArray[3], xCodeArray[4], xCodeArray[5], xCodeArray[6],
                                                   xDecimalArray[1], xSignature, xDecimalArray[2], xDecimalArray[3], xDecimalArray[4]) then
@@ -678,7 +678,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
             SyncLogEntry.Type::Delete:
                 begin
                     SpeedTable.SetRange("Business Group Speed Table", CodeArray[1]);
-                    if SpeedTable.FindSet(false, false) then
+                    if SpeedTable.FindSet(false) then
                         repeat
                             if SpeedTableLine.Get(SpeedTable.Code, CodeArray[2], CodeArray[3], CodeArray[4], CodeArray[5], CodeArray[6],
                                                   DecimalArray[1], Signature, DecimalArray[2], DecimalArray[3], DecimalArray[4]) then
@@ -690,7 +690,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                 begin
                     GetJsonRecordRef(SyncLogEntry, NewRecRef);
                     SpeedTable.SetRange("Business Group Speed Table", CodeArray[1]);
-                    if SpeedTable.FindSet(false, false) then
+                    if SpeedTable.FindSet(false) then
                         repeat
                             if SpeedTableLine.Get(SpeedTable.Code, CodeArray[2], CodeArray[3], CodeArray[4], CodeArray[5], CodeArray[6],
                                                   DecimalArray[1], Signature, DecimalArray[2], DecimalArray[3], DecimalArray[4]) then begin
@@ -747,7 +747,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     ScrapTableCode := GetKeyValue(ScrapTable.FieldName(Code), NameValueBuffer);
                     ScrapTable.SetRange("Business Group Scrap Table", ScrapTableCode);
-                    if ScrapTable.FindSet(true, false) then
+                    if ScrapTable.FindSet(true) then
                         repeat
                             RecRef.GetTable(ScrapTable);
                             SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);
@@ -801,7 +801,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     if Evaluate(xDecimalArray[3], GetKeyValue(PrefixxRec + ScrapTableLine.FieldName("From Qty."), NameValueBuffer)) then;
 
                     ScrapTable.SetRange("Business Group Scrap Table", xCodeArray[1]);
-                    if ScrapTable.FindSet(false, false) then
+                    if ScrapTable.FindSet(false) then
                         repeat
                             if ScrapTableLine.Get(ScrapTable.Code, xCodeArray[2], xCodeArray[3], xCodeArray[4],
                                                   xIntegerArray[1], xIntegerArray[2], xIntegerArray[3],
@@ -814,7 +814,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
             SyncLogEntry.Type::Delete:
                 begin
                     ScrapTable.SetRange("Business Group Scrap Table", CodeArray[1]);
-                    if ScrapTable.FindSet(false, false) then
+                    if ScrapTable.FindSet(false) then
                         repeat
                             if ScrapTableLine.Get(ScrapTable.Code, CodeArray[2], CodeArray[3], CodeArray[4],
                                                   IntegerArray[1], IntegerArray[2], IntegerArray[3],
@@ -827,7 +827,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                 begin
                     GetJsonRecordRef(SyncLogEntry, NewRecRef);
                     ScrapTable.SetRange("Business Group Scrap Table", CodeArray[1]);
-                    if ScrapTable.FindSet(false, false) then
+                    if ScrapTable.FindSet(false) then
                         repeat
                             if ScrapTableLine.Get(ScrapTable.Code, CodeArray[2], CodeArray[3], CodeArray[4],
                                                   IntegerArray[1], IntegerArray[2], IntegerArray[3],
@@ -892,7 +892,7 @@ Codeunit 80201 "PVS Sync Process Cost Center"
                     CalculationUnitSetupCode := GetKeyValue(CalculationUnitSetup.FieldName(Code), NameValueBuffer);
                     CalculationUnitSetup.SetRange(Type, UnitType);
                     CalculationUnitSetup.SetRange("Business Group Calc. Unit", CalculationUnitSetupCode);
-                    if CalculationUnitSetup.FindSet(true, false) then
+                    if CalculationUnitSetup.FindSet(true) then
                         repeat
                             RecRef.GetTable(CalculationUnitSetup);
                             SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);
@@ -933,11 +933,11 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     CalculationUnitSetup.SetRange(Type, UnitType);
                     CalculationUnitSetup.SetRange("Business Group Calc. Unit", CalculationUnitSetupCode);
-                    if CalculationUnitSetup.FindSet(false, false) then begin
+                    if CalculationUnitSetup.FindSet(false) then begin
                         CalculationUnitSetupDetail.SetRange("Unit Type", UnitType);
                         CalculationUnitSetupDetail.SetRange(Unit, CalculationUnitSetup.Code);
                         CalculationUnitSetupDetail.SetRange("Entry No.", EntryNo);
-                        if CalculationUnitSetupDetail.FindSet(true, false) then
+                        if CalculationUnitSetupDetail.FindSet(true) then
                             repeat
                                 RecRef.GetTable(CalculationUnitSetupDetail);
                                 SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);
@@ -992,11 +992,11 @@ Codeunit 80201 "PVS Sync Process Cost Center"
 
                     CalculationUnitSetup.SetRange(Type, UnitType);
                     CalculationUnitSetup.SetRange("Business Group Calc. Unit", CalculationUnitSetupCode);
-                    if CalculationUnitSetup.FindSet(false, false) then begin
+                    if CalculationUnitSetup.FindSet(false) then begin
                         CalculationUnitSetupGroup.SetRange(Type, UnitType);
                         CalculationUnitSetupGroup.SetRange("BOM Code", CalculationUnitSetup.Code);
                         CalculationUnitSetupGroup.SetRange("Entry No.", EntryNo);
-                        if CalculationUnitSetupGroup.FindSet(true, false) then
+                        if CalculationUnitSetupGroup.FindSet(true) then
                             repeat
                                 RecRef.GetTable(CalculationUnitSetupGroup);
                                 SyncProcessingManagement.CopyFields(RecRef, NewRecRef, false);

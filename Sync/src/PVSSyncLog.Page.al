@@ -178,7 +178,7 @@ Page 80202 "PVS Sync Log"
                     if not Confirm(AreYouSureReQueue, false) then
                         exit;
                     CurrPage.SetSelectionFilter(SyncLogEntry);
-                    if SyncLogEntry.FindSet(true, false) then
+                    if SyncLogEntry.FindSet(true) then
                         repeat
                             Clear(SyncLogEntry."Error Message");
                             SyncLogEntry.Status := SyncLogEntry.Status::New;
