@@ -33,8 +33,10 @@ Pageextension 80201 "PVS Business Group Setup" extends "PVS Business Group Setup
                     trigger OnAssistEdit()
                     var
                         PasswordDialogMgt: Codeunit "Password Dialog Management";
+                        SecretText: SecretText;
                     begin
-                        Rec.SetClientSecret(PasswordDialogMgt.OpenPasswordDialog(true, true));
+                        SecretText := PasswordDialogMgt.OpenSecretPasswordDialog();
+                        Rec.SetClientSecret(SecretText);
                         CurrPage.Update(false);
                     end;
                 }
@@ -111,12 +113,6 @@ Pageextension 80201 "PVS Business Group Setup" extends "PVS Business Group Setup
         }
     }
 
-    trigger OnAfterGetRecord()
-    begin
-        if Rec.HasClientSecret() then
-            ClientSecretTxt := Rec.GetClientSecret();
-    end;
-
     var
         ClientSecretTxt: Text;
 
@@ -149,11 +145,8 @@ Pageextension 80201 "PVS Business Group Setup" extends "PVS Business Group Setup
         Rec.Validate("PVS Authorization Endpoint", PVSBusinessGroup."PVS Authorization Endpoint");
         Rec.Validate("PVS Tenant Id", PVSBusinessGroup."PVS Tenant Id");
         Rec.Validate("PVS Token Acquired", PVSBusinessGroup."PVS Token Acquired");
-        if PVSBusinessGroup."PVS Access Token".HasValue() then begin
-            PVSBusinessGroup.CalcFields("PVS Access Token");
-            PVSBusinessGroup."PVS Access Token".CreateInStream(InStr);
-            Rec."PVS Access Token".CreateOutStream(OutStr);
-            CopyStream(OutStr, InStr);
+        if PVSBusinessGroup.GetAccessToken().IsEmpty() <> false then begin
+            Rec.SetAccessToken(PVSBusinessGroup.GetAccessToken());
             Rec.Validate("API Connection Verified", true);
         end;
         Rec.Modify();

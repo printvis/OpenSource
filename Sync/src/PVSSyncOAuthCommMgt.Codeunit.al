@@ -22,14 +22,15 @@ Codeunit 80202 "PVS Sync OAuth Comm. Mgt."
     var
         PromptInteraction: Enum "Prompt Interaction";
         Scopes: List of [Text];
-        AccessToken, AuthError : Text;
+        AuthError: Text;
+        AccessToken, SecretText : SecretText;
     begin
         Scopes.Add('https://api.businesscentral.dynamics.com/user_impersonation');
-        OAuth2.AcquireTokenByAuthorizationCode(BusinessGroup."PVS Client Id", BusinessGroup.GetClientSecret(),
-             BusinessGroup."PVS Authorization Endpoint" + 'authorize', BusinessGroup."PVS Redirect Url", Scopes,
-                 Enum::"Prompt Interaction"::"Select Account", AccessToken, AuthError);
+        SecretText := BusinessGroup.GetClientSecret();
+        OAuth2.AcquireTokenByAuthorizationCode(BusinessGroup."PVS Client Id", SecretText,
+        BusinessGroup."PVS Authorization Endpoint", BusinessGroup."PVS Redirect Url", Scopes, PromptInteraction::"Select Account", AccessToken, AuthError);
 
-        if AccessToken = '' then
+        if AccessToken.IsEmpty() then
             DisplayErrorMessage(BusinessGroup, AuthError)
         else begin
             SetAccessToken(BusinessGroup, AccessToken);
@@ -43,14 +44,15 @@ Codeunit 80202 "PVS Sync OAuth Comm. Mgt."
     var
         PromptInteraction: Enum "Prompt Interaction";
         Scopes: List of [Text];
-        AccessToken, AuthError : Text;
+        AuthError: Text;
+        AccessToken: SecretText;
     begin
         Scopes.Add('https://api.businesscentral.dynamics.com/user_impersonation');
 
         OAuth2.AcquireAuthorizationCodeTokenFromCache(BusinessGroup."PVS Client Id", BusinessGroup.GetClientSecret(),
             BusinessGroup."PVS Redirect Url", BusinessGroup."PVS Authorization Endpoint" + 'authorize', Scopes, AccessToken);
 
-        if AccessToken <> '' then begin
+        if AccessToken.IsEmpty() <> false then begin
             SetAccessToken(BusinessGroup, AccessToken);
             exit;
         end;
@@ -59,18 +61,13 @@ Codeunit 80202 "PVS Sync OAuth Comm. Mgt."
             BusinessGroup."PVS Authorization Endpoint" + 'authorize', BusinessGroup."PVS Redirect Url", Scopes,
                 Enum::"Prompt Interaction"::"Select Account", AccessToken, AuthError);
 
-        if AccessToken <> '' then
+        if AccessToken.IsEmpty() <> false then
             SetAccessToken(BusinessGroup, AccessToken);
     end;
 
-    procedure SetAccessToken(var BusinessGroup: Record "PVS Business Group"; AccessToken: Text)
-    var
-        OutStr: OutStream;
+    procedure SetAccessToken(var BusinessGroup: Record "PVS Business Group"; AccessToken: SecretText)
     begin
-        if BusinessGroup."PVS Access Token".HasValue() then
-            Clear(BusinessGroup."PVS Access Token");
-        BusinessGroup."PVS Access Token".CreateOutStream(OutStr, TextEncoding::UTF8);
-        OutStr.WriteText(AccessToken);
+        BusinessGroup.SetAccessToken(AccessToken);
         BusinessGroup.Modify();
     end;
 
@@ -203,13 +200,7 @@ Codeunit 80202 "PVS Sync OAuth Comm. Mgt."
         ReadString: Text;
         InStr: InStream;
     begin
-        BusinessGroup.CalcFields("PVS Access Token");
-        BusinessGroup."PVS Access Token".CreateInStream(InStr);
-        while not InStr.EOS() do begin
-            InStr.ReadText(ReadString);
-            AccessToken += ReadString;
-        end;
-        SyncHttpClient.DefaultRequestHeaders().Add('Authorization', 'Bearer ' + AccessToken);
+        SyncHttpClient.DefaultRequestHeaders().Add('Authorization', SecretText.SecretStrSubstNo('Bearer %1', BusinessGroup.GetAccessToken()));
     end;
 
     local procedure GetIdWithoutBrackets(Id: Guid): Text
