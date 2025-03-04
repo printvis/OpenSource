@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="de-CH" original="PrintVis Sync">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 430114648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Field Mapping</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 430114648 - Field 296324619 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Business Group</source>
+          <target>Geschäfts Gruppe</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Field Business Group - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 430114648 - Field 3070320983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Name</source>
+          <target>Feld Name</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Field Field Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 430114648 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field No.</source>
+          <target>Feld-Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Field Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 430114648 - Field 3056854109 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>From Code</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Field From Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 430114648 - Field 3017471043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table No.</source>
+          <target>Tabelle ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Field Table No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 430114648 - Field 3068770282 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To Code</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Mapping - Field To Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Field Setup</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 1729185306 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Convert to Local Currency</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Convert to Local Currency - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 3531868071 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field No.</source>
+          <target>Feld-Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Field No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 3936015248 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Mode</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Sync Mode - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 3936015248 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Force Sync,Always Skip,Skip if not Empty</source>
+          <target>Force Sync,Always Skip,Skip if not Empty</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Sync Mode - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 3017471043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table No.</source>
+          <target>Tabelle ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Table No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 3272773416 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Validate Field</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Validate Field - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2455556801 - Field 3272773416 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No,Yes</source>
+          <target>Nein,Ja</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Field Setup - Field Validate Field - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Log Entry</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 1848750023 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>ChangedCompany</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field ChangedCompany - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3572756595 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created DateTime</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Created DateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2365579663 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Destination Business Group</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Destination Business Group - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 883711285 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Entry No.</source>
+          <target>Eintrag Nr.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2852966117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <target>Fehlermeldung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Error Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3641927271 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Id</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3052259380 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Process DateTime</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Last Process DateTime - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2130319802 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Log Field</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Log Field - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2034429472 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Log Type</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Log Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2034429472 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Normal,Media</source>
+          <target>Normal,Medien</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Log Type - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 160286249 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Old Record ID</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Old Record ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2897660500 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record ID</source>
+          <target>Satz ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Record ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 2684947636 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record Object</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Record Object - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3810597175 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record Object Size</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Record Object Size - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 469342894 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Retries Remaining</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Retries Remaining - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3182860744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sorting Order</source>
+          <target>Sortierung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Sorting Order - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3855482000 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source Business Group</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Source Business Group - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <target>Status</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 513339096 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>New,Processing,Notify,Error,Processed</source>
+          <target>Neu,Bearbeitung,Notify,Fehler,Verarbeitet</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Status - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 3017471043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table No.</source>
+          <target>Tabelle ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Table No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 1878130204 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target>Typ</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 901862126 - Field 1878130204 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Insert,Modify,Rename,Delete,Special</source>
+          <target>Einfügen,Ändern,Umbenennen,Löschen,Spezial</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Log Entry - Field Type - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Table Setup</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 2412251541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do not Compress Sync Log</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Do not Compress Sync Log - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 451647718 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Linked To</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Linked To - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 2343724386 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Skip Validate On Insert/Modify</source>
+          <target>Überspringen Validate Beim Einfügen / Ändern</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Skip Validate On Insert/Modify - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 1273745509 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Active</source>
+          <target>Aktiv</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Sync Active - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 3396956838 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Direction</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Sync Direction - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 3396956838 - Property 62802879" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Master to Local,Local to master,All Business Groups,Manual</source>
+          <target state="needs-adaptation">Meister Lokale, Lokale zu meistern, auf alle Gruppen,Manuell</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Sync Direction - Property OptionCaption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 3772995699 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Order</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Sync Order - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 3808951907 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table Name</source>
+          <target>Tabellen Name</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Table Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 3017471043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Table No.</source>
+          <target>Tabelle ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Table No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1563849885 - Field 3017471043 - Method 2126772001 - NamedType 4010842314" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not possible to sync system tables.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PVS Sync Table Setup - Field Table No. - Method OnValidate - NamedType SystemTableErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2890117273 - NamedType 629233074" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Beware that changes will not be activated through all clients until they reconnect</source>
+          <target>Beachten Sie, dass Änderungen nicht durch alle Kunden aktiviert werden, bis sie wieder</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Change Management - NamedType CacheWarning</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2298941499 - NamedType 3729646736" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Incorrect Entry No. (in Codeunit 6010519 PVS Sync Process Cost Center)</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Process Cost Center - NamedType IncorrectEntryNo</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2298941499 - NamedType 734393907" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Incorrect Type (in Codeunit 6010519 PVS Sync Process Cost Center)</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Process Cost Center - NamedType IncorrectType</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2298941499 - NamedType 1673631168" size-unit="char" translate="yes" xml:space="preserve">
+          <source>x_</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Process Cost Center - NamedType PrefixxRec</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1434866374 - NamedType 140434338" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Too many Key fields for this table. Please contact the Administrator.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Processing Management - NamedType ErrorKeyFields</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1434866374 - NamedType 3803907067" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record %1 does not exist.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Processing Management - NamedType ErrorNonExistingRecord</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1434866374 - NamedType 4034542577" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Event not handled by any subscriber code. Please contact the Administrator.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Processing Management - NamedType EventNotHandled</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1434866374 - NamedType 627857569" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No record data found in Record Object Field. Please contact the Administrator.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Processing Management - NamedType NoRecordObjectFound</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1434866374 - Method 177809827 - NamedType 3584901490" size-unit="char" translate="yes" xml:space="preserve">
+          <source>You have to specify client secret for Business Group %1</source>
+          <target state="translated">Sie müssen den geheimen Clientschlüssel für die Unternehmensgruppe %1 angeben</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PVS Sync Processing Management - Method ProcessSyncLogEntryWithOAuth - NamedType ClientSecretMissingErr</note>
+        </trans-unit>
+        <trans-unit id="Page 430114648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Field Mapping</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Mapping - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 430114648 - Control 2547700717 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The Type is mainly an internal field, defining which fields and functions are avaliable to the viewer.The Type options are;- Team- Blocked- Manning- Open Period- Template Team- Template Manning- Master Calendar</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Mapping - Control FieldNo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 430114648 - Control 3300686362 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>When an Item Type Code has been selected, the desciption is presented here.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Mapping - Control ToCode - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Field Setup</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - NamedType 1329410702" size-unit="char" translate="yes" xml:space="preserve">
+          <source>This field is not a decimal field</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - NamedType ErrorNoDecimal</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Control 1729185306 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Convert to Local Currency</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Control Convert to Local Currency - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Control 3153389374 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Force Sync</source>
+          <target>Force Sync</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Control Force Sync - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Control 343736747 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Always Skip</source>
+          <target>Always Skip</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Control Skip - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Control 286009114 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Skip if not Empty</source>
+          <target>Skip if not Empty</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Control SkipIfNotEmpty - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Control 3272773416 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Validate Field</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Control Validate Field - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2455556801 - Action 2349991090 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Field Mapping</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Field Setup - Action Field Mapping - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PrintVis Sync Log</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - NamedType 2919004742" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to Re-Queue the selected entries?</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - NamedType AreYouSureReQueue</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 2320448491 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control CreatedDateTime - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 3324936143 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control DestinationBusinessGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 2763291245 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <target>Fehlermeldung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control ErrorMessage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 166774738 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control LogField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 61417297 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Record ID</source>
+          <target>Satz ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control RecordIDName - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 3290715695 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control RecordObjectSize - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 888064326 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control RetriesRemaining - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 834862016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control SourceBusinessGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Control 103915345 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Control TableNo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 71590906 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export JSON as TXT</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action Export JSON as TXT - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 71590906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Export JSON as TXT</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action Export JSON as TXT - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 2675496269 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <target>Prozess</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action Process - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 2675496269 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Process</source>
+          <target>Prozess</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action Process - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 1330467026 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Re-Queue Selected</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action ReQueue - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 1330467026 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Re-Queue Selected</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action ReQueue - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 698539839 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target>Einstellungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action Settings - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 698539839 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target>Einstellungen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action Settings - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 4065982804 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show/Hide Processed</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action ToggleProcessed - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 132859818 - Action 4065982804 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Show/Hide Processed</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log - Action ToggleProcessed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sync Log API</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - NamedType 4204972761" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invalid Old Record ID Passed</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - NamedType ErrorOldRecordID</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - NamedType 3797616252" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invalid Record ID Passed</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - NamedType ErrorRecordID</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 2320448491 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control CreatedDateTime - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 3324936143 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control DestinationBusinessGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 415504711 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control Id - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 166774738 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control LogField - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 3290715695 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control RecordObjectSize - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 888064326 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control RetriesRemaining - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 834862016 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control SourceBusinessGroup - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 3887370066 - Control 103915345 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Displays which Table to synchronize</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Log API - Control TableNo - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1563849885 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PrintVis Sync Table Setup</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Table Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1563849885 - Control 2343724386 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Skip Validate On Insert/Modify";"Skip Validate On Insert/Modify</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Table Setup - Control Skip Validate On Insert/Modify - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1563849885 - Control 2576829339 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>When an Item Type Code has been selected, the desciption is presented here.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Table Setup - Control SkipValidateOnInsertModify - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1563849885 - Control 1130477493 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>When an Item Type Code has been selected, the desciption is presented here.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Table Setup - Control SyncActive - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1563849885 - Control 2736752003 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>When an Item Type Code has been selected, the desciption is presented here.</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PVS Sync Table Setup - Control SyncOrder - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Report 2568553910 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PrintVis Sync Job Queue Processor</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PVS Sync Job Queue Processor - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Method 3472334044 - NamedType 447159854" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 2774755509">
+          <source>Settings exists on the Business Group, would you like to continue and overwrite?</source>
+          <target state="translated">Für die Unternehmensgruppe sind Einstellungen vorhanden. Möchten Sie fortfahren und überschreiben?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Method CopyApiSettings - NamedType DataExistsLbl</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Action 3219523628 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2774755509">
+          <source>Copy API Settings From Master Company</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Action PVS Copy API - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Action 3219523628 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2774755509">
+          <source>Copy API Settings From Master Company</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Action PVS Copy API - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Action 2915376592 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2774755509">
+          <source>Verify Connection</source>
+          <target>Verbindung überprüfen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Action PVS VerifyConnection - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Action 2915376592 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2774755509">
+          <source>Verify Connection</source>
+          <target>Verbindung überprüfen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Action PVS VerifyConnection - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Action 2915376592 - Method 1377591017 - NamedType 3427407748" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 2774755509">
+          <source>Connection Verified</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Action PVS VerifyConnection - Method OnAction - NamedType ConnectionVerified</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Control 1898259689 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2774755509">
+          <source>OAuth</source>
+          <target state="translated">OAuth</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Control OAuth - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2774755509 - Control 2357484726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2774755509">
+          <source>Client Secret</source>
+          <target state="translated">Geheimer Clientschlüssel</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup - Control PVS Client Secret - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3605745035 - Action 2915376592 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3605745035">
+          <source>Verify Connection</source>
+          <target>Verbindung überprüfen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup List - Action PVS VerifyConnection - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3605745035 - Action 2915376592 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3605745035">
+          <source>Verify Connection</source>
+          <target>Verbindung überprüfen</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup List - Action PVS VerifyConnection - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 3605745035 - Action 2915376592 - Method 1377591017 - NamedType 3427407748" size-unit="char" translate="yes" xml:space="preserve" al-object-target="PageExtension 3605745035">
+          <source>Connection Verified</source>
+          <target state="needs-translation" />
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PVS Business Group Setup List - Action PVS VerifyConnection - Method OnAction - NamedType ConnectionVerified</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 3856156510 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Access Token</source>
+          <target state="translated">Zugangs-Token</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Access Token - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 1551918479 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Authorization Endpoint</source>
+          <target state="translated">Autorisierungsendpunkt</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Authorization Endpoint - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 70711955 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Application (client) ID</source>
+          <target state="translated">Anwendungs-(Client-)ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Client Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 2357484726 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Client Secret</source>
+          <target state="translated">Geheimer Clientschlüssel</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Client Secret - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 3727311355 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Enable OAuth2</source>
+          <target state="translated">OAuth2 aktivieren</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Enable OAuth2 - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 1839708667 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Error Message</source>
+          <target state="translated">Fehlermeldung</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS OAuth Error Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 2259936352 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Redirect URI</source>
+          <target state="translated">Umgeleitete URI</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Redirect Url - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 3442941000 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Directory (tenant) ID</source>
+          <target state="translated">Verzeichnis-(Mandanten-)ID</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Tenant Id - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 2774755509 - Field 3956866422 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1841078088">
+          <source>Token Acquired</source>
+          <target state="translated">Token erworben</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PVS Business Group Setup - Field PVS Token Acquired - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 2457300983 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PV Sync</source>
+          <target state="translated">PV Sync</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet PV-BC Sync - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
