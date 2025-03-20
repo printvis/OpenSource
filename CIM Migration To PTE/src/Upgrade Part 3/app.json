@@ -1,0 +1,41 @@
+{
+  "id": "9625c187-035c-4af4-9a67-fafecbbe1c6f",
+  "name": "PrintVis CIM Migration To PTE",
+  "publisher": "PrintVis A/S",
+  "version": "3.0.0.0",
+  "brief": "PrintVis ERP/MIS built specifically for the print industry.",
+  "description": "PrintVis ERP/MIS built specifically for the print industry.",
+  "privacyStatement": "http://www.printvis.com",
+  "EULA": "http://www.printvis.com",
+  "help": "https://support.printvis.com/",
+  "url": "http://www.printvis.com",
+  "logo": "./Logo/PV_logo_240x240px.png",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "NovaVision Software A/S",
+      "version": "24.0.0.0"
+    },
+     {
+      "id": "14c66b9c-4ebe-4f20-a46f-b3a31c219d2c",
+      "name":  "PrintVis CIM",
+      "publisher":  "PrintVis A/S",
+      "version":  "18.5.0.0"
+  }
+  ],
+  "screenshots": [],
+  "application": "24.0.0.0",
+  "platform": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80210,
+      "to": 80259
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://support.printvis.com/",
+  
+  "runtime": "13.0",
+  "target": "Cloud"
+ 
+}
