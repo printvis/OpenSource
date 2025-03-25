@@ -1,4 +1,4 @@
-/* codeunit 80210 "PTE Upgrade part 1"
+codeunit 80210 "PTE Upgrade part 1"
 {
     Subtype = Install;
     trigger OnInstallAppPerCompany()
@@ -32,4 +32,4 @@
 
     var
         UpgradeLogic: Codeunit "PTE Upgrade Logic Part 1";
-} */
+}

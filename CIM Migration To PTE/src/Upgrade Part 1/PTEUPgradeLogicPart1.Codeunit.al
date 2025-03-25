@@ -1,4 +1,4 @@
-/* codeunit 80211 "PTE UPgrade Logic Part 1"
+codeunit 80211 "PTE UPgrade Logic Part 1"
 {
     procedure PVS_Job_Sheet_Move_To_UPG()
     var
@@ -127,8 +127,8 @@
             UPG."Product Group" := CIMControllerURLMapping."Product Group";
             UPG."Customer Group" := CIMControllerURLMapping."Customer Group";
             UPG."Customer No." := CIMControllerURLMapping."Customer No.";
-            UPG."Finished Goods Item Group Code" := CIMControllerURLMapping."Finished Goods Item Group Code";
-            UPG."Finished Goods Item No." := CIMControllerURLMapping."Finished Goods Item No.";
+            UPG."Finished Goods Item Group Code" := CIMControllerURLMapping."Finished Good Item Group Code";
+            UPG."Finished Goods Item No." := CIMControllerURLMapping."Finished Good Item No.";
             UPG."CIM Controller URL Code" := CIMControllerURLMapping."CIM Controller URL Code";
             if not UPG.Insert() then;
         until CIMControllerURLMapping.Next() = 0;
@@ -353,28 +353,28 @@
             UPG."AE Connect Port" := EskoSetup."AE Connect Port";
             UPG."Integration Activated" := EskoSetup."Integration Activated";
             UPG."AE Container Share Name" := EskoSetup."AE Container Share Name";
-            UPG."Sync Endpoint" := EskoSetup."Sync Endpoint";
+            UPG."Sync Endpoint" := EskoSetup."Synchronization Endpoint";
             UPG."Processing Endpoint" := EskoSetup."Processing Endpoint";
-            UPG."AE Server User Name" := EskoSetup."AE Server User Name";
+            UPG."AE Server User Name" := EskoSetup."AE Server Username";
             UPG."AE Server Password" := EskoSetup."AE Server Password";
             UPG."AE Server Domain" := EskoSetup."AE Server Domain";
             UPG."Default Substrate Queue" := EskoSetup."Default Substrate Queue";
-            UPG."CAD Spec. Base Folder Name" := EskoSetup."CAD Spec. Base Folder Name";
-            UPG."CAD Spec. ARD Folder Name" := EskoSetup."CAD Spec. ARD Folder Name";
-            UPG."CAD Spec. JPG Folder Name" := EskoSetup."CAD Spec. JPG Folder Name";
-            UPG."CAD Spec. PDF Folder Name" := EskoSetup."CAD Spec. PDF Folder Name";
-            UPG."CAD Spec. Interm. Folder Name" := EskoSetup."CAD Spec. Interm. Folder Name";
-            UPG."CAD Spec. Notific. Folder Name" := EskoSetup."CAD Spec. Notific. Folder Name";
-            UPG."CAD Spec. Error Folder Name" := EskoSetup."CAD Spec. Error Folder Name";
-            UPG."Run List Folder Path" := EskoSetup."Run List Folder Path";
+            UPG."CAD Spec. Base Folder Name" := EskoSetup."CAD Spec Base Folder Name";
+            UPG."CAD Spec. ARD Folder Name" := EskoSetup."CAD Spec ARD Folder Name";
+            UPG."CAD Spec. JPG Folder Name" := EskoSetup."CAD Spec JPG Folder Name";
+            UPG."CAD Spec. PDF Folder Name" := EskoSetup."CAD Spec PDF Folder Name";
+            UPG."CAD Spec. Interm. Folder Name" := EskoSetup."CAD Spec Interm. Folder Name";
+            UPG."CAD Spec. Notific. Folder Name" := EskoSetup."CAD Spec Notific. Folder Name";
+            UPG."CAD Spec. Error Folder Name" := EskoSetup."CAD Spec Error Folder Name";
+            UPG."Run List Folder Path" := EskoSetup."RunList Folder Path";
             UPG."Request 3D Previews" := EskoSetup."Request 3D Previews";
             UPG."Incoming Imposition File Mask" := EskoSetup."Incoming Imposition File Mask";
             UPG."Incoming Strct. Dsg. File Mask" := EskoSetup."Incoming Strct. Dsg. File Mask";
             UPG."Allow Mfg Sheets without Job" := EskoSetup."Allow Mfg Sheets without Job";
             UPG."Debug Mode Enabled" := EskoSetup."Debug Mode Enabled";
-            UPG."Service Tier Debug Path" := EskoSetup."Service Tier Debug Path";
-            UPG."No. Series CAD Specs." := EskoSetup."No. Series CAD Specs.";
-            UPG."No. Series Mfg. Sheet" := EskoSetup."No. Series Mfg. Sheet";
+            UPG."Service Tier Debug Path" := EskoSetup."Service-Tier Debug Path";
+            UPG."No. Series CAD Specs." := EskoSetup."NoSeries CAD Spec";
+            UPG."No. Series Mfg. Sheet" := EskoSetup."NoSeries Mfg Sheet";
 
             If not UPG.Insert() then;
         until EskoSetup.Next() = 0;
@@ -591,14 +591,14 @@
 
             UPG.Type := WorkflowPartnerMIMEBuf.Type;
             UPG."Part Acid" := WorkflowPartnerMIMEBuf."Part Acid";
-            UPG."Part No." := WorkflowPartnerMIMEBuf."Part No.";
+            UPG."Part No." := WorkflowPartnerMIMEBuf."Part No";
             UPG."Closing Part" := WorkflowPartnerMIMEBuf."Closing Part";
-            UPG."Response Entry No." := WorkflowPartnerMIMEBuf."Response Entry No.";
+            UPG."Response Entry No." := WorkflowPartnerMIMEBuf."Response Entry No";
             UPG."Part Body" := WorkflowPartnerMIMEBuf."Part Body";
             UPG."Base64 Encoded" := WorkflowPartnerMIMEBuf."Base64 Encoded";
             UPG."Body Size" := WorkflowPartnerMIMEBuf."Body Size";
-            UPG."Content Type" := WorkflowPartnerMIMEBuf."Content Type";
-            UPG."File Name" := WorkflowPartnerMIMEBuf."File Name";
+            UPG."Content Type" := WorkflowPartnerMIMEBuf."ContentType";
+            UPG."File Name" := WorkflowPartnerMIMEBuf."FileName";
             If not UPG.Insert() then;
         until WorkflowPartnerMIMEBuf.Next() = 0;
     end;
@@ -630,11 +630,11 @@
             UPG."Acknowledge Type" := WorkflowPartnerQue."Acknowledge Type";
             UPG.RefID := WorkflowPartnerQue.RefID;
             UPG."File BLOB" := WorkflowPartnerQue."File BLOB";
-            UPG."DateTime Received" := WorkflowPartnerQue."DateTime Received";
+            UPG."DateTime Received" := WorkflowPartnerQue."DateTime Recieved";
             UPG."Response Type" := WorkflowPartnerQue."Response Type";
             UPG."Response Sub Type" := WorkflowPartnerQue."Response Sub Type";
-            UPG.Status := WorkflowPartnerQue.Status;
-            UPG."Error Text" := WorkflowPartnerQue."Error Text";
+            UPG.Status := WorkflowPartnerQue."PVS Status";
+            UPG."Error Text" := WorkflowPartnerQue."PVS Error Text";
 
             if not UPG.Insert() then;
         until WorkflowPartnerQue.Next() = 0;
@@ -653,7 +653,7 @@
             UPG."JMF Response Entry No." := WorkflowPartnerRespAt."JMF Response Entry No.";
             UPG."DateTime Received" := WorkflowPartnerRespAt."DateTime Received";
             UPG."File BLOB" := WorkflowPartnerRespAt."File BLOB";
-            UPG."File Name" := WorkflowPartnerRespAt."File Name";
+            UPG."File Name" := WorkflowPartnerRespAt."FileName";
             UPG.ContentID := WorkflowPartnerRespAt.ContentID;
             UPG.ContentType := WorkflowPartnerRespAt.ContentType;
             UPG."File Size" := WorkflowPartnerRespAt."File Size";
@@ -672,19 +672,19 @@
         repeat
             UPG."Entry No." := WorkflowPartnerResponses."Entry No.";
             UPG.SenderID := WorkflowPartnerResponses.SenderID;
-            UPG."Device Code" := WorkflowPartnerResponses."Device Code";
-            UPG."Controller Code" := WorkflowPartnerResponses."Controller Code";
+            UPG."Device Code" := WorkflowPartnerResponses."PVS Device Code";
+            UPG."Controller Code" := WorkflowPartnerResponses."PVS Controller Code";
             UPG.DeviceID := WorkflowPartnerResponses.DeviceID;
             UPG."Event TimeStamp" := WorkflowPartnerResponses."Event TimeStamp";
             UPG."JobPhase JobID" := WorkflowPartnerResponses."JobPhase JobID";
             UPG."JobPhase JobPartID" := WorkflowPartnerResponses."JobPhase JobPartID";
             UPG."Event System" := WorkflowPartnerResponses."Event System";
             UPG."PVS ID" := WorkflowPartnerResponses."PVS ID";
-            UPG.Job := WorkflowPartnerResponses.Job;
-            UPG."Plan ID" := WorkflowPartnerResponses."Plan ID";
-            UPG."Item No." := WorkflowPartnerResponses."Item No.";
-            UPG."Job Item Entry No." := WorkflowPartnerResponses."Job Item Entry No.";
-            UPG."Process ID" := WorkflowPartnerResponses."Process ID";
+            UPG.Job := WorkflowPartnerResponses."PVS Job";
+            UPG."Plan ID" := WorkflowPartnerResponses."PVS PlanID";
+            UPG."Item No." := WorkflowPartnerResponses."PVS Item No.";
+            UPG."Job Item Entry No." := WorkflowPartnerResponses."PVS Job Item Entry No.";
+            UPG."Process ID" := WorkflowPartnerResponses."PVS ProcessID";
             UPG."Device TotalProductionCounter" := WorkflowPartnerResponses."Device TotalProductionCounter";
             UPG.ID := WorkflowPartnerResponses.ID;
             UPG."Device Status Text" := WorkflowPartnerResponses."Device Status Text";
@@ -707,10 +707,10 @@
             UPG."Device OperationMode" := WorkflowPartnerResponses."Device OperationMode";
             UPG."Device Condition" := WorkflowPartnerResponses."Device Condition";
             UPG."JobPhase End DateTime" := WorkflowPartnerResponses."JobPhase End DateTime";
-            UPG."Costing Type" := WorkflowPartnerResponses."Costing Type";
-            UPG."Cost Center Code" := WorkflowPartnerResponses."Cost Center Code";
-            UPG."Order No." := WorkflowPartnerResponses."Order No.";
-            UPG."Item No." := WorkflowPartnerResponses."Item No.";
+            UPG."Costing Type" := WorkflowPartnerResponses."pvs Costing Type";
+            UPG."Cost Center Code" := WorkflowPartnerResponses."pvs Cost Center Code";
+            UPG."Order No." := WorkflowPartnerResponses."pvs Order No.";
+            UPG."Item No." := WorkflowPartnerResponses."pvs Item No.";
             UPG."Event Comment" := WorkflowPartnerResponses."Event Comment";
             UPG."Work Code" := WorkflowPartnerResponses."Work Code";
             UPG."Event Text" := WorkflowPartnerResponses."Event Text";
@@ -735,15 +735,15 @@
             UPG."ReturnQueueEntry URL" := WorkflowPartnerResponses."ReturnQueueEntry URL";
             UPG."Device JMFURL" := WorkflowPartnerResponses."Device JMFURL";
             UPG."File BLOB" := WorkflowPartnerResponses."File BLOB";
-            UPG."DateTime Received" := WorkflowPartnerResponses."DateTime Received";
-            UPG."File Name" := WorkflowPartnerResponses."File Name";
+            UPG."DateTime Received" := WorkflowPartnerResponses."DateTime Recieved";
+            UPG."File Name" := WorkflowPartnerResponses."FileName";
             UPG."Response Type" := WorkflowPartnerResponses."Response Type";
             UPG."Response Sub Type" := WorkflowPartnerResponses."Response Sub Type";
             UPG."PVS Status" := WorkflowPartnerResponses."PVS Status";
-            UPG."Posted To Journal" := WorkflowPartnerResponses."Posted To Journal";
-            UPG."Posted DateTime" := WorkflowPartnerResponses."Posted DateTime";
-            UPG."Error Text" := WorkflowPartnerResponses."Error Text";
-            UPG."Message Status" := WorkflowPartnerResponses."Message Status";
+            UPG."Posted To Journal" := WorkflowPartnerResponses."PVS Posted to Journal";
+            UPG."Posted DateTime" := WorkflowPartnerResponses."PVS Posted Date Time";
+            UPG."Error Text" := WorkflowPartnerResponses."PVS Error Text";
+            UPG."Message Status" := WorkflowPartnerResponses."PVS Message Status";
             UPG."File Date" := WorkflowPartnerResponses."File Date";
             UPG."File Time" := WorkflowPartnerResponses."File Time";
             UPG."File Size" := WorkflowPartnerResponses."File Size";
@@ -763,7 +763,7 @@
             UPG.EmployeeRoleOperator := WorkflowPartnerResponses.EmployeeRoleOperator;
             UPG.EmployeeRoleShiftLeader := WorkflowPartnerResponses.EmployeeRoleShiftLeader;
             UPG.EmployeeRoleStandBy := WorkflowPartnerResponses.EmployeeRoleStandBy;
-            UPG."Body Parts In Transit" := WorkflowPartnerResponses."Body Parts In Transit";
+            UPG."Body Parts In Transit" := WorkflowPartnerResponses."Bodyparts In-Transit";
             UPG."Original JMF File" := WorkflowPartnerResponses."Original JMF File";
             UPG."Device Status Text Backup" := WorkflowPartnerResponses."Device Status Text Backup";
             UPG."Device StatusDetails Text Back" := WorkflowPartnerResponses."Device StatusDetails Text Back";
@@ -771,4 +771,4 @@
             If not UPG.Insert() then;
         until WorkflowPartnerResponses.Next() = 0;
     end;
-} */
+}
