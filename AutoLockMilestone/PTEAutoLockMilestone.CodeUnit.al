@@ -1,4 +1,4 @@
-codeunit 80201 "PTE AutoLock Milestone"
+codeunit 80199 "PTE AutoLock Milestone"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"PVS Planning Management", 'On_Before_Check_Planning_Method', '', true, true)]
     local procedure On_Before_Check_Planning_Method(var in_PlanUnitRec: Record "PVS Job Planning Unit"; var IsHandled: Boolean)
