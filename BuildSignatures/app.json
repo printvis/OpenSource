@@ -2,7 +2,7 @@
   "id": "64f7cf19-03c1-4887-b7b4-ad3d8c657639",
   "name": "PTE Build Signatures",
   "publisher": "PrintVis",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "runtime": "10.0",
   "target": "Cloud",
   "application": "24.0.0.0",
