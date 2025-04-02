@@ -225,25 +225,6 @@ page 75200 "PTE PVS FG Valuation List"
 
                 end;
             }
-            action(TestOnly)
-            {
-                Caption = 'Test only';
-                ApplicationArea = All;
-                trigger OnAction()
-                var
-                    szBuffer: Text;
-                    char10: Char;
-                    char13: char;
-                    char9: Char;
-                begin
-                    char10 := 10;
-                    char13 := 13;
-                    char9 := 9;
-                    szBuffer :=
-                    strsubstno('This is a line \ this is line with val: %1 %1 %1 val %2 this is new line with val longer: %1 val', char9, char10);
-                    Message(szBuffer);
-                end;
-            }
         }
         area(navigation)
         {
