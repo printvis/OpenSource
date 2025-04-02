@@ -233,26 +233,27 @@ codeunit 80198 "PTE BuildSignatures"
     local procedure GetFinishingSignaturesPerSheet(JobItem: Record "PVS Job Item"; Sheet: Record "PVS Job Sheet") FoldingSignatures: Integer
     var
         ImpositionRec: Record "PVS Imposition Code";
-        SheetParts: Integer;
+        SheetForms, ImpositionForms : Integer;
     begin
-        if JobItem."Manual Signatures" then begin
-            if ((JobItem."Pages In Sheet" = 0) or
-               (JobItem."Pages With Print" = 0) or
-               (JobItem."Pages In Sheet" <= JobItem."Pages With Print"))
-            then
-                SheetParts := 1
-            else
-                SheetParts := JobItem."Pages In Sheet" DIV ROUND(JobItem."Pages With Print", 1);
 
-            if JobItem.Signatures > SheetParts then
-                FoldingSignatures := JobItem.Signatures DIV SheetParts;
+        if ((JobItem."Pages In Sheet" = 0) or
+           (JobItem."Pages With Print" = 0) or
+           (JobItem."Pages In Sheet" <= JobItem."Pages With Print"))
+        then
+            SheetForms := 1
+        else
+            SheetForms := JobItem."Pages In Sheet" DIV ROUND(JobItem."Pages With Print", 1);
+
+        if JobItem."Manual Signatures" then begin
+            if SheetForms <> 0 then
+                FoldingSignatures := JobItem.Signatures DIV SheetForms;
         end else
             if JobItem."Imposition Type" <> '' then
                 if JobItem.GET_ImpositionRec(ImpositionRec, JobItem."Imposition Type") then
                     if (ImpositionRec."Folding Items Length" <> 0) and
                        (ImpositionRec."Folding Items Width" <> 0)
                     then begin
-                        FoldingSignatures := (ImpositionRec."Leaves Length" * ImpositionRec."Leaves Width") DIV
+                        ImpositionForms := (ImpositionRec."Leaves Length" * ImpositionRec."Leaves Width") DIV
                             (ImpositionRec."Folding Items Length" * ImpositionRec."Folding Items Width");
 
                         if ImpositionRec."Double Production" then
@@ -260,7 +261,10 @@ codeunit 80198 "PTE BuildSignatures"
                         if ImpositionRec.Production = 0 then
                             ImpositionRec.Production := 1;
 
-                        FoldingSignatures := FoldingSignatures DIV ImpositionRec.Production;
+                        SheetForms := SheetForms DIV ImpositionRec.Production;
+
+                        if SheetForms <> 0 then
+                            FoldingSignatures := ImpositionForms DIV SheetForms;
                     end;
 
         if FoldingSignatures = 0 then
