@@ -12,4 +12,4 @@ Currently this extention assume that there is only one finished goods item per c
 
 ## What you will need to do for this extension to work
 
-- Install the extention in BC 23 or ealier with printvis.
+- Install the extention in a BC 23(or earlier) BC env. with printvis.
