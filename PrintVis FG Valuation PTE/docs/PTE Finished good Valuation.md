@@ -1638,7 +1638,7 @@ ul
 <p class=MsoNormal>PTE Finished good Valuation</p>
 
 <p class=MsoNormal>The valuation depends <span class=GramE>of</span> the value
-of the field “put-on stock” in related quality code.</p>
+of the field Â“put-on stockÂ” in related quality code.</p>
 
 <p class=MsoNormal><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shapetype
  id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
@@ -1698,7 +1698,7 @@ production calculation equal to true.</p>
 
 <p class=MsoNormal>The &quot;PTE PVS FG Valuation&quot; table keep the
 summarize. It is filled automatically after posting an item entry with mentioned
-rules. <span style='mso-spacerun:yes'> </span></p>
+rules. <span style='mso-spacerun:yes'>Â </span></p>
 
 <p class=MsoNormal>The field valuation indicated the value that should be for
 the current line. The field current valuation indicated the actual sum of cost amount
@@ -1717,8 +1717,8 @@ the <span class=SpellE>adjustement</span> for line (the field cost is adjusted I
 not checked and the system compare the actual value with the value that should
 be and adjust if necessary.</p>
 
-<p class=MsoNormal>Run adjustment is used for all output entries with field “cost
-is adjustment” as false.</p>
+<p class=MsoNormal>Run adjustment is used for all output entries with field Â“cost
+is adjustmentÂ” as false.</p>
 
 <p class=MsoNormal><span style='mso-no-proof:yes'><!--[if gte vml 1]><v:shape
  id="Picture_x0020_3" o:spid="_x0000_i1025" type="#_x0000_t75" style='width:470pt;
