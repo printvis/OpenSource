@@ -6,5 +6,5 @@ This code automates the setting of status locked on planning units. If a plannin
 
 ## What this extension includes:
 
-- An event subscriber (codeunit 88201) that potentially replaces the normal procedure controlling the planning status after a manual move.
+- An event subscriber (codeunit 80199) that potentially replaces the normal procedure controlling the planning status after a manual move.
 

@@ -1,4 +1,4 @@
-pageextension 80200 "PTE Job Print Signatures" extends "PVS Job Print Signatures"
+pageextension 80198 "PTE Job Print Signatures" extends "PVS Job Print Signatures"
 {
     actions
     {
