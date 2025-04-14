@@ -1,4 +1,4 @@
-page 75200 "PTE PVS FG Valuation List"
+page 80260 "PTE PVS FG Valuation List"
 {
     ApplicationArea = All;
     Caption = 'PTE PVS Finished Goods Valuation List';

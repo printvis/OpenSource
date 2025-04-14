@@ -1,4 +1,4 @@
-table 75200 "PTE PVS FG Valuation"
+table 80260 "PTE PVS FG Valuation"
 {
 
     LookupPageId = "PTE PVS FG Valuation List";
