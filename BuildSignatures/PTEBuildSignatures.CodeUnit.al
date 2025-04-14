@@ -1,8 +1,12 @@
-codeunit 80200 "PTE BuildSignatures"
+codeunit 80198 "PTE BuildSignatures"
 {
-
     [EventSubscriber(ObjectType::Table, Database::"PVS Job Signatures", 'OnBeforeBuild_Entries', '', true, true)]
     local procedure OnBeforeBuild_Entries(in_SheetRec: Record "PVS Job Sheet"; in_BuildEntriesForJob: boolean; var out_RecTmp: Record "PVS Job Signatures" temporary; var isHandled: Boolean)
+    begin
+        IsHandled := Build_Entries(in_SheetRec, in_BuildEntriesForJob, out_RecTmp);
+    end;
+
+    local procedure Build_Entries(in_SheetRec: Record "PVS Job Sheet"; in_BuildEntriesForJob: boolean; var out_RecTmp: Record "PVS Job Signatures" temporary): Boolean
     var
         CalcUnit: Record "PVS Job Calculation Unit";
         CalcUnitSetup: Record "PVS Calculation Unit Setup";
@@ -10,21 +14,23 @@ codeunit 80200 "PTE BuildSignatures"
         JobRec: Record "PVS Job";
         FinishingRec: Record "PVS Finishing Types";
         JobItemRec: Record "PVS Job Item";
-        TempJobItem: Record "PVS Job Item" temporary;
+        JobItemTMP: Record "PVS Job Item" temporary;
         ComponentTypeRec: Record "PVS Component Types";
         SheetRec: Record "PVS Job Sheet";
         JobSignaturesRec: Record "PVS Job Signatures";
-        TempLastSignature: Record "PVS Job Signatures" temporary;
+        LastSignatureTMP: Record "PVS Job Signatures" temporary;
         GAF: Codeunit "PVS Table Filters";
-        Counter, Indentation : Integer;
-        SheetSetID: Integer;
+        AssemblyOrder, Indentation : Integer;
+        Counter, SheetSetID : Integer;
         AssemblyStyleFound: Boolean;
         AssemblyStyle: Option Gathering,Collecting,List;
+        AssemblyOrderUsed: List of [Integer];
+        FinishingSignatureCounter, FinishingSignaturesPerSheet : integer;
     begin
 
         if in_SheetRec.ID = 0 then
             exit;
-        TempLastSignature.Copy(out_RecTmp, true);
+        LastSignatureTMP.Copy(out_RecTmp, true);
 
         // Find finishingtype
         CalcUnit.SetRange(ID, in_SheetRec.ID);
@@ -48,13 +54,13 @@ codeunit 80200 "PTE BuildSignatures"
                                 AssemblyStyleFound := false;
                         end;
                     end;
-            until AssemblyStyleFound or (CalcUnit.next() = 0);
+            until AssemblyStyleFound or (CalcUnit.next = 0);
 
         if not AssemblyStyleFound then
             // Try to check the job
             if JobRec.get(in_SheetRec.ID, in_SheetRec.Job, in_SheetRec.Version) then
                 if JobRec.Finishing <> '' then
-                    if FinishingRec.Get(SheetRec.Finishing) then begin
+                    if FinishingRec.Get(JobRec.Finishing) then begin
                         AssemblyStyleFound := true;
 
                         case FinishingRec."CIP4 Binding" of
@@ -72,7 +78,7 @@ codeunit 80200 "PTE BuildSignatures"
                         end;
                     end;
         if not AssemblyStyleFound then
-            exit;
+            AssemblyStyle := AssemblyStyle::Gathering;
 
 
         GAF.SELECT_JobItems2Job(JobItemRec, in_SheetRec.ID, in_SheetRec.Job, in_SheetRec.Version, true);
@@ -86,7 +92,15 @@ codeunit 80200 "PTE BuildSignatures"
                 out_RecTmp.DeleteAll();
                 exit;
             end;
-        until JobItemRec.next() = 0;
+
+            // store assembly order assigned manually
+            JobSignaturesRec.reset;
+            JobSignaturesRec.SetRange("Sheet ID", JobItemRec."Sheet ID");
+            if JobSignaturesRec.findset(false) then
+                repeat
+                    AssemblyOrderUsed.Add(JobSignaturesRec."Assembly Order");
+                until JobSignaturesRec.next = 0;
+        until JobItemRec.next = 0;
 
         // Build sorting order for job items
         // First find covers 
@@ -94,10 +108,10 @@ codeunit 80200 "PTE BuildSignatures"
         repeat
             if ComponentTypeRec.get(JobItemRec."Component Type") then
                 if ComponentTypeRec."Component Of Cover" then begin
-                    TempJobItem := JobItemRec;
+                    JobItemTMP := JobItemRec;
                     Counter += 1;
-                    TempJobItem."Job Item No. 2" := Counter;
-                    TempJobItem.insert();
+                    JobItemTMP."Job Item No. 2" := Counter;
+                    JobItemTMP.insert;
                 end;
         // An alternative is to look at the jdf product type
         // case ComponentTypeRec."JDF Product Type" of
@@ -107,90 +121,154 @@ codeunit 80200 "PTE BuildSignatures"
         //         begin
         //         end;
         // end;
-        until JobItemRec.next() = 0;
+        until JobItemRec.next = 0;
 
         // Now find other job items
         JobItemRec.FindSet();
         repeat
-            if not TempJobItem.get(JobItemRec.ID, JobItemRec.Job, JobItemRec.Version, JobItemRec."Job Item No.", JobItemRec."Entry No.") then begin
-                TempJobItem := JobItemRec;
+            if not JobItemTMP.get(JobItemRec.ID, JobItemRec.Job, JobItemRec.Version, JobItemRec."Job Item No.", JobItemRec."Entry No.") then begin
+                JobItemTMP := JobItemRec;
                 Counter += 1;
-                TempJobItem."Job Item No. 2" := Counter;
-                TempJobItem.insert();
+                JobItemTMP."Job Item No. 2" := Counter;
+                JobItemTMP.insert;
             end;
-        until JobItemRec.next() = 0;
+        until JobItemRec.next = 0;
 
-        out_RecTmp.reset();
+        out_RecTmp.reset;
+
 
         Counter := 0;
         Indentation := 0;
-        TempJobItem.Reset();
-        TempJobItem.SetCurrentkey("Job Item No. 2");
-        if TempJobItem.FindSet() then
+        JobItemTMP.Reset();
+        JobItemTMP.SetCurrentkey("Job Item No. 2");
+        if JobItemTMP.FindSet() then
             repeat
-                if SheetRec.get(TempJobItem."Sheet ID") then
+                if SheetRec.get(JobItemTMP."Sheet ID") then begin
+                    FinishingSignaturesPerSheet := GetFinishingSignaturesPerSheet(JobItemTMP, SheetRec);
+                    if FinishingSignaturesPerSheet = 0 then
+                        FinishingSignaturesPerSheet := 1;
                     for SheetSetID := 1 to SheetRec."No. Of Sheet Sets" do begin
-                        Counter += 1;
+                        for FinishingSignatureCounter := 0 to (FinishingSignaturesPerSheet - 1) do begin
+                            Counter += 1;
 
-                        if JobSignaturesRec.Get(SheetRec."Sheet ID", SheetSetID, 0) then begin
-                            // use the stored value
-                            out_RecTmp := JobSignaturesRec;
-                            if out_RecTmp.insert() then;
-                        end else begin
-                            // try to insert a tmp record
-                            if not out_RecTmp.Get(SheetRec."Sheet ID", SheetSetID, 0) then begin
-                                // insert new tmp record
-                                out_RecTmp.Init();
-                                out_RecTmp."Sheet ID" := SheetRec."Sheet ID";
-                                out_RecTmp."Sheet Set ID" := SheetSetID;
-                                out_RecTmp."Signature No." := Counter;
-                                out_RecTmp."Assembly Order" := Counter;
-                                out_RecTmp.ID := SheetRec.ID;
-                                out_RecTmp.Job := SheetRec.Job;
-                                out_RecTmp.Version := SheetRec.Version;
-                                out_RecTmp."Job Item No." := TempJobItem."Job Item No.";
-                                out_RecTmp."Entry No." := TempJobItem."Entry No.";
-                                if out_RecTmp.Insert() then;
 
-                                GetPrintSignatureID(out_RecTmp);
+                            if JobSignaturesRec.Get(SheetRec."Sheet ID", SheetSetID, FinishingSignatureCounter) then begin
+                                // use the stored value
+                                out_RecTmp := JobSignaturesRec;
+                                if out_RecTmp.insert() then;
+                            end else begin
+
+                                AssemblyOrder := 0;
+                                repeat
+                                    AssemblyOrder += 1;
+                                until not AssemblyOrderUsed.Contains(AssemblyOrder);
+
+
+                                // try to insert a tmp record
+                                if not out_RecTmp.Get(SheetRec."Sheet ID", SheetSetID, FinishingSignatureCounter) then begin
+                                    // insert new tmp record
+                                    out_RecTmp.Init();
+                                    out_RecTmp."Sheet ID" := SheetRec."Sheet ID";
+                                    out_RecTmp."Sheet Set ID" := SheetSetID;
+                                    out_RecTmp."Finishing Signature No." := FinishingSignatureCounter;
+                                    out_RecTmp."Signature No." := Counter;
+                                    out_RecTmp."Assembly Order" := AssemblyOrder;
+                                    out_RecTmp.ID := SheetRec.ID;
+                                    out_RecTmp.Job := SheetRec.Job;
+                                    out_RecTmp.Version := SheetRec.Version;
+                                    out_RecTmp."Job Item No." := JobItemTMP."Job Item No.";
+                                    out_RecTmp."Entry No." := JobItemTMP."Entry No.";
+                                    if out_RecTmp.Insert() then
+                                        AssemblyOrderUsed.Add(out_RecTmp."Assembly Order");
+
+                                    GetPrintSignatureID(out_RecTmp);
+                                end;
+
+                                case AssemblyStyle of
+                                    AssemblyStyle::Collecting:
+                                        begin
+                                            // Collecting = 0123
+                                            Indentation := AssemblyOrder - 1;
+                                        end;
+                                    AssemblyStyle::Gathering:
+                                        begin
+                                            // Gathering = 0000
+                                            Indentation := 0;
+                                        end;
+                                    AssemblyStyle::List:
+                                        begin
+                                            // List = 0111
+                                            if AssemblyOrder = 1 then
+                                                Indentation := 0
+                                            else
+                                                Indentation := 1;
+                                        end;
+                                end;
+
+                                out_RecTmp."Assembly Order" := AssemblyOrder;
+                                out_RecTmp."Print Signature Name" := SheetName(out_RecTmp);
+                                out_RecTmp.Indent := Indentation;
+                                out_RecTmp.Modify(true);
+
+                                // Special rule for residual sheet
+                                if JobItemTMP."Entry No." = 1 then
+                                    LastSignatureTMP := out_RecTmp
+                                else begin
+                                    // Switch values with last signature
+                                    out_RecTmp."Assembly Order" := LastSignatureTMP."Assembly Order";
+                                    out_RecTmp.Indent := LastSignatureTMP.Indent;
+                                    out_RecTmp.Modify();
+                                    LastSignatureTMP."Assembly Order" := AssemblyOrder;
+                                    LastSignatureTMP.Indent := Indentation;
+                                    LastSignatureTMP.Modify();
+                                end;
                             end;
-
-                            case AssemblyStyle of
-                                AssemblyStyle::Collecting:
-                                    // Collecting = 0123
-                                    Indentation := Counter - 1;
-                                AssemblyStyle::Gathering:
-                                    // Gathering = 0000
-                                    Indentation := 0;
-                                AssemblyStyle::List:
-                                    // List = 0111
-                                    if Counter = 1 then
-                                        Indentation := 0
-                                    else
-                                        Indentation := 1;
-                            end;
-
-                            out_RecTmp."Assembly Order" := Counter;
-                            out_RecTmp."Print Signature Name" := CopyStr(SheetName(out_RecTmp), 1, MaxStrLen(out_RecTmp."Print Signature Name"));
-                            out_RecTmp.Indent := Indentation;
-                            out_RecTmp.Modify(true);
-                        end;
-                        // Special rule for residual sheet
-                        if TempJobItem."Entry No." = 1 then
-                            TempLastSignature := out_RecTmp
-                        else begin
-                            // Switch values with last signature
-                            out_RecTmp."Assembly Order" := TempLastSignature."Assembly Order";
-                            out_RecTmp.Indent := TempLastSignature.Indent;
-                            out_RecTmp.Modify();
-                            TempLastSignature."Assembly Order" := Counter;
-                            TempLastSignature.Indent := Indentation;
-                            TempLastSignature.Modify();
                         end;
                     end;
-            until TempJobItem.Next() = 0;
+                end;
+            until JobItemTMP.Next() = 0;
+        exit(true);
+    end;
 
-        isHandled := true;
+    local procedure GetFinishingSignaturesPerSheet(JobItem: Record "PVS Job Item"; Sheet: Record "PVS Job Sheet") FoldingSignatures: Integer
+    var
+        ImpositionRec: Record "PVS Imposition Code";
+        SheetForms, ImpositionForms : Integer;
+    begin
+
+        if ((JobItem."Pages In Sheet" = 0) or
+           (JobItem."Pages With Print" = 0) or
+           (JobItem."Pages In Sheet" <= JobItem."Pages With Print"))
+        then
+            SheetForms := 1
+        else
+            SheetForms := JobItem."Pages In Sheet" DIV ROUND(JobItem."Pages With Print", 1);
+
+        if JobItem."Manual Signatures" then begin
+            if SheetForms <> 0 then
+                FoldingSignatures := JobItem.Signatures DIV SheetForms;
+        end else
+            if JobItem."Imposition Type" <> '' then
+                if JobItem.GET_ImpositionRec(ImpositionRec, JobItem."Imposition Type") then
+                    if (ImpositionRec."Folding Items Length" <> 0) and
+                       (ImpositionRec."Folding Items Width" <> 0)
+                    then begin
+                        ImpositionForms := (ImpositionRec."Leaves Length" * ImpositionRec."Leaves Width") DIV
+                            (ImpositionRec."Folding Items Length" * ImpositionRec."Folding Items Width");
+
+                        if ImpositionRec."Double Production" then
+                            ImpositionRec.Production := 2;
+                        if ImpositionRec.Production = 0 then
+                            ImpositionRec.Production := 1;
+
+                        SheetForms := SheetForms DIV ImpositionRec.Production;
+
+                        if SheetForms <> 0 then
+                            FoldingSignatures := ImpositionForms DIV SheetForms;
+                    end;
+
+        if FoldingSignatures = 0 then
+            FoldingSignatures := 1;
     end;
 
     local procedure GetPrintSignatureID(var in_PVSJobSignatures: Record "PVS Job Signatures")
@@ -203,7 +281,7 @@ codeunit 80200 "PTE BuildSignatures"
     var
         JobItemRec: Record "PVS Job Item";
         SheetRec: Record "PVS Job Sheet";
-        Text005Lbl: label 'pp';
+        Text005: label 'pp';
     begin
         if SheetRec.Get(in_PVSJobSignatures."Sheet ID") then begin
             SheetRec.CalcFields("Component Type Description");
@@ -217,7 +295,7 @@ codeunit 80200 "PTE BuildSignatures"
                 if JobItemRec.Description <> '' then
                     Result := CopyStr(((Format(JobItemRec.Description) + '_')), 1, 250);
 
-                Result := CopyStr(((Result + Format(JobItemRec."Pages With Print") + Text005Lbl + '_')), 1, 250);
+                Result := CopyStr(((Result + Format(JobItemRec."Pages With Print") + Text005 + '_')), 1, 250);
             end;
 
             Result := CopyStr(((Result + Format(SheetRec."Colors Front") + '-' + Format(SheetRec."Colors Back"))), 1, 250);
