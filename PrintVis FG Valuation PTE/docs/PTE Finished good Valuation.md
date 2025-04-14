@@ -13,12 +13,6 @@ xmlns="http://www.w3.org/TR/REC-html40">
 <link rel=Edit-Time-Data
 href="PTE%20Finished%20good%20Valuation_files/editdata.mso">
 <!--[if !mso]>
-<style>
-v\:* {behavior:url(#default#VML);}
-o\:* {behavior:url(#default#VML);}
-w\:* {behavior:url(#default#VML);}
-.shape {behavior:url(#default#VML);}
-</style>
 <![endif]--><!--[if gte mso 9]><xml>
  <o:DocumentProperties>
   <o:Author>Patrick Zawanowski</o:Author>
