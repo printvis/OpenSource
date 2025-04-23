@@ -1,4 +1,4 @@
-codeunit 80211 "PTE UPgrade Logic Part 1"
+/* codeunit 80211 "PTE UPgrade Logic Part 1"
 {
     procedure PVS_Job_Sheet_Move_To_UPG()
     var
@@ -771,4 +771,4 @@ codeunit 80211 "PTE UPgrade Logic Part 1"
             If not UPG.Insert() then;
         until WorkflowPartnerResponses.Next() = 0;
     end;
-}
+} */
