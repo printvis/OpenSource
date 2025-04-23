@@ -23,6 +23,6 @@
   "contextSensitiveHelpUrl": "https://support.printvis.com/",
   
   "runtime": "3.0",
-  "target": "Internal"
+  "target": "Extension"
  
 }
