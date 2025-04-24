@@ -1,0 +1,39 @@
+{
+  "id": "3affff03-2ad1-4f08-b879-7f41d129cd14",
+  "name": "SchedulingProblems",
+  "publisher": "PrintVis OpenSource",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+    "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "version": "25.0.0.0",
+      "publisher": "NovaVision Software A/S"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 80100,
+      "to": 89149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "14.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
