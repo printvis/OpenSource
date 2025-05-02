@@ -10,7 +10,9 @@ codeunit 80109 "PTE UBG Move Data"
         MoveTableDataSalesHeader();
         MoveTableDataSalesLine();
         MoveTableDataSalesHeaderArchive();
+#if NOT CLEAN26
         MoveUserSetupFields();
+#endif
         MoveTableDataSPVSGeneralSetup();
     end;
 
@@ -214,7 +216,7 @@ codeunit 80109 "PTE UBG Move Data"
                 SalesHeaderArchive.Modify(false);
             until SalesHeaderArchive.Next() = 0;
     end;
-
+#if NOT CLEAN26
     local procedure MoveUserSetupFields()
     var
         PVSUserSetup: Record "PVS User Setup";
@@ -225,7 +227,7 @@ codeunit 80109 "PTE UBG Move Data"
                 PVSUserSetup."PTE SOI Case Management Start" := PVSUserSetup."Case Management Start";
             until PVSUserSetup.Next() = 0;
     end;
-
+#endif
     local procedure MoveTableDataSPVSGeneralSetup()
     var
         PVSGeneralSetup: Record "PVS General Setup";
