@@ -1,4 +1,4 @@
-codeunit 80267 "PTE CIM 1 Upg. PrintVis L."//Get new object id
+codeunit 80267 "PTE CIM 2 Upg. PrintVis L."//Get new object id
 {
     Access = Internal;
 

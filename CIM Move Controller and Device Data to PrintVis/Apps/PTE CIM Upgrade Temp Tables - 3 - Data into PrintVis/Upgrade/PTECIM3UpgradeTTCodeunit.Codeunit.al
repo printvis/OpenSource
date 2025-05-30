@@ -1,4 +1,4 @@
-codeunit 80270 "PTE CIM 1 Upg. TT Codeunit"//Get new object id
+codeunit 80270 "PTE CIM 3 Upg. TT Codeunit"//Get new object id
 {
     Subtype = Upgrade;
     trigger OnCheckPreconditionsPerCompany()
@@ -53,8 +53,8 @@ codeunit 80270 "PTE CIM 1 Upg. TT Codeunit"//Get new object id
     end;
 
     var
-        UpgradeLogic: Codeunit "PTE CIM 1 Upg. PrintVis L.";
+        UpgradeLogic: Codeunit "PTE CIM 3 Upg. PrintVis L.";
         UpgradeTag: Codeunit "Upgrade Tag";
-        UpgradeTags: Codeunit "PTE CIM 1 Upg. PrintVis Tags";
+        UpgradeTags: Codeunit "PTE CIM 3 Upg. PrintVis Tags";
 
 }

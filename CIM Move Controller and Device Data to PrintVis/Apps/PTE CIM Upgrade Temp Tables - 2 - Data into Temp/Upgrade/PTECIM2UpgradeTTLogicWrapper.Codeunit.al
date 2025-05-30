@@ -1,8 +1,8 @@
-codeunit 80268 "PTE Upg. Into PrintVis L. W."//Get new object id
+codeunit 80268 "PTE CIM 2 Upg. L. W."//Get new object id
 {
     trigger OnRun()
     var
-        UpgradeLogic: Codeunit "PTE CIM 1 Upg. PrintVis L.";
+        UpgradeLogic: Codeunit "PTE CIM 2 Upg. PrintVis L.";
     begin
         UpgradeLogic.MoveControllerToTempTable();
         UpgradeLogic.MoveDeviceToTempTable();

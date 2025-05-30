@@ -1,4 +1,4 @@
-codeunit 80273 "PTE CIM 1 Upg. PrintVis Tags"//Get new object id
+codeunit 80273 "PTE CIM 3 Upg. PrintVis Tags"//Get new object id
 {
     Access = Internal;
 

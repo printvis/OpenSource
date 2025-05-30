@@ -1,4 +1,4 @@
-codeunit 80269 "PTE CIM 1 Upg. PrintVis Tags"//Get new object id
+codeunit 80269 "PTE CIM 2 Upg. PrintVis Tags"//Get new object id
 {
     Access = Internal;
     procedure GetMoveControllerToTempTableTag(): Code[250]
