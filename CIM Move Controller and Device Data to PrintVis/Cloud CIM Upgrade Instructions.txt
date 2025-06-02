@@ -1,10 +1,10 @@
 #PrintVis 26 Feature Release have had some major changes in the PrintVis CIM app, that will prevent existing installation from upgrading directly.
-#The reason for this - was that 2 tables was moved into the PrintVis App from the PrintVis CIM App
+#The reason for this - was that 2 tables were moved into the PrintVis App from the PrintVis CIM App(PTE App for Cloud)
 #To limit the amount of breaking changes - the following has been done:
-#Moved some parts of the Pages into the PrintVis App with the same name, where the reamining parts has been kept as a new PageExtension.
+#Moved some parts of the Pages into the PrintVis App with the same name, where the remaining parts have been kept as a new PageExtension.
 #The same has been done to the tables "PVS CIM Controller" and "PVS CIM Device".
   
-#A upgrade guide has been made, that needs to be followed to get data transferred from a older version into the newer version.
+#An upgrade guide has been made, that needs to be followed to get data transferred from a older version into the newer version.
 #!!!WAIT!!!
 #!!!This will not move custom fields in "PVS CIM Controller" and "PVS CIM Device"!!!
 #!!!Please add the custom fields into the 'PTE CIM 1 - upg temp tables'!!!
