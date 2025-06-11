@@ -134,7 +134,14 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
                     repeat
                         FieldToRec.SetRange(TableNo, in_TableNoToInt);
                         FieldToRec.SetRange("No.", FieldFromRec."No.");
+                        FieldToRec.SetRange(FieldName, FieldFromRec.FieldName);
                         FieldToRec.SetFilter(ObsoleteState, '<>%1', FieldToRec.ObsoleteState::Removed);
+                        if FieldToRec.IsEmpty() then
+                            FieldToRec.SetRange("No.");
+                        if FieldToRec.IsEmpty() then begin
+                            FieldToRec.SetRange("No.", FieldFromRec."No.");
+                            FieldToRec.SetRange(FieldName);
+                        end;
                         if not FieldToRec.isEmpty() then
                             TransferField(FieldFromRec, fromRecRef, toRecRef);
                     until FieldFromRec.Next() = 0;
