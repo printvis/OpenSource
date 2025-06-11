@@ -368,6 +368,36 @@ Table 80264 "PTE CIM 1 Upg. TT. Controller"
             DataClassification = CustomerContent;
             Caption = 'Notification Subscription ID';
         }
+        field(61000; PrinergyJobGroupCreate; Boolean)
+        {
+            Caption = 'Create Prinergy Job Groups';
+            DataClassification = ToBeClassified;
+        }
+        field(61001; PrinergyJobGroupSetup; Text[1024])
+        {
+            Caption = 'Prinergy Job Group Structure';
+            DataClassification = ToBeClassified;
+        }
+        field(61002; PrinergyAPARootPath; Text[1024])
+        {
+            Caption = 'Root path for APA file';
+            DataClassification = ToBeClassified;
+        }
+        field(61003; PrinergyWebEnableOverride; Boolean)
+        {
+            Caption = 'Allow Web Enable Override';
+            DataClassification = ToBeClassified;
+        }
+        field(61004; PrinergyJobTemplateOverride; Boolean)
+        {
+            Caption = 'Allow Job Template Override';
+            DataClassification = ToBeClassified;
+        }
+        field(61005; PrinergyJobVolumeOverride; Boolean)
+        {
+            Caption = 'Allow Job Volume Override';
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys
