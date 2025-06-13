@@ -1,28 +1,28 @@
 {
+  "$schema": "https://raw.githubusercontent.com/microsoft/AL-Go-Actions/v7.2/settings.schema.json",
   "country": "us",
   "appFolders": [],
   "testFolders": [],
-  "bcptTestFolders": [], 
+  "bcptTestFolders": [],
   "ConditionalSettings": [
-    {       
-        "settings": {
-            "doNotPublishApps": true,
-            "doNotSignApps": true
-        }
-    }
-] ,
-  "installApps": [
-   "https://printvis.blob.core.windows.net/releases/CloudApps/Library/NovaVision%20Software%20AS_PrintVis%20System%20Library_25.2.1.3.app?sv=2023-01-03&st=2025-01-27T15%3A56%3A00Z&se=2028-12-28T15%3A56%3A00Z&sr=b&sp=r&sig=ZRyVo41sJc%2FlrOxUp%2F4d2W%2BPPz%2FgCttb9aHeAMiRZA8%3D",
-"https://printvis.blob.core.windows.net/releases/CloudApps/NovaVision%20Software%20AS_PrintVis_25.2.1.3.app?sv=2023-01-03&st=2025-01-27T15%3A57%3A27Z&se=2028-11-28T15%3A57%3A00Z&sr=b&sp=r&sig=SsYRsJ69fM79A2PTs1G3Jj9KHfVF22UDHAZ%2B7HqinOI%3D"
-  ],   
-"appDependencyProbingPaths":
-  [
     {
-      "repo":  "https://github.com/printvis/PrintVis-System-Library",
-      "release_status":  "release",
-      "version":  "latest",
-      "projects":  "*",
-      "AuthTokenSecret":  "LibraryAppRepoToken"
+      "settings": {
+        "doNotPublishApps": true,
+        "doNotSignApps": true
+      }
+    }
+  ],
+  "installApps": [
+    "https://printvis.blob.core.windows.net/releases/CloudApps/Library/NovaVision%20Software%20AS_PrintVis%20System%20Library_25.2.1.3.app?sv=2023-01-03&st=2025-01-27T15%3A56%3A00Z&se=2028-12-28T15%3A56%3A00Z&sr=b&sp=r&sig=ZRyVo41sJc%2FlrOxUp%2F4d2W%2BPPz%2FgCttb9aHeAMiRZA8%3D",
+    "https://printvis.blob.core.windows.net/releases/CloudApps/NovaVision%20Software%20AS_PrintVis_25.2.1.3.app?sv=2023-01-03&st=2025-01-27T15%3A57%3A27Z&se=2028-11-28T15%3A57%3A00Z&sr=b&sp=r&sig=SsYRsJ69fM79A2PTs1G3Jj9KHfVF22UDHAZ%2B7HqinOI%3D"
+  ],
+  "appDependencyProbingPaths": [
+    {
+      "repo": "https://github.com/printvis/PrintVis-System-Library",
+      "release_status": "release",
+      "version": "latest",
+      "projects": "*",
+      "AuthTokenSecret": "LibraryAppRepoToken"
     }
   ]
 }
