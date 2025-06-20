@@ -225,6 +225,7 @@ codeunit 80109 "PTE UBG Move Data"
         if PVSUserSetup.FindSet() then
             repeat
                 PVSUserSetup."PTE SOI Case Management Start" := PVSUserSetup."Case Management Start";
+                PVSUserSetup.modify(false);
             until PVSUserSetup.Next() = 0;
     end;
 #endif
