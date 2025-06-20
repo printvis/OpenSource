@@ -14,13 +14,13 @@
     {
       "id":  "5452f323-059e-499a-9753-5d2c07eef904",
     	"name":  "PrintVis",
-    	"publisher":  "PrintVis A/S",
+    	"publisher":  "Novavision Software A/S",
     	"version":  "25.0.0.0"
     },
     {
       "id": "c5fe08f2-b97e-43e8-adc1-2ee2cda7ee68",
       "name": "PTE CIM 1 - Upg Temp tables",
-      "publisher": "PrintVis A/S",
+      "publisher": "Novavision Software A/S",
       "version": "1.0.0.0"
     }
   ],

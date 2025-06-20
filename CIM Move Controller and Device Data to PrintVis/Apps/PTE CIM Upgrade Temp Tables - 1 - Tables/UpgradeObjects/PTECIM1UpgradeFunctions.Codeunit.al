@@ -146,9 +146,9 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
                             TransferField(FieldFromRec, fromRecRef, toRecRef);
                     until FieldFromRec.Next() = 0;
                 if InsertAllowed then
-                    toRecRef.Insert(true);
+                    toRecRef.Insert(false);
                 if ModifyAllowed then
-                    toRecRef.Modify(true);
+                    toRecRef.Modify(false);
             until fromRecRef.Next() = 0;
     end;
 
