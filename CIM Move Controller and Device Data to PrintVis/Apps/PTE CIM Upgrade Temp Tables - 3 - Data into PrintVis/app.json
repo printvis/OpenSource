@@ -1,0 +1,45 @@
+{
+  "id": "94f222b0-63c2-429e-be8d-fad1f1a5dfb7",
+  "name": "PTE CIM 3 - Move Data into PrintVis",
+  "publisher": "PrintVis A/S",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id":  "5452f323-059e-499a-9753-5d2c07eef904",
+      "name":  "PrintVis",
+      "publisher":  "Novavision Software A/S",
+      "version":  "25.0.0.0"
+    },
+    {
+      "id": "c5fe08f2-b97e-43e8-adc1-2ee2cda7ee68",
+      "name": "PTE CIM 1 - Upg Temp tables",
+      "publisher": "Novavision Software A/S",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 80270,
+      "to": 80273
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "14.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
