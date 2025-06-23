@@ -5,10 +5,10 @@ $instance = ''
 $path = '' 
 #Current version of PrintVis
 $PrintVisVersionCurrent = '26.0.0.3' 
-$PrintVisVersionNew = '26.0.2.0'
-$PrintVisPath = $path + 'NovaVision Software AS_PrintVis_26.0.2.0.app'
-$PrintVisLibraryPath = $path + 'NovaVision Software AS_PrintVis System Library_26.0.2.0.app'
-$PrintVisCIMPath = $path + 'NovaVision Software AS_PrintVis CIM_26.0.2.0.app'
+$PrintVisVersionNew = '26.1.1.0'
+$PrintVisPath = $path + 'NovaVision Software AS_PrintVis_26.1.1.0.app'
+$PrintVisLibraryPath = $path + 'NovaVision Software AS_PrintVis System Library_26.1.1.0.app'
+$PrintVisCIMPath = $path + 'NovaVision Software AS_PrintVis CIM_26.1.1.0.app'
 #input
 
 #does not need to be updated
