@@ -14,21 +14,28 @@ Cloud only needs to follow the information outlined above and below, where they 
 OnPrem / Container - use the appropriate Powershell script, before running the script - update the input section in the top of the script. 
 
 1. Install App 1 'PTE CIM 1 - upg temp tables'
+
 2. Install App 2 'PTE CIM 1 - Move Data into Temp'
 *- trigger upgrade "move data from PrintVis into App 1"*
 3. Install App 2 'PTE CIM 1 - Move Data into Temp' v.2
 4. Uninstall + Remove App 2
 5. Uninstall + Remove App 2 v.2
-6. Install 'PrintVis' - version 26.1.1.0
-7. Install 'PrintVis CIM' - version 26.1.1.0
+
+6. Uninstall + Unpublish 'PrintVis CIM'
+
+7. Install 'PrintVis' - version 26.1.1.0
+8. Install 'PrintVis CIM' - version 26.1.1.0
 **- install with mode = Force**
-8. Install App 3 'PTE CIM 1 - Move Data into PrintVis'
+
+9. Install App 3 'PTE CIM 1 - Move Data into PrintVis'
 *- trigger upgrade "Move Data from App 1 into PrintVis CIM"*
-9. Install App 3 'PTE CIM 1 - Move Data into PrintVis' v.2
-10. Uninstall + Remove App 3 
-11. Uninstall + Remove App 3 v.2 
+10. Install App 3 'PTE CIM 1 - Move Data into PrintVis' v.2
+11. Uninstall + Remove App 3 
+12. Uninstall + Remove App 3 v.2 
 **- Delete Extension Data**
-12. Go to the Browser and connect to the Business Central system and check if there exists data in PrintVis CIM Controller.
-13. Verify Data exists in Controller + Device
-14. Uninstall + Remove App 1 - **Delete Extension data** 
-15. Done
+
+13. Go to the Browser and connect to the Business Central system and check if there exists data in PrintVis CIM Controller.
+14. Verify Data exists in Controller + Device
+15. Uninstall + Remove App 1 - **Delete Extension data** 
+
+16. Done
