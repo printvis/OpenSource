@@ -10,9 +10,8 @@ An upgrade guide has been made, that needs to be followed to get data transferre
 #!!!This will not move custom fields in "PVS CIM Controller" and "PVS CIM Device"!!!
 #!!!Add the custom fields into the 'PTE CIM 1 - upg temp tables'!!!**
 
-Cloud only needs to follow the outline above, where they can ignore the Powershell script
-OnPrem  Container - use the appropriate Powershell script
-before running the script - update the input section in the top of the script. 
+Cloud only needs to follow the information outlined above and below, where they can ignore the Powershell script
+OnPrem / Container - use the appropriate Powershell script, before running the script - update the input section in the top of the script. 
 
 1. Install App 1 'PTE CIM 1 - upg temp tables'
 2. Install App 2 'PTE CIM 1 - Move Data into Temp'
