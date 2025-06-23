@@ -5,24 +5,24 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         PVSCIMIDLbl: Label 'FE465AD6-34B0-46B0-A1E2-23B28DB843D2', Locked = true;
 
         isPTECIMInstalled: Boolean;
-        PTECIMIDLbl: Label '5452f323-059e-499a-9753-5d2c07eef904', Locked = true;
+        PTECIMIDLbl: Label '14c66b9c-4ebe-4f20-a46f-b3a31c219d2c', Locked = true;
 
         APPIntegrationNameLbl: Label 'PrintVis CIM', Locked = true;
         TableNoCIMController: Integer;
         TableNoCIMDevice: Integer;
         TableNoCostCenter: Integer;
 
-    local procedure IsCIMInstalled(): Boolean
+    local procedure IsCIMInstalled(MoveIntoPrintVis: Boolean): Boolean
     begin
         if IsPVSCIMInstalled or isPTECIMInstalled then
             exit(true);
         if IsPrintVisCIMinstalled() then
             exit(true);
-        if IsPTEPrintVisCIMinstalled() then
+        if IsPTEPrintVisCIMinstalled(MoveIntoPrintVis) then
             exit(true);
     end;
 
-    local procedure IsPTEPrintVisCIMinstalled(): Boolean
+    local procedure IsPTEPrintVisCIMinstalled(MoveIntoPrintVis: Boolean): Boolean
     var
         ModuleInfo: ModuleInfo;
     begin
@@ -32,8 +32,14 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
             exit(false);
 
         isPTECIMInstalled := true;
-        TableNoCIMController := 75915;
-        TableNoCIMDevice := 75916;
+        if not MoveIntoPrintVis then begin
+            TableNoCIMController := 75915;
+            TableNoCIMDevice := 75916;
+        end
+        else begin
+            TableNoCIMController := 6010915;
+            TableNoCIMDevice := 6010916;
+        end;
         TableNoCostCenter := 6010347;
         exit(isPTECIMInstalled);
     end;
@@ -59,7 +65,7 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         TableNoFromInt: Integer;
         TableNoToInt: Integer;
     begin
-        if not IsCIMInstalled() then
+        if not IsCIMInstalled(MoveIntoPrintVis) then
             exit;
         if MoveIntoPrintVis then begin
             TableNoFromInt := Database::"PTE CIM 1 Upg. TT. Controller";
@@ -77,7 +83,7 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         TableNoFromInt: Integer;
         TableNoToInt: Integer;
     begin
-        if not IsCIMInstalled() then
+        if not IsCIMInstalled(MoveIntoPrintVis) then
             exit;
         if MoveIntoPrintVis then begin
             TableNoFromInt := Database::"PTE CIM 1 Upg. TT Device";
@@ -96,7 +102,7 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         TableNoFromInt: Integer;
         TableNoToInt: Integer;
     begin
-        if not IsCIMInstalled() then
+        if not IsCIMInstalled(MoveIntoPrintVis) then
             exit;
         if MoveIntoPrintVis then begin
             TableNoFromInt := Database::"PTE CIM 1 Upg. TT. Cost Center";
@@ -116,7 +122,7 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         fromRecRef: RecordRef;
         toRecRef: RecordRef;
     begin
-        if not IsCIMInstalled() then
+        if not IsCIMInstalled(false) then
             exit;
 
         fromRecRef.Open(in_TableNoFromInt);
@@ -130,20 +136,19 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
                 FieldFromRec.SetRange(TableNo, in_TableNoFromInt);
                 FieldFromRec.SetFilter("No.", '..%1', 1999999999);
                 FieldFromRec.SetFilter(ObsoleteState, '<>%1', FieldFromRec.ObsoleteState::Removed);
+                FieldFromRec.SetFilter(Class, '<>%1', FieldFromRec.Class::FlowFilter);
                 if FieldFromRec.FindSet() then
                     repeat
+                        FieldToRec.SetFilter(ObsoleteState, '<>%1', FieldToRec.ObsoleteState::Removed);
+                        FieldToRec.SetFilter(Class, '<>%1', FieldToRec.Class::FlowFilter);
+                        FieldToRec.SetRange(Type, FieldFromRec.Type);
                         FieldToRec.SetRange(TableNo, in_TableNoToInt);
                         FieldToRec.SetRange("No.", FieldFromRec."No.");
-                        FieldToRec.SetRange(FieldName, FieldFromRec.FieldName);
-                        FieldToRec.SetFilter(ObsoleteState, '<>%1', FieldToRec.ObsoleteState::Removed);
                         if FieldToRec.IsEmpty() then
-                            FieldToRec.SetRange("No.");
-                        if FieldToRec.IsEmpty() then begin
-                            FieldToRec.SetRange("No.", FieldFromRec."No.");
-                            FieldToRec.SetRange(FieldName);
-                        end;
-                        if not FieldToRec.isEmpty() then
-                            TransferField(FieldFromRec, fromRecRef, toRecRef);
+                            if isPTECIMInstalled then
+                                FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
+                        if FieldToRec.FindFirst() then
+                            TransferField(FieldFromRec, FieldToRec, fromRecRef, toRecRef);
                     until FieldFromRec.Next() = 0;
                 if InsertAllowed then
                     toRecRef.Insert(false);
@@ -152,12 +157,12 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
             until fromRecRef.Next() = 0;
     end;
 
-    local procedure TransferField(toFieldRec: Record Field; var fromRecRef: RecordRef; var toRecRef: RecordRef)
+    local procedure TransferField(fromFieldRec: Record Field; toFieldRec: Record Field; var fromRecRef: RecordRef; var toRecRef: RecordRef)
     var
         fromFieldRef: FieldRef;
         toFieldRef: FieldRef;
     begin
-        fromFieldRef := fromRecRef.Field(toFieldRec."No.");
+        fromFieldRef := fromRecRef.Field(fromFieldRec."No.");
         toFieldRef := toRecRef.Field(toFieldRec."No.");
         toFieldRef.Value := fromFieldRef.Value;
     end;
@@ -168,19 +173,23 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         toRecRef: RecordRef;
         TableNoToInt: Integer;
         EnumValue: Integer;
+        FieldNo: integer;
     begin
-        if not IsCIMInstalled() then
+        if not IsCIMInstalled(true) then
             exit;
 
         TableNoToInt := TableNoCIMController;
         toRecRef.Open(TableNoToInt);
-        if not toRecRef.FieldExist(50) then
+        FieldNo := 50;
+        if isPTECIMInstalled then
+            FieldNo += 75000;
+        if not toRecRef.FieldExist(FieldNo) then
             exit;
 
 
         if toRecRef.FindSet(true) then
             repeat
-                FieldRec := toRecRef.Field(50);
+                FieldRec := toRecRef.Field(FieldNo);
                 if Evaluate(EnumValue, format(FieldRec.Value())) then
                     if EnumValue = 0 then begin
                         FieldRec.Value := EnumValue + 1;

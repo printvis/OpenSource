@@ -17,8 +17,8 @@ $PrintVisName = 'PrintVis'
 $PrintVisCIMName = 'PrintVis CIM'
 
 $Temp1Name = 'PTE CIM 1 - upg temp tables'
-$Temp1Version = '1.0.0.0'
-$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.0.app'
+$Temp1Version = '1.0.0.10'
+$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.10.app'
 
 $Temp2Name = 'PTE CIM 1 - Move Data into Temp'
 $Temp2Version = '1.0.0.0'
