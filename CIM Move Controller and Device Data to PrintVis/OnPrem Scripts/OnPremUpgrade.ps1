@@ -5,10 +5,10 @@ $instance = ''
 $path = '' 
 #Current version of PrintVis
 $PrintVisVersionCurrent = '26.0.0.3' 
-$PrintVisVersionNew = '26.0.2.0'
-$PrintVisPath = $path + 'NovaVision Software AS_PrintVis_26.0.2.0.app'
-$PrintVisLibraryPath = $path + 'NovaVision Software AS_PrintVis System Library_26.0.2.0.app'
-$PrintVisCIMPath = $path + 'NovaVision Software AS_PrintVis CIM_26.0.2.0.app'
+$PrintVisVersionNew = '26.1.1.0'
+$PrintVisPath = $path + 'NovaVision Software AS_PrintVis_26.1.1.0.app'
+$PrintVisLibraryPath = $path + 'NovaVision Software AS_PrintVis System Library_26.1.1.0.app'
+$PrintVisCIMPath = $path + 'NovaVision Software AS_PrintVis CIM_26.1.1.0.app'
 #input
 
 #does not need to be updated
@@ -17,8 +17,8 @@ $PrintVisName = 'PrintVis'
 $PrintVisCIMName = 'PrintVis CIM'
 
 $Temp1Name = 'PTE CIM 1 - upg temp tables'
-$Temp1Version = '1.0.0.0'
-$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.0.app'
+$Temp1Version = '1.0.0.10'
+$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.10.app'
 
 $Temp2Name = 'PTE CIM 1 - Move Data into Temp'
 $Temp2Version = '1.0.0.0'
