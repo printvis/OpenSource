@@ -99,20 +99,16 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
 
     procedure MoveCostCenterFieldToTable(MoveIntoPrintVis: Boolean; InsertAllowed: Boolean; ModifyAllowed: Boolean)
     var
-        TableNoFromInt: Integer;
-        TableNoToInt: Integer;
+        CostCenters: Record "PVS Cost Center";
+        CostCenterUpg: Record "PTE CIM 1 Upg. TT. Cost Center";
     begin
-        if not IsCIMInstalled(MoveIntoPrintVis) then
-            exit;
-        if MoveIntoPrintVis then begin
-            TableNoFromInt := Database::"PTE CIM 1 Upg. TT. Cost Center";
-            TableNoToInt := TableNoCostCenter;
-        end
-        else begin
-            TableNoFromInt := TableNoCostCenter;
-            TableNoToInt := Database::"PTE CIM 1 Upg. TT. Cost Center";
-        end;
-        LoopTableAndMoveData(TableNoFromInt, TableNoToInt, InsertAllowed, ModifyAllowed);
+        if CostCenterUpg.FindSet(false) then
+            repeat
+                if CostCenters.get(CostCenterUpg.Code) then begin
+                    CostCenters."PVS CIM Device Code" := CostCenterUpg."PVS CIM Device Code";
+                    CostCenters.Modify(false);
+                end;
+            until CostCenterUpg.Next() = 0;
     end;
 
     local procedure LoopTableAndMoveData(in_TableNoFromInt: Integer; in_TableNoToInt: Integer; InsertAllowed: Boolean; ModifyAllowed: Boolean)
