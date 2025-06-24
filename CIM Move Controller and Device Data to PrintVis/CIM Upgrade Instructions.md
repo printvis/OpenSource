@@ -6,9 +6,6 @@ To limit the amount of breaking changes - the following has been done:
 - *The same has been done to the tables "PVS CIM Controller" and "PVS CIM Device".*
   
 An upgrade guide has been made, that needs to be followed to get data transferred from a older version into the newer version.
-**#!!!WAIT!!!
-#!!!This will not move custom fields in "PVS CIM Controller" and "PVS CIM Device"!!!
-#!!!Add the custom fields into the 'PTE CIM 1 - upg temp tables'!!!**
 
 Cloud only needs to follow the information outlined above and below, where they can ignore the Powershell script
 OnPrem / Container - use the appropriate Powershell script, before running the script - update the input section in the top of the script. 
