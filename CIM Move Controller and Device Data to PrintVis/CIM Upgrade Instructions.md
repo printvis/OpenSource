@@ -6,9 +6,11 @@ To limit the amount of breaking changes - the following has been done:
 - *The same has been done to the tables "PVS CIM Controller" and "PVS CIM Device".*
   
 An upgrade guide has been made, that needs to be followed to get data transferred from a older version into the newer version.
+
 **#!!!WAIT!!!
 #!!!This will not move custom fields in "PVS CIM Controller" and "PVS CIM Device"!!!
-#!!!Add the custom fields into the 'PTE CIM 1 - upg temp tables'!!!**
+#!!!Add the custom fields into the 'PTE CIM 1 - upg temp tables' before continuing with the upgrade!!!**
+
 *!!!When moving data on step 3, please verify the tables has data!!!*
 *!!!Table 80265 for Cost Center - Device Code data being moved!!!*
 *!!!Table 80264 for Controller data being moved!!!*
