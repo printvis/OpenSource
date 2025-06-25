@@ -1,10 +1,10 @@
 
 #input
-$instance = 'CIMonprem'
+$instance = ''
 #needs to end with a \
-$path = 'C:\Users\TommySvendsenMøballe\Downloads\Upgrade\CIM Upgrade\' 
+$path = '' 
 #Current version of PrintVis
-$PrintVisVersionCurrent = '26.0.80.0' 
+$PrintVisVersionCurrent = '26.0.0.4' 
 $PrintVisVersionNew = '26.1.1.0'
 $PrintVisPath = $path + 'NovaVision Software AS_PrintVis_26.1.1.0.app'
 $PrintVisLibraryPath = $path + 'NovaVision Software AS_PrintVis System Library_26.1.1.0.app'
