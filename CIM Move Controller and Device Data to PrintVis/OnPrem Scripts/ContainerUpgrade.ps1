@@ -28,10 +28,10 @@ $Temp2_2Path =  $path + 'PrintVis AS_PTE CIM 2 - Move Data into Temp_1.0.0.1.app
 
 
 $Temp3Name = 'PTE CIM 3 - Move Data into PrintVis'
-$Temp3Version = '1.0.0.0'
+$Temp3Version = '1.0.0.2'
 
-$Temp3Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.0.app'
-$Temp3_2Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.1.app'
+$Temp3Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.2.app'
+$Temp3_2Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.3.app'
 #does not need to be updated
 
 #Steps
