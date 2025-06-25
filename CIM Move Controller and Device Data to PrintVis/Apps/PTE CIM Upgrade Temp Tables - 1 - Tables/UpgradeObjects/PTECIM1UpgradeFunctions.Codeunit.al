@@ -98,14 +98,14 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
 
 
     procedure MoveCostCenterFieldToTable(MoveIntoPrintVis: Boolean; InsertAllowed: Boolean; ModifyAllowed: Boolean)
-   var
+    var
         TableNoFromInt: Integer;
         TableNoToInt: Integer;
     begin
         if not IsCIMInstalled(MoveIntoPrintVis) then
             exit;
-        if MoveIntoPrintVis then 
-        exit;
+        if MoveIntoPrintVis then
+            exit;
         TableNoFromInt := TableNoCostCenter;
         TableNoToInt := Database::"PTE CIM 1 Upg. TT. Cost Center";
         LoopTableAndMoveData(TableNoFromInt, TableNoToInt, InsertAllowed, ModifyAllowed);
