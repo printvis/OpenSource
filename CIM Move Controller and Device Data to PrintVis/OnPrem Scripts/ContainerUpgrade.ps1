@@ -17,38 +17,24 @@ $PrintVisName = 'PrintVis'
 $PrintVisCIMName = 'PrintVis CIM'
 
 $Temp1Name = 'PTE CIM 1 - upg temp tables'
-$Temp1Version = '1.0.0.11'
-$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.11.app'
-
-$Temp2Name = 'PTE CIM 2 - Move Data into Temp'
-$Temp2Version = '1.0.0.0'
-$Temp2_2Version = '1.0.0.1'
-$Temp2Path =  $path + 'PrintVis AS_PTE CIM 2 - Move Data into Temp_1.0.0.0.app'
-$Temp2_2Path =  $path + 'PrintVis AS_PTE CIM 2 - Move Data into Temp_1.0.0.1.app'
-
+$Temp1Version = '1.0.0.12'
+$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.12.app'
 
 $Temp3Name = 'PTE CIM 3 - Move Data into PrintVis'
-$Temp3Version = '1.0.0.0'
+$Temp3Version = '1.0.0.2'
 
-$Temp3Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.0.app'
-$Temp3_2Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.1.app'
+$Temp3Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.2.app'
 #does not need to be updated
+
 
 #Steps
 #Install temp table app to data that needs to be moved
-Publish-BcContainerApp $instance -appFile $Temp1Path -skipVerification -sync -install
+Publish-BcContainerApp $instance -appFile $Temp1Path -skipVerification -sync -install -upgrade
 
-#Now data needs to be moved into temp tables
-Publish-BcContainerApp $instance -appFile $Temp2Path -skipVerification -sync -install
-#Trigger upgrade step
-Publish-BcContainerApp $instance -appFile $Temp2_2Path -sync -upgrade -install -skipVerification
-#Upgrade to temp tables done
-UnPublish-BcContainerApp $instance -name $Temp2Name -version $Temp2Version -unInstall -doNotSaveData
-UnPublish-BcContainerApp $instance -name $Temp2Name -version $Temp2_2Version -unInstall -doNotSaveData
+#Uninstall PrintVis CIM
+Unpublish-BcContainerApp $instance -appName $PrintVisCIMName -version $PrintVisVersionCurrent -unInstall
 
 #install PrintVis
-
-#install PrintVis CIM
 Publish-BcContainerApp $instance -appFile $PrintVisLibraryPath -skipVerification -sync
 Publish-BcContainerApp $instance -appFile $PrintVisPath -skipVerification -sync
 Unpublish-BcContainerApp $instance -appName $PrintVisName -version $PrintVisVersionCurrent -unInstall
@@ -63,12 +49,9 @@ Publish-BcContainerApp $instance -appFile $PrintVisCIMPath -syncMode ForceSync -
 
 #Now data needs to be moved into PrintVis Tables
 Publish-BcContainerApp $instance -appFile $Temp3Path -skipVerification -sync -install
-#Trigger upgrade step
-Publish-BcContainerApp $instance -appFile $Temp3_2Path -sync -upgrade -install -skipVerification
 
 #confirm that PrintVis CIM Controller is not empty
 #Upgrade to temp tables done
-UnPublish-BcContainerApp $instance -name $Temp3Name -version $Temp2Version -unInstall -doNotSaveData
-UnPublish-BcContainerApp $instance -name $Temp3Name -version $Temp2_2Version -unInstall -doNotSaveData
+UnPublish-BcContainerApp $instance -name $Temp3Name -version $Temp3Version -unInstall -doNotSaveData
 UnPublish-BcContainerApp $instance -name $Temp1Name -version $Temp1Version -unInstall -doNotSaveData
 

@@ -16,8 +16,17 @@ codeunit 80271 "PTE CIM 3 Upg. PrintVis L."//Get new object id
     end;
 
     internal procedure MoveCostCenterFieldToPrintVisTable()
+    var
+        CostCenters: Record "PVS Cost Center";
+        CostCenterUpg: Record "PTE CIM 1 Upg. TT. Cost Center";
     begin
-        upgfunctions.MoveCostCenterFieldToTable(true, false, true);
+        if CostCenterUpg.FindSet(false) then
+            repeat
+                if CostCenters.get(CostCenterUpg.Code) then begin
+                    CostCenters."PVS CIM Device Code" := CostCenterUpg."PVS CIM Device Code";
+                    if CostCenters.Modify(false) then;
+                end;
+            until CostCenterUpg.Next() = 0;
     end;
 
     internal procedure UpdatePVSCIMSystemJDFEnumValueInControllerTable()

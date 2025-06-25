@@ -1,23 +1,13 @@
 codeunit 80270 "PTE CIM 3 Upg. TT Codeunit"//Get new object id
 {
-    Subtype = Upgrade;
-    trigger OnCheckPreconditionsPerCompany()
-    begin
-        // Code to make sure company is OK to upgrade.
-    end;
-
-    trigger OnUpgradePerCompany()
+    Subtype = Install;
+    trigger OnInstallAppPerCompany()
     begin
         // Code to perform company related table upgrade tasks
         UpgradeMoveDeviceToPrintVisTable();
         UpgradeMoveControllerToPrintVisTable();
         UpgradeMoveCostCenterFieldToPrintVisTable();
         UpgradePVSCIMSystemJDFEnumValueInControllerTable();
-    end;
-
-    trigger OnValidateUpgradePerCompany()
-    begin
-        // Code to make sure that upgrade was successful for each company
     end;
 
     local procedure UpgradeMoveControllerToPrintVisTable();
