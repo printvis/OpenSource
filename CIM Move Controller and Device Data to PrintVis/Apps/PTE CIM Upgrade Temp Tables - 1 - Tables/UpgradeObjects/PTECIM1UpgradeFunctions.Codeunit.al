@@ -141,11 +141,12 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
                         FieldToRec.SetRange(TableNo, in_TableNoToInt);
                         FieldToRec.SetRange("No.", FieldFromRec."No.");
                         if FieldToRec.IsEmpty() then
-                            if isPTECIMInstalled then
-                                if FieldFromRec."No." = 6010050 then
-                                    FieldToRec.SetRange("No.", 6010050)
-                                else
-                                    FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
+                            FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
+                        if FieldToRec.IsEmpty() then
+                            if FieldFromRec."No." = 75050 then
+                                if isPTECIMInstalled then
+                                    if in_TableNoFromInt = Database::"PVS Cost Center" then
+                                        FieldToRec.SetRange("No.", 6010050);
                         if FieldToRec.FindFirst() then
                             TransferField(FieldFromRec, FieldToRec, fromRecRef, toRecRef);
                     until FieldFromRec.Next() = 0;
