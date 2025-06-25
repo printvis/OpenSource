@@ -18,7 +18,7 @@ Cloud only needs to follow the information outlined above and below, where they 
 OnPrem / Container - use the appropriate Powershell script, before running the script - update the input section in the top of the script. 
 
 1. Install App 1 'PTE CIM 1 - upg temp tables'
-*- trigger upgrade "move data from PrintVis into App 1"*
+*- triggers upgrade "move data from PrintVis into App 1"*
 
 2. Uninstall + Unpublish 'PrintVis CIM'
 
@@ -27,7 +27,7 @@ OnPrem / Container - use the appropriate Powershell script, before running the s
 **- install with mode = Force**
 
 5. Install App 3 'PTE CIM 1 - Move Data into PrintVis'
-*- trigger upgrade "Move Data from App 1 into PrintVis CIM"*
+*- triggers upgrade "Move Data from App 1 into PrintVis CIM"*
 6. Uninstall + Remove App 3 
 **- Delete Extension Data**
 
