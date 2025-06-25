@@ -24,7 +24,7 @@ codeunit 80271 "PTE CIM 3 Upg. PrintVis L."//Get new object id
             repeat
                 if CostCenters.get(CostCenterUpg.Code) then begin
                     CostCenters."PVS CIM Device Code" := CostCenterUpg."PVS CIM Device Code";
-                    CostCenters.Modify(false);
+                    if CostCenters.Modify(false) then;
                 end;
             until CostCenterUpg.Next() = 0;
     end;
