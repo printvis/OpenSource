@@ -102,13 +102,22 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
         CostCenters: Record "PVS Cost Center";
         CostCenterUpg: Record "PTE CIM 1 Upg. TT. Cost Center";
     begin
-        if CostCenterUpg.FindSet(false) then
-            repeat
-                if CostCenters.get(CostCenterUpg.Code) then begin
-                    CostCenters."PVS CIM Device Code" := CostCenterUpg."PVS CIM Device Code";
-                    CostCenters.Modify(false);
-                end;
-            until CostCenterUpg.Next() = 0;
+        if MoveIntoPrintVis then
+            if CostCenterUpg.FindSet(false) then
+                repeat
+                    if CostCenters.get(CostCenterUpg.Code) then begin
+                        CostCenters."PVS CIM Device Code" := CostCenterUpg."PVS CIM Device Code";
+                        CostCenters.Modify(false);
+                    end;
+                until CostCenterUpg.Next() = 0;
+
+        if not MoveIntoPrintVis then
+            if CostCenters.FindSet(false) then
+                repeat
+                    CostCenterUpg.Code := CostCenters.Code;
+                    CostCenterUpg."PVS CIM Device Code" := CostCenters."PVS CIM Device Code";
+                    CostCenterUpg.Insert(false);
+                until CostCenters.Next() = 0;
     end;
 
     local procedure LoopTableAndMoveData(in_TableNoFromInt: Integer; in_TableNoToInt: Integer; InsertAllowed: Boolean; ModifyAllowed: Boolean)

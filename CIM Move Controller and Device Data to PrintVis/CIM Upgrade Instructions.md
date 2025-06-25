@@ -6,6 +6,13 @@ To limit the amount of breaking changes - the following has been done:
 - *The same has been done to the tables "PVS CIM Controller" and "PVS CIM Device".*
   
 An upgrade guide has been made, that needs to be followed to get data transferred from a older version into the newer version.
+**#!!!WAIT!!!
+#!!!This will not move custom fields in "PVS CIM Controller" and "PVS CIM Device"!!!
+#!!!Add the custom fields into the 'PTE CIM 1 - upg temp tables'!!!**
+*!!!When moving data on step 3, please verify the tables has data!!!*
+*!!!Table 80265 for Cost Center - Device Code data being moved!!!*
+*!!!Table 80264 for Controller data being moved!!!*
+*!!!Table 80263 for Device data being moved!!!*
 
 Cloud only needs to follow the information outlined above and below, where they can ignore the Powershell script
 OnPrem / Container - use the appropriate Powershell script, before running the script - update the input section in the top of the script. 
@@ -13,8 +20,8 @@ OnPrem / Container - use the appropriate Powershell script, before running the s
 1. Install App 1 'PTE CIM 1 - upg temp tables'
 
 2. Install App 2 'PTE CIM 1 - Move Data into Temp'
-*- trigger upgrade "move data from PrintVis into App 1"*
 3. Install App 2 'PTE CIM 1 - Move Data into Temp' v.2
+*- trigger upgrade "move data from PrintVis into App 1"*
 4. Uninstall + Remove App 2
 5. Uninstall + Remove App 2 v.2
 
@@ -25,14 +32,14 @@ OnPrem / Container - use the appropriate Powershell script, before running the s
 **- install with mode = Force**
 
 9. Install App 3 'PTE CIM 1 - Move Data into PrintVis'
-*- trigger upgrade "Move Data from App 1 into PrintVis CIM"*
 10. Install App 3 'PTE CIM 1 - Move Data into PrintVis' v.2
+*- trigger upgrade "Move Data from App 1 into PrintVis CIM"*
 11. Uninstall + Remove App 3 
 12. Uninstall + Remove App 3 v.2 
 **- Delete Extension Data**
 
 13. Go to the Browser and connect to the Business Central system and check if there exists data in PrintVis CIM Controller.
-14. Verify Data exists in Controller + Device
+14. Verify Data exists in CIM Controller + CIM Device + Cost Center.Device Code
 15. Uninstall + Remove App 1 - **Delete Extension data** 
 
 16. Done
