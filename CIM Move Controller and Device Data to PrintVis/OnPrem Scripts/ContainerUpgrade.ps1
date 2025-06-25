@@ -1,10 +1,10 @@
 
 #input
-$instance = ''
+$instance = 'CIMonprem'
 #needs to end with a \
-$path = '' 
+$path = 'C:\Users\TommySvendsenMøballe\Downloads\Upgrade\CIM Upgrade\' 
 #Current version of PrintVis
-$PrintVisVersionCurrent = '26.0.0.3' 
+$PrintVisVersionCurrent = '26.0.80.0' 
 $PrintVisVersionNew = '26.1.1.0'
 $PrintVisPath = $path + 'NovaVision Software AS_PrintVis_26.1.1.0.app'
 $PrintVisLibraryPath = $path + 'NovaVision Software AS_PrintVis System Library_26.1.1.0.app'
@@ -26,13 +26,15 @@ $Temp3Version = '1.0.0.2'
 $Temp3Path = $path + 'PrintVis AS_PTE CIM 3 - Move Data into PrintVis_1.0.0.2.app'
 #does not need to be updated
 
+
 #Steps
 #Install temp table app to data that needs to be moved
 Publish-BcContainerApp $instance -appFile $Temp1Path -skipVerification -sync -install -upgrade
 
-#install PrintVis
+#Uninstall PrintVis CIM
+Unpublish-BcContainerApp $instance -appName $PrintVisCIMName -version $PrintVisVersionCurrent -unInstall
 
-#install PrintVis CIM
+#install PrintVis
 Publish-BcContainerApp $instance -appFile $PrintVisLibraryPath -skipVerification -sync
 Publish-BcContainerApp $instance -appFile $PrintVisPath -skipVerification -sync
 Unpublish-BcContainerApp $instance -appName $PrintVisName -version $PrintVisVersionCurrent -unInstall

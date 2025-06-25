@@ -32,7 +32,9 @@ Publish-NAVApp $instance -Path $Temp1Path -SkipVerification
 Sync-NAVApp $instance -Name $Temp1Name
 Install-NAVApp $instance -Name $Temp1Name
 
-#install PrintVis
+#Uninstall PrintVis CIM
+Uninstall-NAVApp $instance -Name $PrintVisCIMName -version $PrintVisVersionCurrent -Force
+Unpublish-NAVApp $instance -Name $PrintVisCIMName -version $PrintVisVersionCurrent -unInstall
 
 #install PrintVis Library
 Uninstall-NAVApp $instance -Name $PrintVisLibraryName -Force
