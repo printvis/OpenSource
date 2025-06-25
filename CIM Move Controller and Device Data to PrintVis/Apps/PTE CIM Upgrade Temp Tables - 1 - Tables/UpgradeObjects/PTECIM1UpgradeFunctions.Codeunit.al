@@ -142,7 +142,10 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
                         FieldToRec.SetRange("No.", FieldFromRec."No.");
                         if FieldToRec.IsEmpty() then
                             if isPTECIMInstalled then
-                                FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
+                                if FieldFromRec."No." = 6010050 then
+                                    FieldToRec.SetRange("No.", 6010050)
+                                else
+                                    FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
                         if FieldToRec.FindFirst() then
                             TransferField(FieldFromRec, FieldToRec, fromRecRef, toRecRef);
                     until FieldFromRec.Next() = 0;
