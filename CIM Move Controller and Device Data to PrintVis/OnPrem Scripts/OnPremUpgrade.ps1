@@ -21,9 +21,9 @@ $Temp1Version = '1.0.0.12'
 $Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.12.app'
 
 $Temp3Name = 'PTE CIM 1 - Move Data into PrintVis'
-$Temp3Version = '1.0.0.2'
+$Temp3Version = '1.0.0.3'
 
-$Temp3Path = $path + 'PrintVis AS_PTE CIM 1 - Move Data into PrintVis_1.0.0.2.app'
+$Temp3Path = $path + 'PrintVis AS_PTE CIM 1 - Move Data into PrintVis_1.0.0.3.app'
 #does not need to be updated
 
 #Steps

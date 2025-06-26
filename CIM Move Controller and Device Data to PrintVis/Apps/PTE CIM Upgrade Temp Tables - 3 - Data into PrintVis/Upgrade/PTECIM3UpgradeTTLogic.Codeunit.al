@@ -30,7 +30,19 @@ codeunit 80271 "PTE CIM 3 Upg. PrintVis L."//Get new object id
     end;
 
     internal procedure UpdatePVSCIMSystemJDFEnumValueInControllerTable()
+    var
+        Controller: Record "PVS CIM Controller";
+        FieldRef: FieldRef;
+        RecordRef: RecordRef;
     begin
-        upgfunctions.UpdatePVSCIMSystemJDFEnumValueInControllerTable();
+        RecordRef.Open(Database::"PVS CIM Controller");
+        Controller.SetRange("CIM System", Controller."CIM System"::" ");
+        if Controller.FindSet() then
+            repeat
+                RecordRef.GetTable(Controller);
+                FieldRef := RecordRef.Field(Controller.FieldNo("CIM System"));
+                FieldRef.Value := 1;
+                RecordRef.Modify(false);
+            until Controller.Next() = 0;
     end;
 }
