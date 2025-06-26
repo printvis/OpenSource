@@ -18,10 +18,8 @@ OnPrem / Container - use the appropriate Powershell script, before running the s
 4. Uninstall + Remove App 2
 5. Uninstall + Remove App 2 v.2
 
-6. Uninstall + Unpublish 'PrintVis CIM'
-
-7. Install 'PrintVis' - version 26.1.1.0
-8. Install 'PrintVis CIM' - version 26.1.1.0
+3. Install 'PrintVis' - version 26.1.1.0 or later
+4. Install 'PrintVis CIM' - version 26.1.1.0 or later
 **- install with mode = Force**
 
 9. Install App 3 'PTE CIM 1 - Move Data into PrintVis'
