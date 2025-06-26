@@ -99,16 +99,16 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
 
     procedure MoveCostCenterFieldToTable(MoveIntoPrintVis: Boolean; InsertAllowed: Boolean; ModifyAllowed: Boolean)
     var
-        CostCenters: Record "PVS Cost Center";
-        CostCenterUpg: Record "PTE CIM 1 Upg. TT. Cost Center";
+        TableNoFromInt: Integer;
+        TableNoToInt: Integer;
     begin
-        if CostCenterUpg.FindSet(false) then
-            repeat
-                if CostCenters.get(CostCenterUpg.Code) then begin
-                    CostCenters."PVS CIM Device Code" := CostCenterUpg."PVS CIM Device Code";
-                    CostCenters.Modify(false);
-                end;
-            until CostCenterUpg.Next() = 0;
+        if not IsCIMInstalled(MoveIntoPrintVis) then
+            exit;
+        if MoveIntoPrintVis then
+            exit;
+        TableNoFromInt := TableNoCostCenter;
+        TableNoToInt := Database::"PTE CIM 1 Upg. TT. Cost Center";
+        LoopTableAndMoveData(TableNoFromInt, TableNoToInt, InsertAllowed, ModifyAllowed);
     end;
 
     local procedure LoopTableAndMoveData(in_TableNoFromInt: Integer; in_TableNoToInt: Integer; InsertAllowed: Boolean; ModifyAllowed: Boolean)
@@ -141,15 +141,19 @@ codeunit 80263 "PTE CIM 1 - UPG Functions"
                         FieldToRec.SetRange(TableNo, in_TableNoToInt);
                         FieldToRec.SetRange("No.", FieldFromRec."No.");
                         if FieldToRec.IsEmpty() then
-                            if isPTECIMInstalled then
-                                FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
+                            FieldToRec.SetRange("No.", FieldFromRec."No." + 75000);
+                        if FieldToRec.IsEmpty() then
+                            if FieldFromRec."No." = 75050 then
+                                if isPTECIMInstalled then
+                                    if in_TableNoFromInt = Database::"PVS Cost Center" then
+                                        FieldToRec.SetRange("No.", 6010050);
                         if FieldToRec.FindFirst() then
                             TransferField(FieldFromRec, FieldToRec, fromRecRef, toRecRef);
                     until FieldFromRec.Next() = 0;
                 if InsertAllowed then
-                    toRecRef.Insert(false);
+                    if toRecRef.Insert(false) then;
                 if ModifyAllowed then
-                    toRecRef.Modify(false);
+                    if toRecRef.Modify(false) then;
             until fromRecRef.Next() = 0;
     end;
 

@@ -17,15 +17,8 @@ $PrintVisName = 'PrintVis'
 $PrintVisCIMName = 'PrintVis CIM'
 
 $Temp1Name = 'PTE CIM 1 - upg temp tables'
-$Temp1Version = '1.0.0.11'
-$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.11.app'
-
-$Temp2Name = 'PTE CIM 1 - Move Data into Temp'
-$Temp2Version = '1.0.0.0'
-$Temp2_2Version = '1.0.0.1'
-$Temp2Path =  $path + 'PrintVis AS_PTE CIM 1 - Move Data into Temp_1.0.0.0.app'
-$Temp2_2Path =  $path + 'PrintVis AS_PTE CIM 1 - Move Data into Temp_1.0.0.1.app'
-
+$Temp1Version = '1.0.0.12'
+$Temp1Path = $path + 'PrintVis AS_PTE CIM 1 - upg temp tables_1.0.0.12.app'
 
 $Temp3Name = 'PTE CIM 1 - Move Data into PrintVis'
 $Temp3Version = '1.0.0.3'
@@ -39,22 +32,9 @@ Publish-NAVApp $instance -Path $Temp1Path -SkipVerification
 Sync-NAVApp $instance -Name $Temp1Name
 Install-NAVApp $instance -Name $Temp1Name
 
-#Now data needs to be moved into temp tables
-Publish-NAVApp $instance -Path $Temp2Path -SkipVerification
-Sync-NAVApp $instance -Name $Temp2Name
-Install-NAVApp $instance -Name $Temp2Name
-Uninstall-NAVApp $instance -Name $Temp2Name
-Unpublish-NAVApp $instance -Name $Temp2Name
-
-#Trigger upgrade step
-Publish-NAVApp $instance -Path $Temp2_2Path -SkipVerification
-Sync-NAVApp $instance -Name $Temp2Name
-Start-NAVAppDataUpgrade $instance -Name $Temp2Name
-Uninstall-NAVApp $instance -Name $Temp2Name
-Unpublish-NAVApp $instance -Name $Temp2Name
-
-
-#install PrintVis
+#Uninstall PrintVis CIM
+Uninstall-NAVApp $instance -Name $PrintVisCIMName -version $PrintVisVersionCurrent -Force
+Unpublish-NAVApp $instance -Name $PrintVisCIMName -version $PrintVisVersionCurrent -unInstall
 
 #install PrintVis Library
 Uninstall-NAVApp $instance -Name $PrintVisLibraryName -Force
@@ -85,11 +65,6 @@ Sync-NAVApp $instance -Name $Temp3Name
 Install-NAVApp $instance -Name $Temp3Name -Force
 Uninstall-NAVApp $instance -Name $Temp3Name
 Unpublish-NAVApp $instance -Name $Temp3Name
-#Trigger upgrade step
-Publish-NAVApp $instance -Path $Temp3_2Path -SkipVerification
-Sync-NAVApp $instance -Name $Temp3Name
-Start-NAVAppDataUpgrade $instance -Name $Temp3Name
-Uninstall-NAVApp $instance -Name $Temp3Name
 #!!!confirm that PrintVis CIM Controller is not empty!!!
 #Upgrade to temp tables done
 Unpublish-NAVApp $instance -Name $Temp3Name
