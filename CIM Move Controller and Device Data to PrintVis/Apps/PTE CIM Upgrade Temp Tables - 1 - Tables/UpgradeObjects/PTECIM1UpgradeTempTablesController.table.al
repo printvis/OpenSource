@@ -368,34 +368,54 @@ Table 80264 "PTE CIM 1 Upg. TT. Controller"
             DataClassification = CustomerContent;
             Caption = 'Notification Subscription ID';
         }
-        field(61000; PrinergyJobGroupCreate; Boolean)
+        field(61009; "EKC PrinergyJobGroupCreate"; Boolean)
         {
             Caption = 'Create Prinergy Job Groups';
             DataClassification = ToBeClassified;
         }
-        field(61001; PrinergyJobGroupSetup; Text[1024])
+        field(61010; "EKC PrinergyJobGroupSetup"; Text[1024])
         {
             Caption = 'Prinergy Job Group Structure';
             DataClassification = ToBeClassified;
         }
-        field(61002; PrinergyAPARootPath; Text[1024])
+        field(61011; "EKC PrinergyAPARootPath"; Text[1024])
         {
             Caption = 'Root path for APA file';
             DataClassification = ToBeClassified;
         }
-        field(61003; PrinergyWebEnableOverride; Boolean)
+        field(61012; "EKC PrinergyWebEnableOverride"; Boolean)
         {
             Caption = 'Allow Web Enable Override';
             DataClassification = ToBeClassified;
         }
-        field(61004; PrinergyJobTemplateOverride; Boolean)
+        field(61013; "EKC PrinergyJobTplOverride"; Boolean)
         {
             Caption = 'Allow Job Template Override';
             DataClassification = ToBeClassified;
         }
-        field(61005; PrinergyJobVolumeOverride; Boolean)
+        field(61014; "EKC PrinergyJobVolumeOverride"; Boolean)
         {
             Caption = 'Allow Job Volume Override';
+            DataClassification = ToBeClassified;
+        }
+        field(61015; "EKC WorkflowPartnerType"; Enum "EKC CIM Controller Types")
+        {
+            Caption = 'CIM Controller Type';
+            DataClassification = ToBeClassified;
+        }
+        field(61016; "EKC Prinergy JMF Support"; Boolean)
+        {
+            Caption = 'Enable Prinergy JMF Support';
+            DataClassification = ToBeClassified;
+        }
+        field(61017; "EKC Prinergy Export Location"; Text[2048])
+        {
+            Caption = 'Prinergy export location';
+            DataClassification = ToBeClassified;
+        }
+        field(61018; "EKC Enable Item Ruleset"; Boolean)
+        {
+            Caption = 'Enable Item Ruleset';
             DataClassification = ToBeClassified;
         }
     }
