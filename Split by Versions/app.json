@@ -1,0 +1,45 @@
+{
+  "id": "1072e23d-5230-414f-950e-7a711145e12e",
+  "name": "PrintVis Split Bind Open Source",
+  "publisher": "PrintVis Open Source",
+  "version": "1.0.0.3",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "PrintVis A/S",
+      "version": "25.0.0.0"
+    },
+    {
+      "id": "a1775e0b-ae52-43ed-9eb9-8e23a6214831",
+      "name": "PrintVis System Library",
+      "publisher": "PrintVis A/S",
+      "version": "25.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 80000,
+      "to": 84999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "15.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
