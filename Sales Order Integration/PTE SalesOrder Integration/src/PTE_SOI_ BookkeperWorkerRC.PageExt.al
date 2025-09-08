@@ -1,4 +1,4 @@
-PageExtension 80101 "PTE SOI SOint Bookkeeper RC" extends "Bookkeeper Role Center"
+PageExtension 80101 "PTE SOI SOint Bookkeeper RC" extends "PVS Bookkeeper Role Center"
 {
     actions
     {
