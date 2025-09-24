@@ -1,0 +1,39 @@
+{
+  "id": "ac0c87be-2178-48cf-a94a-b7d324c50c43",
+  "name": "PrintVis Update Item Tracking Posted Item",
+  "publisher": "PrintVis A/S",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "This extension can be used to add a Tracking Code to selected Item even the Item has open entries.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+          {
+         "id": "5452f323-059e-499a-9753-5d2c07eef904",
+         "name": "PrintVis",
+         "publisher": "PrintVis A/S",
+         "version": "26.0.182.0"
+      }
+ ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 80100,
+      "to": 89999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "15.2",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
