@@ -1,0 +1,46 @@
+{
+  "id": "A71CF80E-7AB9-44EB-A5F7-1004674D9C80",
+  "name": "PrintVis Sample Reports",
+  "publisher": "PrintVis A/S",
+  "version": "1.0.0.0",
+  "brief": "PrintVis Sample Reports",
+  "description": "PrintVis Sample Reports",
+  "privacyStatement": "http://www.printvis.com",
+  "EULA": "http://www.printvis.com",
+  "help": "https://support.printvis.com/",
+  "url": "http://www.printvis.com",
+  "logo": "./Logo/PV_logo_240x240px.png",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "PrintVis A/S",
+      "version": "24.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "24.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 69000,
+      "to": 69100
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://support.printvis.com/",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "13.0",
+  "target": "Cloud",
+  "features": [
+    "TranslationFile"
+  ],
+  "supportedLocales": [
+    "en-US",
+    "da-DK",
+    "de-DE"
+  ]
+}
