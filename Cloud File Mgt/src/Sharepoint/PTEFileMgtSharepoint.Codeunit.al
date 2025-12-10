@@ -65,42 +65,16 @@ codeunit 80400 "PTE File Mgt Sharepoint"
 
     end;
 
-    /*     procedure GetBatchRec(): Boolean
-        begin
-            BatchRec.SetRange(BatchRec."Custom Object type", BatchRec."Custom Object type"::Codeunit);
-            BatchRec.SetRange(BatchRec."Custom Object ID", Codeunit::"PTE AS400 Mgt");
-            if BatchRec.IsEmpty() then begin
-                BatchRec.SetRange(BatchRec."Custom Object type", BatchRec."Custom Object type"::Report);
-                BatchRec.SetRange(BatchRec."Custom Object ID", 50151);
-            end;
-            exit(BatchRec.FindFirst());
-        end; */
     procedure GetFilesList(FolderId: Text; var CloudStorage_Out: Record "PVS Cloud Storage" temporary): Boolean
     var
-        //    CloudStorage: Record "PVS Cloud Storage";
         AuthProviderRec_: Record "PVS Auth. Providers";
         temp_CloudStorage_: Record "PVS Cloud Storage" temporary;
-        //   GraphMgt: Codeunit "PVS Cloud Graph Management";
         GlobalCaption_: Text;
         GlobalProvider_: Option " ",Graph;
         DeleteAccessVisible_: Boolean;
         ReadAccessVisible_: Boolean;
         WriteAccessVisible_: Boolean;
-    //    PVSFolders: Record "PVS Folder";
-    //    Blob: Codeunit "Temp Blob";
-    //    ServerFileName: Text;
-    //  ShareLink: text;
-    // FileManagement: Codeunit "File Management";
     begin
-        /*        //Set Filters
-               PVSFolders.SetRange("Folder ID", InventorySetup."PTE Inv Receiving Folder Id");
-               PVSFolders.SetRange("Storage Type", PVSFolders."Storage Type"::Graph);
-               PVSFolders.SetRange(Usage, PVSFolders.Usage::Artwork);
-               if PVSFolders.IsEmpty() then exit;
-               //Set Filters
-
-               if PVSFolders.FindSet(false) then
-                   repeat */
         GlobalProvider_ := GlobalProvider_::Graph;
 
         CloudStorageManagement.FillBufferOnOpenPage(
@@ -111,14 +85,6 @@ codeunit 80400 "PTE File Mgt Sharepoint"
         CloudStorageManagement.ExpandAll(temp_CloudStorage_, FolderId, 'Folder Expanding');
         temp_CloudStorage_.SetRange(type, temp_CloudStorage_.type::File);
         temp_CloudStorage_.SetFilter(Name, '<>%1|<>%2', '', '.');
-        // if CloudStorage_.FindSet(false) then
-        /* repeat
-            ShareLink := GraphMgt.GetShareLink(CloudStorage.ID, 0);
-            ValueBuffer_.AddNewEntry(FileManagement.GetFileNameWithoutExtension(CloudStorage.Name), CloudStorage.Name);
-
-
-        until CloudStorage.Next() = 0; */
-        //   until PVSFolders.Next() = 0;
         temp_CloudStorage_.Reset();
         temp_CloudStorage_.SetRange(type, temp_CloudStorage_.type::File);
         temp_CloudStorage_.SetFilter(Name, '<>%1|<>%2', '', '.');

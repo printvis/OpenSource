@@ -27,6 +27,7 @@ page 80400 "PTE SH Folders List"
                         Folders: Record "PTE Sharepoint Folders";
                     begin
                         Folders._Folder_Path_OnAssistEdit_PathRoot(Rec);
+                        CurrPage.Update(false);
                     end;
                 }
                 field(" Folder Id"; rec."Folder Id")
