@@ -1,3 +1,4 @@
+#if not CLEAN27
 PageExtension 80101 "PTE SOI SOint Bookkeeper RC" extends "PVS Bookkeeper Role Center"
 {
     actions
@@ -13,3 +14,4 @@ PageExtension 80101 "PTE SOI SOint Bookkeeper RC" extends "PVS Bookkeeper Role C
         }
     }
 }
+#endif

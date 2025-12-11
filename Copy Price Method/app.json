@@ -1,8 +1,8 @@
 {
-  "id": "2002c5b1-9946-45ac-a072-0332156be019",
-  "name": "PTE Wait Plan Unit Status",
-  "publisher": "PrintVis",
-  "version": "1.0.0.0",
+  "id": "44dedef3-c153-4c67-a6a5-66e2ebe14f47",
+  "name": "CopyPriceMethod",
+  "publisher": "PrintVis Open Source",
+  "version": "27.0.0.0",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -14,23 +14,17 @@
     {
       "id": "5452f323-059e-499a-9753-5d2c07eef904",
       "name": "PrintVis",
-      "publisher": "NovaVision Software A/S",
-      "version": "25.1.0.0"
-    },
-    {
-      "id": "a1775e0b-ae52-43ed-9eb9-8e23a6214831",
-      "name": "PrintVis System Library",
-      "publisher": "NovaVision Software A/S",
-      "version": "25.1.0.0"
+      "publisher": "PrintVis A/S",
+      "version": "26.4.1.1"
     }
   ],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "25.0.0.0",
+  "application": "26.0.0.0",
   "idRanges": [
     {
-      "from": 80207,
-      "to": 80209
+      "from": 80279,
+      "to": 80279
     }
   ],
   "resourceExposurePolicy": {
@@ -38,7 +32,7 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "13.0",
+  "runtime": "15.0",
   "features": [
     "NoImplicitWith"
   ]

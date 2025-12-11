@@ -1,0 +1,32 @@
+{
+  "id": "64f7cf19-03c1-4995-c7b4-ad3d8c657639",
+  "name": "PTE Tooltip performance",
+  "publisher": "PrintVis",
+  "version": "1.0.0.0",
+  "runtime": "10.0",
+  "target": "Cloud",
+  "application": "26.0.0.0",
+  "platform": "26.0.0.0",
+  "contextSensitiveHelpUrl": "https://Debug.com/help/",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "version": "26.0.0.0",
+      "publisher": "PrintVis A/S"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 80100,
+      "to": 89999
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "applyToDevExtension": true,
+    "includeSourceInSymbolFile": true
+  }
+
+}
