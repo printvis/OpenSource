@@ -1,7 +1,7 @@
 table 80400 "PTE Sharepoint Folders"
 {
     DataClassification = SystemMetadata;
-
+    Caption = 'Sharepoint Folders';
     fields
     {
         field(1; CODE; Code[20])
