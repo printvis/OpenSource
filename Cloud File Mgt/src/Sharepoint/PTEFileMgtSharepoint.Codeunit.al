@@ -89,7 +89,7 @@ codeunit 80400 "PTE File Mgt Sharepoint"
         temp_CloudStorage_.SetRange(type, temp_CloudStorage_.type::File);
         temp_CloudStorage_.SetFilter(Name, '<>%1|<>%2', '', '.');
         if not temp_CloudStorage_.FindSet() then
-            error('is empty, please check setup / sharepoint');
+            exit;
         repeat
             CloudStorage_Out := temp_CloudStorage_;
             CloudStorage_Out.Insert();
