@@ -1,0 +1,39 @@
+{
+  "id": "2051d42a-342f-4d28-9b3e-ed86d590a40f",
+  "name": "Cloud File Mgt",
+  "publisher": "PrintVis A/S",
+  "version": "1.0.0.4",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id":  "5452f323-059e-499a-9753-5d2c07eef904",
+      "name":  "PrintVis",
+      "publisher":  "PrintVis A/S",
+      "version":  "26.0.0.0"
+  }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "26.0.0.0",
+  "idRanges": [
+    {
+      "from": 80400,
+      "to": 80419
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "14.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
