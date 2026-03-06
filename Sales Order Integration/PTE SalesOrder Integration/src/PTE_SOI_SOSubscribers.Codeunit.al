@@ -305,12 +305,8 @@ Codeunit 80105 "PTE SOI S.O. Sub"
         Lowest_SortingOrder: Integer;
         Is_Quote_Raised_To_Order: Boolean;
         ok: Boolean;
-        IsHandled2: Boolean;
     begin
 
-        OnBeforeUpdateStatusCode(StatusCodeFromRec, StatusCodeToRec, CaseRec, IsHandled2);
-        if IsHandled2 then
-            exit;
 
         if not StatusCodeToRec."Prod eq. Sale" then
             exit;
@@ -378,8 +374,5 @@ Codeunit 80105 "PTE SOI S.O. Sub"
             SalesorderManagement.Job_Redundant_To_SalesLines(Rec);
     end;
 
-    [IntegrationEvent(false, false)]
-    local procedure OnBeforeUpdateStatusCode(StatusCodeFromRec: Record "PVS Status Code"; StatusCodeToRec: Record "PVS Status Code"; var CaseRec: Record "PVS Case"; var IsHandled2: Boolean)
-    begin
-    end;
+
 }
