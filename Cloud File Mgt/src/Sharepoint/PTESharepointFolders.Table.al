@@ -61,11 +61,11 @@ table 80400 "PTE Sharepoint Folders"
     var
         GraphMgt: Codeunit "PVS Cloud Graph Management";
         FileMgtCloud: Codeunit "PTE File Mgt Sharepoint";
-        NewID: Text[50];
+        NewID: Text;
         FolderPath: Text;
     begin
         if GraphMgt.FilePicker(1, '', '', FolderPath, NewID) then begin
-            Folders_."Folder Id" := NewID;
+            Folders_."Folder Id" := CopyStr(NewID, 1, MaxStrLen(Folders_."Folder Id"));
             if Folders_."Folder Id" <> '' then
                 Folders_."Folder Path" := CopyStr(FolderPath, 1, MaxStrLen(Folders_."Folder Path"));
         end;
