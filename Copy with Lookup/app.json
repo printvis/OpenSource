@@ -2,7 +2,7 @@
   "id": "bf1ceb67-68a4-4909-9f85-2148fb148ca4",
   "name": "CopyWithLookup",
   "publisher": "PrintVis A/S",
-  "version": "1.0.0.0",
+  "version": "1.1.0.0",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -34,6 +34,10 @@
   },
   "runtime": "16.0",
   "features": [
-    "NoImplicitWith"
-  ]
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+      "supportedLocales":  [
+                             "da-DK"
+      ]
 }

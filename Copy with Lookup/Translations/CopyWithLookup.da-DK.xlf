@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="da-DK" original="CopyWithLookup">
+    <body>
+      <group id="body">
+        <trans-unit id="PageExtension 1213386776 - Control 3105998746 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 252261239">
+          <source>Specifies whether this calculation unit is looked up and re-inserted when copying, instead of being copied as-is.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension PTE CalcUnit Lookup on Copy - Control Lookup on Copy - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1213386776 - Field 3105998746 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 252261239">
+          <source>Lookup on Copy</source>
+          <target>Genopslå ved kopiering</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension PTE CalcUnit Lookup on Copy - Field Lookup on Copy - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
