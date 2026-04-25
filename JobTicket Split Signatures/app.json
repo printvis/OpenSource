@@ -1,8 +1,8 @@
 {
-  "id": "452fada5-ed14-4c35-bc62-3e9a8d21a072",
-  "name": "PTE Job Ticket Signatures",
-  "publisher": "PrintVis",
-  "version": "1.0.0.0",
+  "id": "b455cc6f-d5af-4933-81d2-152498b6aa98",
+  "name": "JobTicketSplit",
+  "publisher": "PrintVis A/S",
+  "version": "28.0.0.0",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -11,16 +11,16 @@
   "url": "",
   "logo": "",
   "dependencies": [
-      {
+    {
         "id":  "5452f323-059e-499a-9753-5d2c07eef904",
         "name":  "PrintVis",
         "publisher":  "NovaVision Software A/S",
-        "version":  "24.0.0.0"
+        "version":  "26.0.0.0"
     }
   ],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "24.0.0.0",
+  "application": "26.0.0.0",
   "idRanges": [
     {
       "from": 80422,
@@ -32,7 +32,7 @@
     "allowDownloadingSource": true,
     "includeSourceInSymbolFile": true
   },
-  "runtime": "13.0",
+  "runtime": "15.0",
   "features": [
     "NoImplicitWith"
   ]
