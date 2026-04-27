@@ -1,13 +1,41 @@
 # Roll Job Item
 
-This extension can be used at companies that often cut roll stock down before printing and print on sheets. It would require the cutting operator to consume the amount of roll stock that is cut and use release finished goods to release sheets into stock. The press operator would then consume the sheets at the press. Either the sheets or the roll would need to have a 0 price in PrintVis estimating so it does not charge twice for the paper.
+This extension is intended for companies that cut roll stock down before printing and print on sheets. The cutting operator consumes roll stock and uses Release Finished Goods to release cut sheets into inventory. The press operator then consumes those sheets at the press. To avoid double-charging for paper, either the sheet item or the roll item should have a price of zero in PrintVis estimating.
 
-## What this extension includes:
+## What this extension includes
 
-- A table extension (80100) on the PVS Job Sheet table to add Roll Item No.
-- A page extension (80100) on the PVS Job Items ListPart for the user to enter the Roll Item No.
-- A custom calculation formula codeunit (80100) that will calculate the weight/length of the roll paper and add the roll item no. to the calculation detail line.
+- Table extension 80100 **"PTE Sheet Roll"** extends **"PVS Job Sheet"** — adds the **Roll Item No.** field.
+- Page extension 80100 extends **"PVS Job Items ListPart"** — allows the user to enter the Roll Item No. on each job item.
+- Codeunit 80100 **"PTE Roll Custom Formula"** — custom calculation formula that calculates the weight, area, or length of the roll paper and assigns the roll item number to the calculation detail line.
+
+## How it works
+
+The custom formula codeunit is triggered during PrintVis calculation when formula 80100 is evaluated:
+
+1. It retrieves the Roll Item No. from the job sheet and looks up the item record.
+2. It sets the item number on the calculation detail line to the roll item, replacing the standard sheet paper item.
+3. It calls standard formula 16 to get the base quantity of paper (sheets with scrap).
+4. Based on the roll item's price unit, the quantity is converted: weight (price unit 2), area (price unit 3), or length (price unit 4).
+5. The converted quantity and the roll item's price unit are written back to the calculation detail line.
+
+## How to configure
+
+Step 1 Install the extension in your Business Central environment.
+
+Step 2 Create a custom calculation formula with number **80100** pointing to Codeunit 80100.
+
+Step 3 Assign this formula to a material line on your cutting machine calculation unit.
+
+Step 4 On the Job Items ListPart, enter the Roll Item No. on each job sheet that uses roll stock.
+
+## Prerequisites to run the functionality
+
+- PrintVis dependency available (minimum version 24.0.0.0).
+- Business Central application compatible with version 24.0.0.0.
+- A roll stock item must exist in Business Central with the appropriate price unit (weight, area, or length).
 
 ## What you will need to do for this extension to work
 
-- Create a custom calculation formula with # 80100 that points to Codeunit 80100. Assign this formula on a material line on your cutting machine calculation unit.
+- Install the .app extension in your environment.
+- Ensure the PrintVis app is installed and meets the dependency version.
+- Create the custom calculation formula 80100 and assign it to the cutting machine calculation unit as described above.

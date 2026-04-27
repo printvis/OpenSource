@@ -1,13 +1,28 @@
-# Performance when reloading planning board
+# Planning Board Tooltip Performance
 
-When loading the planning board, most performance is used by generating Toolstips based on the setup.
-By using an event, we can the the tools tip by code - and thus bypassing the setup, which can improve performace a lot.
+When loading the Planning Board, significant time is spent generating tooltips for each planning unit based on the configured setup. This extension improves reload performance by caching the generated tooltip text on the planning unit record and reusing it on subsequent loads, only generating new tooltips for planning units that have not been cached yet.
 
- 
-This code is using the normal setup rules when opening the planning board, but saves the tool tip on the planning unit, and reuses this text when reloading the planing board - only generating new ttol tips for planning units not used before.
+## What this extension includes
 
-## What this extension includes:
+- Table extension 80800 **"PTE Planning Unit"** extends **"PVS Job Planning Unit"** — adds two fields to store the cached tooltip text and search text.
+- Codeunit 80800 **"PTE ToolTip"** — event subscribers that cache and reuse tooltip text.
 
-- A table extension (80800) on the "PVS Job Planning Unit"  adding two extra fields to hold the tool text and search text.
+## How it works
 
-- An event subscriber (codeunit 80800) that saves the generated tooltip/searchtext on the planning unit, and reuses it later insted of rebuilding again
+The codeunit subscribes to three events in the Planning Board data pipeline:
+
+1. When the Planning Board is opened (`OnBeforeSetJSONSettings`), all cached tooltip texts are cleared so they are regenerated fresh on the first load.
+2. After a tooltip is generated for a planning unit (`OnAfterTooltipText2`), the tooltip text and search text are saved to the two new fields on the planning unit record.
+3. Before a tooltip is generated (`OnBeforeTooltipText`), if a cached tooltip text already exists on the planning unit, it is returned immediately and `IsHandled` is set to true, skipping the standard tooltip generation entirely.
+
+## Prerequisites to run the functionality
+
+- PrintVis dependency available (minimum version 26.0.0.0).
+- Business Central application compatible with version 26.0.0.0.
+
+## What you will need to do for this extension to work
+
+- Install the .app extension in your environment.
+- Ensure the PrintVis app is installed and meets the dependency version.
+- The caching logic runs automatically — no additional configuration is required.
+
