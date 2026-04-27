@@ -21,11 +21,11 @@ The codeunit subscribes to the `OnAfterMainCopyJobToOrder` event in `PVS Copy Ma
 
 ## How to configure
 
-**Step 1** Open the **PVS Calculation Unit Setup** page and locate the calculation units that should be re-inserted when a job is copied.
+Step 1 Open the **PVS Calculation Unit Setup** page and locate the calculation units that should be re-inserted when a job is copied.
 
-**Step 2** Enable the **Lookup on Copy** field on each applicable calculation unit. Note: this field is only available for units that are not of the "List Of Units" type.
+Step 2 Enable the **Lookup on Copy** field on each applicable calculation unit. Note: this field is only available for units that are not of the "List Of Units" type.
 
-**Step 3** Once configured, no further action is needed. The re-insertion happens automatically whenever a job is copied using the standard PrintVis copy functionality.
+Step 3 Once configured, no further action is needed. The re-insertion happens automatically whenever a job is copied using the standard PrintVis copy functionality.
 
 ## Prerequisites to run the functionality
 
