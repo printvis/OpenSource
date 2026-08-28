@@ -73,9 +73,11 @@ codeunit 75004 "PTE Product Template Mgt"
         JobSheet: Record "PVS Job Sheet";
         PageMgt: Codeunit "PVS Page Management";
         SheetMgt: Codeunit "PVS Sheet Management";
+        SingleInstance: Codeunit "PVS SingleInstance";
         UnitCode: Code[20];
         Changed: Boolean;
         SheetChanged: Boolean;
+        PrevGUINotAllowed: Boolean;
     begin
         if Job."Product Code" = '' then
             exit;
@@ -84,6 +86,13 @@ codeunit 75004 "PTE Product Template Mgt"
         TmplLine.SetCurrentKey("Product Code", "Job Item No.");
         if not TmplLine.FindSet() then
             exit;
+
+        // Suppress any base-app popups (e.g. "PVS Calculation Configurations" ambiguity
+        // prompt, or List Of Units surcharge prompts) while template lines are applied
+        // automatically. The base app is left to auto-resolve a default silently; there
+        // is no writable Configuration field on "PVS Job Sheet" to force a specific value.
+        PrevGUINotAllowed := SingleInstance.Get_GUINOTALLOWED();
+        SingleInstance.Set_GUINOTALLOWED(true);
 
         repeat
             // Locate primary PVS Job Item for this job + template line number
@@ -205,15 +214,37 @@ codeunit 75004 "PTE Product Template Mgt"
             if Changed then
                 JobItem.Modify(false);
 
-            // --- 19. Paper / Weight ---
-            // Both are stored on the PVS Job Sheet (the Job Item's "Paper Item No." and
-            // "Paper Weight" are FlowField lookups into it). Applied at sheet level so their
-            // OnValidate cascades run. Paper is applied before Weight because changing paper
+            // --- 19. List Of Units ---
+            // Assigns the Controlling (Sheet) Unit and, through it, resolves the Cost
+            // Center Configuration for the sheet. Must run BEFORE Finishing/Paper/Weight:
+            // the base app's "PVS Calculation Configurations" selection page is prompted
+            // when Finishing/Paper/Weight are validated on a sheet whose Configuration has
+            // not been resolved yet. Manually picking List Of Units first (as done on the
+            // Product Job Item sub page / base Job Items list) avoids that prompt, so the
+            // same order is used here. Must be after Modify so Job_Item_Input_Unit reads
+            // the persisted state. Skipped silently when no Sheet exists yet (Sheet ID = 0).
+            if TmplLine."List Of Units" <> '' then
+                if JobItem."Sheet ID" <> 0 then begin
+                    UnitCode := TmplLine."List Of Units";
+                    PageMgt.Job_Item_Input_Unit(JobItem, UnitCode);
+                end;
+
+            // --- 20. Finishing / Paper / Weight ---
+            // All three are stored on the PVS Job Sheet (the Job Item's "Paper Item No." and
+            // "Paper Weight" are FlowField lookups into it). Applied at sheet level, after
+            // List Of Units above, so the sheet's Configuration is already resolved and the
+            // "PVS Calculation Configurations" selection page does not get triggered. Finishing
+            // is applied before Paper/Weight since it is the more likely input to that
+            // configuration resolution. Paper is applied before Weight because changing paper
             // (Change_Paper) can reset the default weight, which we then override.
             // Skipped silently when no Sheet exists yet (Sheet ID = 0).
             if JobItem."Sheet ID" <> 0 then
                 if JobSheet.Get(JobItem."Sheet ID") then begin
                     Clear(SheetChanged);
+                    if (TmplLine.Finishing <> '') and (JobSheet.Finishing <> TmplLine.Finishing) then begin
+                        JobSheet.Validate(Finishing, TmplLine.Finishing);
+                        SheetChanged := true;
+                    end;
                     if (TmplLine."Paper No." <> '') and (JobSheet."Paper Item No." <> TmplLine."Paper No.") then begin
                         JobSheet.Validate("Paper Item No.", TmplLine."Paper No.");
                         SheetChanged := true;
@@ -226,17 +257,9 @@ codeunit 75004 "PTE Product Template Mgt"
                         JobSheet.Modify(true);
                 end;
 
-            // --- 20. List Of Units ---
-            // Always validated when set; uses PVS sheet-level unit assignment logic.
-            // Must be after Modify so Job_Item_Input_Unit reads the persisted state.
-            // Skipped silently when no Sheet exists yet (Sheet ID = 0).
-            if TmplLine."List Of Units" <> '' then
-                if JobItem."Sheet ID" <> 0 then begin
-                    UnitCode := TmplLine."List Of Units";
-                    PageMgt.Job_Item_Input_Unit(JobItem, UnitCode);
-                end;
-
         until TmplLine.Next() = 0;
+
+        SingleInstance.Set_GUINOTALLOWED(PrevGUINotAllowed);
 
         // Refresh the Job record from the database.  SheetMgt.Event_Create_Sheet and
         // field Validate cascades may have internally called Modify() on the PVS Job

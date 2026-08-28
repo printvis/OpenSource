@@ -206,6 +206,17 @@ table 75000 "PTE Product Job Item"
             Caption = 'List Of Units';
             ToolTip = 'Specifies the list of units code.';
             TableRelation = "PVS Calculation Unit Setup".Code where("List Of Units" = const(true));
+
+            trigger OnValidate()
+            begin
+                ResolveConfiguration();
+            end;
+        }
+        field(6010421; "Configuration"; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Configuration';
+            ToolTip = 'Specifies the Cost Center Configuration to use for the List Of Units. Resolved automatically when unambiguous, or selected manually when the machine/cost center has more than one matching configuration (mirrors the "PVS Calculation Configurations" selection shown on the PVS Job Item).';
         }
         field(6010411; "Envelope Window Shape Type"; Option)
         {
@@ -357,6 +368,134 @@ table 75000 "PTE Product Job Item"
     trigger OnRename()
     begin
 
+    end;
+
+    /// <summary>
+    /// Resolves the Cost Center Configuration for the current "List Of Units" selection,
+    /// mirroring the base app's ambiguity handling on the real PVS Job Item (page
+    /// "PVS Calculation Configurations" / 6010357): candidate configurations are filtered
+    /// by this line's current Format1/Format2/Weight against each configuration's
+    /// Min/Max Printing Format and Weight ranges.
+    /// - 0 matches: "Configuration" is cleared (left for manual/runtime resolution).
+    /// - 1 match: assigned silently.
+    /// - 2+ matches: the user is prompted via "PVS Calculation Configurations" to pick one.
+    /// </summary>
+    local procedure ResolveConfiguration()
+    var
+        TempMatchingUnitSetup: Record "PVS Calculation Unit Setup" temporary;
+        Page_Configurations: Page "PVS Calculation Configurations";
+        Config_ARR: array[100] of Code[20];
+        Config_Max: Integer;
+        MatchCount: Integer;
+    begin
+        Rec.Configuration := '';
+
+        if "List Of Units" = '' then
+            exit;
+
+        MatchCount := GetMatchingConfigurations(TempMatchingUnitSetup);
+        case MatchCount of
+            0:
+                exit;
+            1:
+                begin
+                    TempMatchingUnitSetup.FindFirst();
+                    Rec.Configuration := TempMatchingUnitSetup.Configuration;
+                end;
+            else begin
+                Commit();
+                Clear(Page_Configurations);
+                Page_Configurations.Set_Filter_Units(TempMatchingUnitSetup);
+                if Page_Configurations.RunModal() = Action::OK then begin
+                    Page_Configurations.Find_Marked(Config_Max, Config_ARR);
+                    if Config_Max > 0 then
+                        if TempMatchingUnitSetup.Get(TempMatchingUnitSetup.Type::"Price Unit", Config_ARR[1]) then
+                            Rec.Configuration := TempMatchingUnitSetup.Configuration;
+                end;
+            end;
+        end;
+    end;
+
+    /// <summary>
+    /// Builds the set of Cost Center Configurations that are compatible with this line's
+    /// current Format1/Format2/Weight, under the Cost Center resolved from the "List Of
+    /// Units" calculation unit. Each match is represented by its concrete "PVS Calculation
+    /// Unit Setup" record, because the "PVS Calculation Configurations" picker page
+    /// (6010357) actually has SourceTable = "PVS Calculation Unit Setup" (confirmed from
+    /// the base app symbols) - not "PVS Cost Center Configuration". Also used by the sub
+    /// page to let the user manually reopen the picker and override the automatically
+    /// resolved Configuration.
+    /// </summary>
+    /// <param name="TempMatchingUnitSetup">Filled with one Calculation Unit Setup record per matching Configuration.</param>
+    /// <returns>The number of matching configurations found.</returns>
+    procedure GetMatchingConfigurations(var TempMatchingUnitSetup: Record "PVS Calculation Unit Setup" temporary): Integer
+    var
+        UnitSetup: Record "PVS Calculation Unit Setup";
+        CostCenterConfig: Record "PVS Cost Center Configuration";
+        CandidateUnitSetup: Record "PVS Calculation Unit Setup";
+    begin
+        TempMatchingUnitSetup.Reset();
+        TempMatchingUnitSetup.DeleteAll();
+
+        if "List Of Units" = '' then
+            exit(0);
+
+        if not UnitSetup.Get(UnitSetup.Type::"Price Unit", "List Of Units") then
+            exit(0);
+
+        if UnitSetup."Cost Center Code" = '' then
+            exit(0);
+
+        CostCenterConfig.SetRange("Cost Center Code", UnitSetup."Cost Center Code");
+        if CostCenterConfig.FindSet() then
+            repeat
+                if IsConfigurationMatch(CostCenterConfig) then begin
+                    CandidateUnitSetup.Reset();
+                    CandidateUnitSetup.SetRange(Type, CandidateUnitSetup.Type::"Price Unit");
+                    CandidateUnitSetup.SetRange("Cost Center Code", CostCenterConfig."Cost Center Code");
+                    CandidateUnitSetup.SetRange(Configuration, CostCenterConfig.Configuration);
+                    CandidateUnitSetup.SetRange("List Of Units", false);
+                    if CandidateUnitSetup.FindFirst() then
+                        if not TempMatchingUnitSetup.Get(CandidateUnitSetup.Type, CandidateUnitSetup.Code) then begin
+                            TempMatchingUnitSetup := CandidateUnitSetup;
+                            TempMatchingUnitSetup.Insert();
+                        end;
+                end;
+            until CostCenterConfig.Next() = 0;
+
+        exit(TempMatchingUnitSetup.Count());
+    end;
+
+    /// <summary>
+    /// Checks whether the given Cost Center Configuration's Min/Max Printing Format and
+    /// Weight ranges accommodate this line's current Format1/Format2/Weight values. A
+    /// blank/zero limit on the configuration, or a blank/zero value on this line, is
+    /// treated as "no constraint" for that dimension.
+    /// </summary>
+    local procedure IsConfigurationMatch(CostCenterConfig: Record "PVS Cost Center Configuration"): Boolean
+    begin
+        if (Format1 <> 0) then begin
+            if (CostCenterConfig."Max Printing Format Length" <> 0) and (Format1 > CostCenterConfig."Max Printing Format Length") then
+                exit(false);
+            if (CostCenterConfig."Min Print Format Length" <> 0) and (Format1 < CostCenterConfig."Min Print Format Length") then
+                exit(false);
+        end;
+
+        if (Format2 <> 0) then begin
+            if (CostCenterConfig."Max Printing Format Width" <> 0) and (Format2 > CostCenterConfig."Max Printing Format Width") then
+                exit(false);
+            if (CostCenterConfig."Min Print Format Width" <> 0) and (Format2 < CostCenterConfig."Min Print Format Width") then
+                exit(false);
+        end;
+
+        if (Weight <> 0) then begin
+            if (CostCenterConfig."Max Weight" <> 0) and (Weight > CostCenterConfig."Max Weight") then
+                exit(false);
+            if (CostCenterConfig."Min Weight" <> 0) and (Weight < CostCenterConfig."Min Weight") then
+                exit(false);
+        end;
+
+        exit(true);
     end;
 
 }

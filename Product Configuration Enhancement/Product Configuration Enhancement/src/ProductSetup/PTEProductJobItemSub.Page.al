@@ -117,6 +117,40 @@ page 75001 "PTE Product Job Item Sub"
                         end;
                     end;
                 }
+                field("Configuration"; Rec."Configuration")
+                {
+                    ToolTip = 'Specifies the Cost Center Configuration resolved for the List Of Units. Automatically resolved when unambiguous; drill down to pick manually when the machine has more than one matching configuration.';
+
+                    trigger OnLookup(var Text: Text): Boolean
+                    var
+                        TempMatchingUnitSetup: Record "PVS Calculation Unit Setup" temporary;
+                        Page_Configurations: Page "PVS Calculation Configurations";
+                        Config_ARR: array[100] of Code[20];
+                        Config_Max: Integer;
+                    begin
+                        if Rec."List Of Units" = '' then
+                            exit(false);
+
+                        if Rec.GetMatchingConfigurations(TempMatchingUnitSetup) = 0 then
+                            exit(false);
+
+                        Commit();
+                        Clear(Page_Configurations);
+                        Page_Configurations.Set_Filter_Units(TempMatchingUnitSetup);
+                        if Page_Configurations.RunModal() = Action::OK then begin
+                            Page_Configurations.Find_Marked(Config_Max, Config_ARR);
+                            if Config_Max = 0 then
+                                exit(false);
+
+                            if not TempMatchingUnitSetup.Get(TempMatchingUnitSetup.Type::"Price Unit", Config_ARR[1]) then
+                                exit(false);
+
+                            Rec.Validate("Configuration", TempMatchingUnitSetup.Configuration);
+                            Text := TempMatchingUnitSetup.Configuration;
+                            exit(true);
+                        end;
+                    end;
+                }
                 field("Envelope Window Shape Type"; Rec."Envelope Window Shape Type")
                 {
 
