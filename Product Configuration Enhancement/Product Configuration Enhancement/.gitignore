@@ -1,0 +1,7 @@
+#This file lists which files should be ignored by git
+*.app
+rad.json
+.snapshots/
+.alcache/
+.altestrunner/
+.vscode/launch.json
