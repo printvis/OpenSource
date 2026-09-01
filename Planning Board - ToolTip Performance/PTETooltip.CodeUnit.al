@@ -79,6 +79,7 @@ codeunit 80800 "PTE ToolTip"
         AssemblyStyle: Option Gathering,Collecting,List;
         AssemblyOrderUsed: List of [Integer];
         FinishingSignatureCounter, FinishingSignaturesPerSheet : integer;
+        LastSignatureInitialized: Boolean;
     begin
 
         if in_SheetRec.ID = 0 then
@@ -264,8 +265,10 @@ codeunit 80800 "PTE ToolTip"
                                 out_RecTmp.Modify(true);
 
                                 // Special rule for residual sheet
-                                if JobItemTMP."Entry No." = 1 then
-                                    LastSignatureTMP := out_RecTmp
+                                if (JobItemTMP."Entry No." = 1) or (not LastSignatureInitialized) then begin
+                                    LastSignatureTMP := out_RecTmp;
+                                    LastSignatureInitialized := true;
+                                end
                                 else begin
                                     // Switch values with last signature
                                     out_RecTmp."Assembly Order" := LastSignatureTMP."Assembly Order";
