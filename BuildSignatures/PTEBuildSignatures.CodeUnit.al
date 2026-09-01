@@ -220,7 +220,7 @@ codeunit 80198 "PTE BuildSignatures"
                                     out_RecTmp.Modify();
                                     LastSignatureTMP."Assembly Order" := AssemblyOrder;
                                     LastSignatureTMP.Indent := Indentation;
-                                    LastSignatureTMP.Modify();
+                                    if LastSignatureTMP.Modify() then;
                                 end;
                             end;
                         end;
