@@ -14,17 +14,36 @@ codeunit 75004 "PTE Product Template Mgt"
     /// </summary>
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"PVS Product Management", OnAfterValidateProductPVSJob, '', false, false)]
     local procedure OnAfterValidateProductPVSJob(var Job: Record "PVS Job"; var xJob: Record "PVS Job")
-    var
-        ProductSetupState: Codeunit "PTE Product Setup State";
     begin
         // 1. Copy product header fields (Format Code / Colors) to the job header.
         ApplyProductHeaderFields(Job);
 
         // 2. Transfer the product user field values to the job.
-        ProductSetupState.Transfer_Product_Userfields_To_Job(Job."Product Code", Job.ID, Job.Job, Job.Version);
+        ApplyProductUserFields(Job);
 
         // 3. Sync template lines to the job items.
         SyncTemplateLinesToJobItems(Job);
+    end;
+
+    /// <summary>
+    /// Copies the userfield values assigned to the product into a job
+    /// </summary>
+    local procedure ApplyProductUserFields(var Job: Record "PVS Job")
+    var
+        UserfieldValueRec: Record "PVS Userfield Field Value";
+        UserfieldMgt: Codeunit "PVS Userfield Management";
+        UniqueTables: Dictionary of [Integer, Boolean];
+        ProductCode: Code[20];
+    begin
+        ProductCode := CopyStr(Job."Product Code", 1, MaxStrLen(ProductCode));
+        UserfieldValueRec.SetRange(Code1, ProductCode);
+        if UserfieldValueRec.Findset() then
+            repeat
+                if not UniqueTables.ContainsKey(UserfieldValueRec."Table ID") then begin
+                    UniqueTables.Add(UserfieldValueRec."Table ID", true);
+                    UserfieldMgt.Copy_Record_UserFields(UserfieldValueRec."Table ID", '', ProductCode, 0, 0, 0, 0, 0, '', Job.ID, Job.Job, Job.Version, 0, 0, false);
+                end;
+            until UserfieldValueRec.Next() = 0;
     end;
 
     /// <summary>

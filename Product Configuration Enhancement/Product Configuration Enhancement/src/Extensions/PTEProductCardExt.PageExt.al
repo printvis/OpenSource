@@ -32,15 +32,19 @@ pageextension 75006 "PTE Product Card Ext" extends "PVS Product Card"
                     ApplicationArea = All;
                     Caption = 'User Fields 1';
                     Image = PeriodStatus;
+                    Promoted = true;
+                    PromotedCategory = Process;
                     ShortCutKey = 'Shift+Ctrl+F1';
                     ToolTip = 'User Fields (1) JOB';
                     Visible = PUSH_USERFIELDS_1Visible;
 
                     trigger OnAction()
                     var
-                        ProductSetupState: Codeunit "PTE Product Setup State";
+                        UserFieldMgt: Codeunit "PVS Userfield Management";
+                        Code1: Code[20];
                     begin
-                        ProductSetupState.Form_Userfield_Edit_Product(0, Rec.Code);
+                        Code1 := CopyStr(Rec.Code, 1, MaxStrLen(Code1));
+                        UserFieldMgt.Form_Userfield_Edit(6010313, 0, '', Code1, 0, 0, 0, 0, 0);
                     end;
                 }
                 action("PTE_PUSH_USERFIELDS_2")
@@ -48,15 +52,19 @@ pageextension 75006 "PTE Product Card Ext" extends "PVS Product Card"
                     ApplicationArea = All;
                     Caption = 'User Fields 2';
                     Image = ReopenPeriod;
+                    Promoted = true;
+                    PromotedCategory = Process;
                     ShortCutKey = 'Shift+Ctrl+F2';
                     ToolTip = 'User Fields (2) JOB';
                     Visible = PUSH_USERFIELDS_2Visible;
 
                     trigger OnAction()
                     var
-                        ProductSetupState: Codeunit "PTE Product Setup State";
+                        UserFieldMgt: Codeunit "PVS Userfield Management";
+                        Code1: Code[20];
                     begin
-                        ProductSetupState.Form_Userfield_Edit_Product(1, Rec.Code);
+                        Code1 := CopyStr(Rec.Code, 1, MaxStrLen(Code1));
+                        UserFieldMgt.Form_Userfield_Edit(6010313, 1, '', Code1, 0, 0, 0, 0, 0);
                     end;
                 }
                 action("PTE_PUSH_USERFIELDS_3")
@@ -64,15 +72,19 @@ pageextension 75006 "PTE Product Card Ext" extends "PVS Product Card"
                     ApplicationArea = All;
                     Caption = 'User Fields 3';
                     Image = ClosePeriod;
+                    Promoted = true;
+                    PromotedCategory = Process;
                     ShortCutKey = 'Shift+Ctrl+F3';
                     ToolTip = 'User Fields (3) JOB';
                     Visible = PUSH_USERFIELDS_3Visible;
 
                     trigger OnAction()
                     var
-                        ProductSetupState: Codeunit "PTE Product Setup State";
+                        UserFieldMgt: Codeunit "PVS Userfield Management";
+                        Code1: Code[20];
                     begin
-                        ProductSetupState.Form_Userfield_Edit_Product(2, Rec.Code);
+                        Code1 := CopyStr(Rec.Code, 1, MaxStrLen(Code1));
+                        UserFieldMgt.Form_Userfield_Edit(6010313, 2, '', Code1, 0, 0, 0, 0, 0);
                     end;
                 }
             }
