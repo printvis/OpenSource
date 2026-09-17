@@ -4,14 +4,7 @@
   "templateUrl": "https://github.com/microsoft/AL-Go-PTE@main",
   "templateSha": "28c060aecd801a24e69346bea0c3cb193f327183",
   
-  "appDependencyProbingPaths": [
-    {
-      "repo": "https://github.com/printvis/PrintVis-System-Library",
-      "release_status": "release",
-      "version": "latest",
-      "projects": "*",
-      "AuthTokenSecret": "LibraryAppRepoToken"
-    },
+  "appDependencyProbingPaths": [ 
       {
       "repo": "https://github.com/printvis/PrintVis",
       "release_status": "release",
