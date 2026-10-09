@@ -4,7 +4,7 @@ table 75000 "PTE Product Job Item"
 
     fields
     {
-        field(1; "Product Code"; Code[20])
+        field(1; "Product Code"; Code[50])
         {
             Caption = 'Product Code';
             DataClassification = SystemMetadata;

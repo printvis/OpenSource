@@ -2,7 +2,7 @@
     "id": "8d206bcf-bc23-4041-9c54-ccfeef79998d",
     "name": "Product Configuration Enhancement",
     "publisher": "PrintVis A/S",
-    "version": "1.0.0.0",
+    "version": "1.0.0.2",
     "brief": "Product Job Item templates and user field setup for PrintVis products.",
     "description": "Adds Product Job Item template lines to the PrintVis Product Card and syncs them to Job Items when a product is applied to a case. Also surfaces the PrintVis Job user fields on the Product Card.",
     "privacyStatement": "http://www.printvis.com",

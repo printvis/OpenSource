@@ -93,8 +93,10 @@ Fields** in PrintVis General Setup.
 - Each action is only visible if the corresponding Job User Fields group (1, 2, or 3) is
   enabled in **General Setup**.
 - Shortcut keys: Shift+Ctrl+F1, Shift+Ctrl+F2, Shift+Ctrl+F3.
-- Values entered here are stored against the product and are automatically copied to the
-  Job's user fields the next time this product is applied to a Job (see below).
+- Values entered here are stored against the product itself (tagged as table "PVS
+  Product", not as a Job), so they cannot be mistaken for real Job entries by other
+  Job-related logic. They are automatically copied to the Job's user fields the next
+  time this product is applied to a Job (see below).
 
 ## What happens when a product is applied to a Job
 

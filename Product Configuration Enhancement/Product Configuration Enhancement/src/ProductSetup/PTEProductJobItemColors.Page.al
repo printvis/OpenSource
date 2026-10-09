@@ -120,6 +120,10 @@ page 75002 "PTE Product Job Item Colors"
     begin
         // Inherit the filtered Product Code and Job Item No. so every new line
         // is automatically linked to the correct product and job item.
+        // Rec ("PVS Product Materials", base app) caps Product Code at 20 characters -
+        // shorter than "PTE Product Job Item"/"PVS Product".Code (Code[50]). This is an
+        // existing base-app limitation of the Colors/Materials feature, not something this
+        // extension can widen, so the value is truncated to fit here (same as before).
         FilterProductCode := CopyStr(Rec.GetFilter("Product Code"), 1, MaxStrLen(Rec."Product Code"));
         Evaluate(FilterJobItemNo, Rec.GetFilter("Job Item No."));
 

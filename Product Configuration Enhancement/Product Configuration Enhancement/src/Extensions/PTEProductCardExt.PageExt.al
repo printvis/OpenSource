@@ -40,11 +40,9 @@ pageextension 75006 "PTE Product Card Ext" extends "PVS Product Card"
 
                     trigger OnAction()
                     var
-                        UserFieldMgt: Codeunit "PVS Userfield Management";
-                        Code1: Code[20];
+                        ProductTemplateMgt: Codeunit "PTE Product Template Mgt";
                     begin
-                        Code1 := CopyStr(Rec.Code, 1, MaxStrLen(Code1));
-                        UserFieldMgt.Form_Userfield_Edit(6010313, 0, '', Code1, 0, 0, 0, 0, 0);
+                        ProductTemplateMgt.EditProductUserFields(Rec.Code, 0);
                     end;
                 }
                 action("PTE_PUSH_USERFIELDS_2")
@@ -60,11 +58,9 @@ pageextension 75006 "PTE Product Card Ext" extends "PVS Product Card"
 
                     trigger OnAction()
                     var
-                        UserFieldMgt: Codeunit "PVS Userfield Management";
-                        Code1: Code[20];
+                        ProductTemplateMgt: Codeunit "PTE Product Template Mgt";
                     begin
-                        Code1 := CopyStr(Rec.Code, 1, MaxStrLen(Code1));
-                        UserFieldMgt.Form_Userfield_Edit(6010313, 1, '', Code1, 0, 0, 0, 0, 0);
+                        ProductTemplateMgt.EditProductUserFields(Rec.Code, 1);
                     end;
                 }
                 action("PTE_PUSH_USERFIELDS_3")
@@ -80,11 +76,9 @@ pageextension 75006 "PTE Product Card Ext" extends "PVS Product Card"
 
                     trigger OnAction()
                     var
-                        UserFieldMgt: Codeunit "PVS Userfield Management";
-                        Code1: Code[20];
+                        ProductTemplateMgt: Codeunit "PTE Product Template Mgt";
                     begin
-                        Code1 := CopyStr(Rec.Code, 1, MaxStrLen(Code1));
-                        UserFieldMgt.Form_Userfield_Edit(6010313, 2, '', Code1, 0, 0, 0, 0, 0);
+                        ProductTemplateMgt.EditProductUserFields(Rec.Code, 2);
                     end;
                 }
             }

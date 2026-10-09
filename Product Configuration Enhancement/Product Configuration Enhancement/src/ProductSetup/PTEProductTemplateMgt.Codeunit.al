@@ -26,24 +26,201 @@ codeunit 75004 "PTE Product Template Mgt"
     end;
 
     /// <summary>
-    /// Copies the userfield values assigned to the product into a job
+    /// Deletes a product's stored default User Field values (table "PTE Product Userfield
+    /// ID") when the product itself is deleted, so no orphaned default value rows are left
+    /// behind pointing at a Product Code that no longer exists.
+    /// </summary>
+    [EventSubscriber(ObjectType::Table, Database::"PVS Product", OnAfterDeleteEvent, '', false, false)]
+    local procedure OnAfterDeleteProduct(var Rec: Record "PVS Product"; RunTrigger: Boolean)
+    var
+        ProductUserfieldValue: Record "PTE Product Userfield ID";
+        ProductJobItem: Record "PTE Product Job Item";
+    begin
+        if Rec.IsTemporary() then
+            exit;
+
+        ProductUserfieldValue.SetRange("Product Code", Rec.Code);
+        ProductUserfieldValue.DeleteAll(false);
+
+        // Remove the product's job item template lines (with trigger, so dependent
+        // extensions can clean up data linked to each template line).
+        ProductJobItem.SetRange("Product Code", Rec.Code);
+        if not ProductJobItem.IsEmpty() then
+            ProductJobItem.DeleteAll(true);
+    end;
+
+    /// <summary>
+    /// Creates a copy of a product job item template line on the same product with the next
+    /// free Job Item No. Raises OnAfterCopyProductJobItem so dependent extensions can copy
+    /// their own data linked to the template line.
+    /// </summary>
+    procedure CopyProductJobItem(SourceProductJobItem: Record "PTE Product Job Item"; var NewProductJobItem: Record "PTE Product Job Item")
+    begin
+        SourceProductJobItem.TestField("Product Code");
+        NewProductJobItem := SourceProductJobItem;
+        NewProductJobItem."Job Item No." := 0;
+        NewProductJobItem.Insert(true);
+        OnAfterCopyProductJobItem(SourceProductJobItem, NewProductJobItem);
+    end;
+
+    /// <summary>
+    /// Copies the default userfield values stored for the product (table "PTE Product
+    /// Userfield ID", see <see cref="EditProductUserFields"/>) into a job. "PVS Userfield
+    /// Management".Copy_Record_UserFields only copies between two identities within the
+    /// SAME "PVS Userfield Field Value" table, so the product's own defaults (which live in
+    /// our own table, not in "PVS Userfield Field Value") are first materialized there as
+    /// temporary rows tagged Table ID = "PVS Job", ID1 = SessionId() (see
+    /// <see cref="StageProductUserFieldsAsJob"/>), then copied from that identity to the
+    /// real job's identity, then the temporary rows are removed again. SessionId() is
+    /// already guaranteed unique for the duration of this call - no reserved/looked-up
+    /// surrogate ID is needed.
     /// </summary>
     local procedure ApplyProductUserFields(var Job: Record "PVS Job")
     var
-        UserfieldValueRec: Record "PVS Userfield Field Value";
+        ProductUserfieldID: Record "PTE Product Userfield ID";
         UserfieldMgt: Codeunit "PVS Userfield Management";
-        UniqueTables: Dictionary of [Integer, Boolean];
-        ProductCode: Code[20];
+        StagingId: Integer;
     begin
-        ProductCode := CopyStr(Job."Product Code", 1, MaxStrLen(ProductCode));
-        UserfieldValueRec.SetRange(Code1, ProductCode);
-        if UserfieldValueRec.Findset() then
+        if Job."Product Code" = '' then
+            exit;
+
+        // No default User Field values have ever been saved for this product - nothing to
+        // transfer.
+        if not ProductUserfieldID.HasValues(Job."Product Code") then
+            exit;
+
+        StagingId := SessionId();
+        StageProductUserFieldsAsJob(StagingId, Job."Product Code");
+        UserfieldMgt.Copy_Record_UserFields(Database::"PVS Job", '', '', StagingId, 0, 0, 0, 0, '', Job.ID, Job.Job, Job.Version, 0, 0, false);
+        DeleteStagedJobUserFields(StagingId);
+    end;
+
+    /// <summary>
+    /// Opens the Userfield edit form for a Product using the Job User Field 1/2/3 group
+    /// setup/labels (table 6010313, "PVS Job"). "PVS Userfield Management".Form_Userfield_Edit
+    /// only works against "PVS Userfield Field Value" (table 6010313), so the product's
+    /// existing default values (stored in our own table "PTE Product Userfield ID") are first
+    /// materialized there as temporary rows tagged Table ID = "PVS Job" before the edit form
+    /// is opened; afterwards, whatever the form left staged is saved back into "PTE Product
+    /// Userfield ID" as the product's new default values, and the temporary rows are removed.
+    /// InputProductCode is the full Product Code (Code[50], matching "PVS Product".Code). It
+    /// is never truncated or length-checked: staging/committing is keyed by SessionId(), not
+    /// by the Product Code string itself, so no reserved/looked-up surrogate ID is needed.
+    /// </summary>
+    procedure EditProductUserFields(InputProductCode: Code[50]; GroupIndex: Integer)
+    var
+        UserFieldMgt: Codeunit "PVS Userfield Management";
+        StagingId: Integer;
+    begin
+        StagingId := SessionId();
+        StageProductUserFieldsAsJob(StagingId, InputProductCode);
+        UserFieldMgt.Form_Userfield_Edit(Database::"PVS Job", GroupIndex, '', '', StagingId, 0, 0, 0, 0);
+        CommitStagedJobUserFieldsToProduct(StagingId, InputProductCode);
+    end;
+
+    /// <summary>
+    /// Materializes the product's stored default values (table "PTE Product Userfield ID")
+    /// as rows in "PVS Userfield Field Value" tagged Table ID = "PVS Job", ID1 = StagingId,
+    /// so base app procedures that only operate on "PVS Userfield Field Value" (Form_Userfield_
+    /// Edit, Copy_Record_UserFields) can read them as their source/current values. ID1 (an
+    /// Integer) is used instead of Code1 (Code[20]) so the full Product Code (Code[50])
+    /// never needs to be truncated or length-checked. Each staged row's "Table Subtype" is set
+    /// from the stored "Group Index" so that Form_Userfield_Edit (which filters by subtype per
+    /// User Field group) only ever operates on the single group being edited, while the other
+    /// two groups' defaults stay staged untouched alongside it.
+    /// </summary>
+    local procedure StageProductUserFieldsAsJob(StagingId: Integer; ProductCode: Code[50])
+    var
+        ProductUserfieldValue: Record "PTE Product Userfield ID";
+    begin
+        ProductUserfieldValue.SetRange("Product Code", ProductCode);
+        if ProductUserfieldValue.FindSet() then
             repeat
-                if not UniqueTables.ContainsKey(UserfieldValueRec."Table ID") then begin
-                    UniqueTables.Add(UserfieldValueRec."Table ID", true);
-                    UserfieldMgt.Copy_Record_UserFields(UserfieldValueRec."Table ID", '', ProductCode, 0, 0, 0, 0, 0, '', Job.ID, Job.Job, Job.Version, 0, 0, false);
-                end;
-            until UserfieldValueRec.Next() = 0;
+                InsertOrUpdateStagedValue(StagingId, ProductUserfieldValue."Group Index", ProductUserfieldValue."Field No.", ProductUserfieldValue."Value Entry No.", ProductUserfieldValue.Text);
+            until ProductUserfieldValue.Next() = 0;
+    end;
+
+    /// <summary>
+    /// Inserts or updates a single staged value row in "PVS Userfield Field Value", tagged
+    /// Table ID = "PVS Job", Table Subtype = GroupIndex, ID1 = StagingId - the transient
+    /// identity used to materialize a product's defaults there. See
+    /// <see cref="StageProductUserFieldsAsJob"/>.
+    /// </summary>
+    local procedure InsertOrUpdateStagedValue(StagingId: Integer; GroupIndex: Integer; FieldNo: Integer; ValueEntryNo: Integer; Value: Text[250])
+    var
+        StagedRec: Record "PVS Userfield Field Value";
+    begin
+        StagedRec.SetRange("Table ID", Database::"PVS Job");
+        StagedRec.SetRange("Table Subtype", GroupIndex);
+        StagedRec.SetRange(ID1, StagingId);
+        StagedRec.SetRange("Field No.", FieldNo);
+        StagedRec.SetRange("Entry No.", ValueEntryNo);
+        if StagedRec.FindFirst() then begin
+            StagedRec.Text := Value;
+            StagedRec.Modify(false);
+        end else begin
+            StagedRec.Init();
+            StagedRec."Table ID" := Database::"PVS Job";
+            StagedRec."Table Subtype" := GroupIndex;
+            StagedRec.ID1 := StagingId;
+            StagedRec."Field No." := FieldNo;
+            StagedRec."Entry No." := ValueEntryNo;
+            StagedRec.Text := Value;
+            StagedRec.Insert(false);
+        end;
+    end;
+
+    /// <summary>
+    /// Removes the temporary "PVS Userfield Field Value" rows tagged Table ID = "PVS Job",
+    /// ID1 = StagingId, once their content has been safely copied elsewhere (see
+    /// <see cref="CommitStagedJobUserFieldsToProduct"/> and <see cref="ApplyProductUserFields"/>).
+    /// Must only be called AFTER the data has been copied out - never before, or the
+    /// rows would be lost with nothing to restore them.
+    /// </summary>
+    local procedure DeleteStagedJobUserFields(StagingId: Integer)
+    var
+        JobRec: Record "PVS Userfield Field Value";
+    begin
+        JobRec.SetRange("Table ID", Database::"PVS Job");
+        JobRec.SetRange(ID1, StagingId);
+        JobRec.DeleteAll(false);
+    end;
+
+    /// <summary>
+    /// Saves the staged "PVS Userfield Field Value" rows (Table ID = "PVS Job", ID1 =
+    /// StagingId) - i.e. whatever Form_Userfield_Edit just added or changed - as the
+    /// product's new default values in "PTE Product Userfield ID", then removes the staged
+    /// rows. This is a full replace (existing default value rows for the product are deleted
+    /// first) rather than a pure upsert, so a field that was cleared during editing does not
+    /// remain behind as a stale default.
+    /// </summary>
+    local procedure CommitStagedJobUserFieldsToProduct(StagingId: Integer; ProductCode: Code[50])
+    var
+        StagedRec: Record "PVS Userfield Field Value";
+        ProductUserfieldValue: Record "PTE Product Userfield ID";
+    begin
+        ProductUserfieldValue.SetRange("Product Code", ProductCode);
+        ProductUserfieldValue.DeleteAll(false);
+
+        StagedRec.SetRange("Table ID", Database::"PVS Job");
+        StagedRec.SetRange(ID1, StagingId);
+        if StagedRec.FindSet() then
+            repeat
+                ProductUserfieldValue.Init();
+                ProductUserfieldValue."Product Code" := ProductCode;
+                ProductUserfieldValue."Group Index" := StagedRec."Table Subtype";
+                ProductUserfieldValue."Field No." := StagedRec."Field No.";
+                ProductUserfieldValue."Value Entry No." := StagedRec."Entry No.";
+                ProductUserfieldValue.Text := StagedRec.Text;
+                // RunTrigger must be true here: "Entry No." is deliberately left unassigned
+                // above and is only ever set by the table's OnInsert trigger (FindLast()+1).
+                // Insert(false) would skip that trigger, leaving every row at "Entry No." = 0
+                // and causing a "record already exists" error on the second row inserted for
+                // the same product.
+                ProductUserfieldValue.Insert(true);
+            until StagedRec.Next() = 0;
+
+        DeleteStagedJobUserFields(StagingId);
     end;
 
     /// <summary>
@@ -98,6 +275,10 @@ codeunit 75004 "PTE Product Template Mgt"
         SheetChanged: Boolean;
         PrevGUINotAllowed: Boolean;
     begin
+        // Raised before the blank-product exit so subscribers can clean up data from a
+        // previously applied product (also when the product is cleared).
+        OnBeforeSyncTemplateLinesToJobItems(Job);
+
         if Job."Product Code" = '' then
             exit;
 
@@ -276,7 +457,14 @@ codeunit 75004 "PTE Product Template Mgt"
                         JobSheet.Modify(true);
                 end;
 
+            // --- 21. Extension point ---
+            // Raised while GUI is still suppressed, with both the template line and the
+            // PVS Job Item it was applied to (Job Item No. may differ from the template).
+            OnAfterSyncTemplateLineToJobItem(TmplLine, JobItem, Job);
+
         until TmplLine.Next() = 0;
+
+        OnAfterSyncTemplateLinesToJobItems(Job);
 
         SingleInstance.Set_GUINOTALLOWED(PrevGUINotAllowed);
 
@@ -355,6 +543,38 @@ codeunit 75004 "PTE Product Template Mgt"
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterApplyProductHeaderFields(var Job: Record "PVS Job")
+    begin
+    end;
+
+    /// <summary>
+    /// Raised before the product template lines are synced to the job items, also when the
+    /// job has no product (product cleared).
+    /// </summary>
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeSyncTemplateLinesToJobItems(var Job: Record "PVS Job")
+    begin
+    end;
+
+    /// <summary>
+    /// Raised after a template line has been applied to its PVS Job Item (incl. List Of Units
+    /// and sheet fields). GUI is suppressed while this event runs.
+    /// </summary>
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterSyncTemplateLineToJobItem(TemplateLine: Record "PTE Product Job Item"; var JobItem: Record "PVS Job Item"; var Job: Record "PVS Job")
+    begin
+    end;
+
+    /// <summary>
+    /// Raised after all template lines have been synced, before the Job record is refreshed.
+    /// GUI is suppressed while this event runs.
+    /// </summary>
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterSyncTemplateLinesToJobItems(var Job: Record "PVS Job")
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterCopyProductJobItem(SourceProductJobItem: Record "PTE Product Job Item"; var NewProductJobItem: Record "PTE Product Job Item")
     begin
     end;
 }

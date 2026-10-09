@@ -223,11 +223,9 @@ page 75001 "PTE Product Job Item Sub"
                 trigger OnAction()
                 var
                     NewProductJobItem: Record "PTE Product Job Item";
+                    ProductTemplateMgt: Codeunit "PTE Product Template Mgt";
                 begin
-                    Rec.TestField("Product Code");
-                    NewProductJobItem := Rec;
-                    NewProductJobItem."Job Item No." := 0;
-                    NewProductJobItem.Insert(true);
+                    ProductTemplateMgt.CopyProductJobItem(Rec, NewProductJobItem);
                     CurrPage.Update(false);
                 end;
             }
