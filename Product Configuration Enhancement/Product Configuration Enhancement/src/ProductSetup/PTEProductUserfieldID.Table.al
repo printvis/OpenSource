@@ -48,10 +48,10 @@ table 75003 "PTE Product Userfield ID"
 
     keys
     {
-        key(Key1; "Entry No.","Product Code","Field No.","Value Entry No.")
+        key(Key1; "Entry No.", "Product Code", "Field No.", "Value Entry No.")
         {
             Clustered = true;
-        } 
+        }
     }
 
     /// <summary>
