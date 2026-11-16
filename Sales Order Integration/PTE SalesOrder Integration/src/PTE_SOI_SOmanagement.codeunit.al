@@ -246,25 +246,12 @@ Codeunit 80104 "PTE SOI S.O. Mgt"
 
     procedure SalesHead_Has_PurchaseOrdreNo(in_SH: Record "Sales Header"): Boolean
     var
-        SL: Record "Sales Line";
         PL: Record "Purchase Line";
     begin
-        SL.Reset();
-        SL.SetRange("Document Type", in_SH."Document Type");
-        SL.SetRange("Document No.", in_SH."No.");
-
-        if SL.FindSet(false) then
-            repeat
-                if SL.Type = sl.Type::Item then begin // Item
-                    PL.SetCurrentkey("Sales Order No.", "Sales Order Line No.");
-                    PL.SetRange("Sales Order No.", SL."Document No.");
-                    PL.SetRange("Sales Order Line No.", SL."Line No.");
-                    if PL.FindFirst() then
-                        exit(true);
-                end;
-            until SL.Next() = 0;
-
-        exit(false);
+        // Single indexed existence check instead of one query per sales line
+        PL.SetCurrentKey("Sales Order No.", "Sales Order Line No.");
+        PL.SetRange("Sales Order No.", in_SH."No.");
+        exit(not PL.IsEmpty());
     end;
 
     procedure SalesHead_Get_ProductionOrderN(in_SH: Record "Sales Header"): Text[1024]
