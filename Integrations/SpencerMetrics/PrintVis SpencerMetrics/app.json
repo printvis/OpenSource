@@ -1,0 +1,44 @@
+{
+  "id": "b43efe82-3cf5-4267-b39c-eae529da92df",
+  "name": "PrintVis Spencer Metrics Integration",
+  "publisher": "PrintVis A/S",
+  "version": "28.0.0.0",
+  "brief": "PrintVis SpencerMetrics",
+  "description": "PrintVis SpencerMetrics",
+  "privacyStatement": "http://www.printvis.com",
+  "EULA": "http://www.printvis.com",
+  "help": "https://support365.printvis.com/",
+  "url": "http://www.printvis.com",
+  "logo": "Logo/PV_logo_240x240px.png",
+  "contextSensitiveHelpUrl": "https://learn.printvis.com/",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "PrintVis A/S",
+      "version": "28.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "idRanges": [
+    {
+      "from": 80290,
+      "to": 80300
+    }
+  ],
+  "features": [
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+   "supportedLocales": [
+    "en-US" 
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  },
+  "runtime": "16.0"
+}
