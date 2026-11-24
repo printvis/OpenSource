@@ -738,7 +738,7 @@ report 80301 "PVS BS Artwork Approval Report"
         ReportCode: Code[50];
         CompanyLogoPosition: Integer;
         ArtworkApprovalLbl: Label 'Artwork Approval';
-        BillToContactEmailLbl: Label 'Bill-to Contact E-Mail';
+        BillToContactEmailLbl: Label 'Bill-to Contact Email';
         BillToContactMobilePhoneNoLbl: Label 'Bill-to Contact Mobile Phone No.';
         BillToContactPhoneNoLbl: Label 'Bill-to Contact Phone No.';
         CompanyInfoBankAccNoLbl: Label 'Account No.';
@@ -753,8 +753,8 @@ report 80301 "PVS BS Artwork Approval Report"
         InvNoLbl: Label 'No.';
         LocalCurrencyLbl: Label 'Local Currency';
         QuestionsLbl: Label 'Questions?';
-        SalespersonLbl: Label 'Sales person';
-        SellToContactEmailLbl: Label 'Sell-to Contact E-Mail';
+        SalespersonLbl: Label 'Salesperson';
+        SellToContactEmailLbl: Label 'Sell-to Contact Email';
         SellToContactMobilePhoneNoLbl: Label 'Sell-to Contact Mobile Phone No.';
         SellToContactPhoneNoLbl: Label 'Sell-to Contact Phone No.';
         ShiptoAddrLbl: Label 'Ship-to Address';

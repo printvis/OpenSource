@@ -21,7 +21,7 @@ page 80307 "PVS BS Report Selection Setup"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Report Type';
                 OptionCaption = 'Artwork Approval';
-                ToolTip = 'Specifies which type of document the report is used for. ';
+                ToolTip = 'Specifies which type of document the report is used for.';
 
                 trigger OnValidate()
                 begin

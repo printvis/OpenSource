@@ -12,21 +12,25 @@ codeunit 80307 "PVS BS Utility"
     procedure GetReportFileName(ReportType: Enum "Report Selection Usage"; PrintVisCaseID: Integer): Text
     var
         PrintVisCase: Record "PVS Case";
-        Filename: Text;
+        Filename, DocumentNo : Text;
     begin
         if not PrintVisCase.Get(PrintVisCaseID) then
             Clear(PrintVisCase);
 
         case ReportType of
             ReportType::"PVS Quote Report":
-                Filename := Format(ReportType) + ' ' + PrintVisCase."Quote No.";
+                DocumentNo := PrintVisCase."Quote No.";
             ReportType::"PVS Order Confirmation Report":
-                Filename := Format(ReportType) + ' ' + PrintVisCase."Order No.";
+                DocumentNo := PrintVisCase."Order No.";
             ReportType::"PVS BS Artwork Approval":
-                Filename := Format(ReportType) + ' ' + PrintVisCase."Order No.";
+                DocumentNo := PrintVisCase."Order No.";
             else
-                Filename := Format(ReportType) + ' ' + Format(PrintVisCase.ID);
+                DocumentNo := Format(PrintVisCase.ID);
         end;
+
+        Filename := Format(ReportType);
+        if DocumentNo <> '' then
+            Filename += ' ' + DocumentNo;
 
         exit(Filename);
     end;

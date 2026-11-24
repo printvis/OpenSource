@@ -83,8 +83,12 @@ page 80302 "PVS BS Document List"
     {
         area(Processing)
         {
-            action(Test)
+            action(RefreshAllStatuses)
             {
+                Caption = 'Refresh All Statuses';
+                Image = RefreshLines;
+                ToolTip = 'Checks BoldSign for the current status of all documents that are awaiting signature.';
+
                 trigger OnAction()
                 begin
                     Codeunit.Run(Codeunit::"PVS BS BoldSign Document Check");

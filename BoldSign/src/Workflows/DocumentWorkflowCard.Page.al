@@ -43,12 +43,6 @@ page 80309 "PVS BS Document Workflow Card"
                     MultiLine = true;
                 }
             }
-            group(EmailNotification)
-            {
-                Caption = 'Email Notification';
-                field("Email Salesperson"; Rec."Email Salesperson") { }
-                field("Email Coordinator"; Rec."Email Coordinator") { }
-            }
         }
     }
 }

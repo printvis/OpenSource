@@ -38,7 +38,7 @@ tableextension 80301 "PVS BS Report Selections" extends "Report Selections"
         }
         field(80306; "PVS BS Add Decline Button"; Boolean)
         {
-            Caption = 'BoldSign Add Decline button';
+            Caption = 'BoldSign Add Decline Button';
             DataClassification = CustomerContent;
             ToolTip = 'Gives this signer the ability to decline to sign by showing a "decline" button in their user interface. Declining cancels the signing process.';
         }
@@ -52,7 +52,7 @@ tableextension 80301 "PVS BS Report Selections" extends "Report Selections"
         {
             Caption = 'BoldSign Signature On Last Page';
             DataClassification = CustomerContent;
-            ToolTip = 'Places the signature field on the last page of the report. The artwork PDFs added in the wizard are not counted.';
+            ToolTip = 'Places the signature field on the last page of the report. PDF files added with Add additional PDF are not counted.';
         }
         field(80309; "PVS BS Sign. Page No."; Integer)
         {
@@ -64,7 +64,7 @@ tableextension 80301 "PVS BS Report Selections" extends "Report Selections"
         }
         field(80310; "PVS BS Sign. X"; Integer)
         {
-            Caption = 'BoldSign Signature X';
+            Caption = 'BoldSign Signature Pos. X';
             DataClassification = CustomerContent;
             InitValue = 50;
             MinValue = 0;
@@ -72,7 +72,7 @@ tableextension 80301 "PVS BS Report Selections" extends "Report Selections"
         }
         field(80311; "PVS BS Sign. Y"; Integer)
         {
-            Caption = 'BoldSign Signature Y';
+            Caption = 'BoldSign Signature Pos. Y';
             DataClassification = CustomerContent;
             InitValue = 50;
             MinValue = 0;

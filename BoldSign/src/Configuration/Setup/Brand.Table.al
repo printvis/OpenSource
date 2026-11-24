@@ -21,7 +21,7 @@ table 80304 "PVS BS Brand"
         field(3; "BoldSign Brand ID"; Guid)
         {
             Caption = 'BoldSign Brand ID';
-            ToolTip = 'Specifies the brand ID from the BoldSign portal (Settings > Brands).';
+            ToolTip = 'Specifies the brand ID from the BoldSign portal (Settings > Branding).';
         }
         field(4; Active; Boolean)
         {

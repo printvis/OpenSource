@@ -38,24 +38,6 @@ table 80302 "PVS BS Document Workflow"
                     Rec.TestField("Update Status", true);
             end;
         }
-        field(20; "Email Salesperson"; Boolean)
-        {
-            Caption = 'Email Salesperson';
-            ToolTip = 'Specifies if the salesperson should be notified';
-            trigger OnValidate()
-            begin
-                this.ValidateExclusiveEmailFields();
-            end;
-        }
-        field(21; "Email Coordinator"; Boolean)
-        {
-            Caption = 'Email Coordinator';
-            ToolTip = 'Specifies if the coordinator should be notified';
-            trigger OnValidate()
-            begin
-                this.ValidateExclusiveEmailFields();
-            end;
-        }
         field(30; "Update Milestone"; Boolean)
         {
             Caption = 'Update Milestone';
@@ -63,7 +45,7 @@ table 80302 "PVS BS Document Workflow"
         }
         field(40; "Milestone to Complete"; Code[20])
         {
-            Caption = 'Milestone to complete';
+            Caption = 'Milestone to Complete';
             TableRelation = "PVS Calculation Unit Setup".Code where(
                 Type = const("Planning Unit"),
                 Milestone = const(true)
@@ -73,7 +55,7 @@ table 80302 "PVS BS Document Workflow"
         field(41; "Milestone Comment"; Text[250])
         {
             Caption = 'Milestone Comment';
-            ToolTip = 'This comment will be added to the milestone when BoldSign marks the milestone complete. If empty, then ''BoldSign Signed'' will be used.';
+            ToolTip = 'This comment will be added to the milestone when BoldSign marks the milestone complete. Only the signed document workflow uses a default comment (''BoldSign Signed'') when this is empty.';
         }
         field(50; "Rejection Code"; Code[20])
         {
@@ -100,13 +82,4 @@ table 80302 "PVS BS Document Workflow"
             Clustered = true;
         }
     }
-
-    var
-        ExclusiveEmailFieldsErr: Label 'Only one of "Email Salesperson" or "Email Coordinator" can be selected.';
-
-    local procedure ValidateExclusiveEmailFields()
-    begin
-        if (Rec."Email Salesperson") and (Rec."Email Coordinator") then
-            Error(this.ExclusiveEmailFieldsErr);
-    end;
 }

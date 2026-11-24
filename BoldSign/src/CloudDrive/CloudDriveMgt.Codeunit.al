@@ -25,7 +25,7 @@ codeunit 80306 "PVS BS Cloud Drive Mgt."
         Folder: Record "PVS Folder";
         CloudMgt: Codeunit "PVS Cloud Graph Management";
         LocalTempBlob: Codeunit "Temp Blob";
-        NoFolderErr: Label 'Could not find a folder to save the report, check setup of folders';
+        NoFolderErr: Label 'Could not find a folder to save the report. Check the folder setup.';
         ReportOutStream: OutStream;
         FileName: Text;
         NewFileID: Text;

@@ -53,9 +53,12 @@ page 80304 "PVS BS Send for Signature"
                     }
                     group(SigPosition)
                     {
-                        Caption = 'Signature postion';
+                        Caption = 'Signature Position';
                         field(sigX; sigX)
                         {
+                            Caption = 'Signature Pos. X';
+                            ToolTip = 'Specifies the horizontal position of the signature field, measured from the left edge of the page.';
+
                             trigger OnValidate()
                             begin
 
@@ -63,6 +66,9 @@ page 80304 "PVS BS Send for Signature"
                         }
                         field(sigY; sigY)
                         {
+                            Caption = 'Signature Pos. Y';
+                            ToolTip = 'Specifies the vertical position of the signature field, measured from the top edge of the page.';
+
                             trigger OnValidate()
                             begin
 
@@ -310,13 +316,16 @@ page 80304 "PVS BS Send for Signature"
     end;
 
     local procedure ValidateSignerStep(): Boolean
+    var
+        EnterSignerNameMsg: Label 'Please enter the signer name.';
+        EnterSignerEmailMsg: Label 'Please enter the signer email.';
     begin
         if this.SignerName = '' then begin
-            Message('Please enter the signer name.');
+            Message(EnterSignerNameMsg);
             exit(false);
         end;
         if this.SignerEmail = '' then begin
-            Message('Please enter the signer email.');
+            Message(EnterSignerEmailMsg);
             exit(false);
         end;
 
@@ -416,7 +425,7 @@ page 80304 "PVS BS Send for Signature"
     local procedure TryStartSignatureProcess(var NewDocument: Record "PVS BS Document"; var DocumentInStream: InStream; var Dialog: Dialog; var ErrorText: Text): Boolean
     var
         BoldSignService: Codeunit "PVS BS Integration Service";
-        FailedToStartSignaturesProcessErr: Label 'Failed to start signatures process';
+        FailedToStartSignaturesProcessErr: Label 'Failed to start signature process';
         useCustomPosSig: Boolean;
     begin
         useCustomPosSig := (this.ReportSelection."PVS BS Sign. X" <> sigX) or (this.ReportSelection."PVS BS Sign. Y" <> sigY);
