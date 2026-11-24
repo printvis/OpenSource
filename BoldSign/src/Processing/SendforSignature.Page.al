@@ -508,8 +508,9 @@ page 80304 "PVS BS Send for Signature"
         PageNumber, X, Y, Width, Height : Integer;
     begin
         DocumentInStream := this.GetDocumentInStream();
-        SignatureService.GetSignatureBounds(this.ReportSelection, this.ReportPageCount, PageNumber, X, Y, Width, Height);
-        CurrPage.PDFUtility.DrawSignatureBox(Base64Convert.ToBase64(DocumentInStream), PageNumber, X, Y, Width, Height);
+        SignatureService.setSignaturePositionParam(sigX, sigY, true);
+        SignatureService.GetSignatureBounds(this.ReportSelection, this.ReportPageCount, PageNumber, sigX, sigY, Width, Height);
+        CurrPage.PDFUtility.DrawSignatureBox(Base64Convert.ToBase64(DocumentInStream), PageNumber, sigX, sigY, Width, Height);
     end;
 
     local procedure ShowMarkedPreview(PdfContent: Text)
