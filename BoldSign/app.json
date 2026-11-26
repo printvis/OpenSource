@@ -1,0 +1,45 @@
+{
+  "id": "a28c2d52-a966-4fe5-9385-d016a2ac5d9b",
+  "name": "PrintVis BoldSign Integration",
+  "publisher": "PrintVis A/S",
+  "version": "1.0.0.1",
+  "brief": "BoldSign signature workflow connection for PrintVis",
+  "description": "BoldSign signature workflow connection for PrintVis",
+  "privacyStatement": "http://www.printvis.com",
+  "EULA": "http://www.printvis.com",
+  "help": "https://learn.printvis.com/",
+  "url": "http://www.printvis.com",
+  "logo": "./Logo/PV_logo_240x240px.png",
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "dependencies": [
+    {
+      "id": "5452f323-059e-499a-9753-5d2c07eef904",
+      "name": "PrintVis",
+      "publisher": "PrintVis A/S",
+      "version": "28.0.0.0"
+    }
+  ],
+  "idRanges": [
+    {
+      "from": 80301,
+      "to": 80319
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://learn.printvis.com/",
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "17.0",
+  "features": [
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+  "target": "Cloud",
+  "supportedLocales": [
+    "en-US",
+    "nl-NL"
+  ]
+}
